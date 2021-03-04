@@ -126,7 +126,7 @@
 ]
 </script>
 
-<div id="TcHmi_Controls_Beckhoff_btnOperation" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="36" data-tchmi-height-unit="px" data-tchmi-text="%l%Text1%/l%" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="183" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-left-unit="px" data-tchmi-left="0" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-width-mode="Parent" data-tchmi-height-mode="Parent" data-tchmi-creator-visibility="Visible" data-tchmi-zindex="1">
+<div id="TcHmi_Controls_Beckhoff_btnOperation" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="36" data-tchmi-height-unit="px" data-tchmi-text="Reset" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="183" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-left-unit="px" data-tchmi-left="0" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-width-mode="Parent" data-tchmi-height-mode="Parent" data-tchmi-creator-visibility="Visible" data-tchmi-zindex="1">
 
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">

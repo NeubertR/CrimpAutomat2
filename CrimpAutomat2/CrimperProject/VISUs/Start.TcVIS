@@ -1095,7 +1095,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"DB6.diStueck_Fertig"</v>
+                      <v n="Value">"DB6.diTagesZaehler"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -4107,10 +4107,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>66876116-21bf-41e1-9f26-cb8584f52542</v>
-                <v>FB_Reinit</v>
-                <v>ae0500d2-7680-4a77-b3c4-cd32764b244c</v>
                 <v>FB_Exit</v>
                 <v>0f1cd88e-e5aa-46f5-9711-b7dbda4271a9</v>
+                <v>FB_Reinit</v>
+                <v>ae0500d2-7680-4a77-b3c4-cd32764b244c</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{029b2148-e07a-4768-a9fe-44ef1ec480fd}</v>
