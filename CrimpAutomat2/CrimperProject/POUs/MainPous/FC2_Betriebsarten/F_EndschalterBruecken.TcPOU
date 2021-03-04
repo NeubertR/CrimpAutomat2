@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_EndschalterBruecken" Id="{b93c4c15-18fb-49a5-bc3a-e39cc8e09da8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM F_EndschalterBruecken
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Baustein: FC2 Start, Stop, Betriebsarten *)
+(* Netzwerk: 1 Endschalter brücken *)
+
+(* Vorgehensweise: Eine bestimmte mögliche (Ausgangs-)Kombi wird meist etwas verzögert als Eingang 'dargeboten'... 
+damit wird der entsprechende Eingang simuliert *)
+
+
+(*
+	U "M11.0_Bridge_E1.0" M11.0 -- Brücke E1.0 Drahthalter offen
+	SPBN br10
+	
+	UN "A 1.7" A1.7 -- Y-10 Drahthalter+Führung zu
+	L S5T#500MS
+	SE "Bridge_E1.0" T110 -- Brücke E1.0 Drahthalter offen
+	U "Bridge_E1.0" T110 -- Brücke E1.0 Drahthalter offen
+	= "E1_0" E1.0 -- R Drahthalter offen
+*)
+IF RVL.sBrDrahthalterIstOffen THEN //Brücke E1.2 (neu) Drahthalter offen, VAT.M11.0
+	GVL.tonDrahthaltOffen(IN := NOT IO.outY10DrahthaltFuehrungZU, PT := T#500MS);
+	GVL.insecDrahthalterIstOffen := GVL.tonDrahthaltOffen.Q;
+ELSE
+
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecDrahthalterIstOffen := GVL.inTmpDrahthalterIstOffen;
+	{ELSE}
+		GVL.insecDrahthalterIstOffen := IO.inDrahthalterIstOffen;
+	{END_IF}	
+	
+END_IF
+
+(*	
+br10:
+	U "M11.1_Bridge_E1.1" M11.1 -- Brücke E1.1 Auslöseschalter
+	SPBN br11
+	U "A 0.0" A0.0 -- Tastleuchte Start
+	O "M0_3_Tipp" M0.3 -- Einzel-Schritt
+	U "M 80.0" M80.0 -- +F E0.0 Taste Start
+	= "E1_1" E1.1 -- N Auslöseschalter
+*)
+IF RVL.sBrAusloeseSchalter THEN //Brücke E1.3 (neu) Auslöseschalter, war VAT.M11.1
+	GVL.insecAusloeseSchalter := IO.outMldTasteStart OR VAT.bEinzelSchritt AND VAT.bFlkTasteStart;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecAusloeseSchalter := GVL.inTmpAusloeseSchalter;
+	{ELSE}
+		GVL.insecAusloeseSchalter := IO.inAusloeseSchalter;
+	{END_IF}
+END_IF
+(*
+br11:
+	U "M11.2_Bridge_E1.2" M11.2 -- Brücke E1.2 Abisolierer zu
+	SPBN br12
+	U "A 1.3" A1.3 -- Y-6 Abisolierer zu
+	L S5T#300MS
+	SE "Bridge_E1.2" T112 -- Brücke E1.2 Abisolierer zu
+	U "Bridge_E1.2" T112 -- Brücke E1.2 Abisolierer zu
+	= "E1_2" E1.2 -- N Abisolierer zu
+*)
+IF RVL.sBrAbisoliererIstZU THEN //Brücke E1.4 (neu) Auslöseschalter, war VAT.M11.2
+	GVL.tonAbisoliererIstZU(IN := IO.outY6AbisoliererZU, PT := T#300MS); // war T112
+	GVL.insecAbisoliererIstZU := GVL.tonAbisoliererIstZU.Q;
+ELSE	
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecAbisoliererIstZU := GVL.inTmpAbisoliererIstZU;
+	{ELSE}
+		GVL.insecAbisoliererIstZU := IO.inAbisoliererIstZU;
+	{END_IF}
+END_IF
+(*
+br12: U "M11.3_Bridge_E1.3" M11.3 -- Brücke E1.3 Abisolierer vorn
+	SPBN br13
+	UN "A 1.5" A1.5 -- Y-8 Abisolierer rück
+	L S5T#300MS
+	SE "Bridge_E1.3" T113 -- Brücke E1.3 Abisolierer vorn
+	U "Bridge_E1.3" T113 -- Brücke E1.3 Abisolierer vorn
+	= "E1_3" E1.3 -- R Abisolierer vorn
+*)
+IF RVL.sBrAbisoliererIstVORN THEN //Brücke E1.5 (neu) Abisolierer vorn, war VAT.M11.3
+	GVL.tonAbisoliererIstVORN(IN := NOT IO.outY8AbisoliererRUECK, PT := T#300MS); // war T113
+	GVL.insecAbisoliererIstVORN := GVL.tonAbisoliererIstVORN.Q;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecAbisoliererIstVORN := GVL.inTmpAbisoliererIstVORN;
+	{ELSE}	
+		GVL.insecAbisoliererIstVORN := IO.inAbisoliererIstVORN;
+	{END_IF}	
+END_IF
+(*
+br13: U "M11.4_Bridge_E1.4" M11.4 -- Brücke E1.4 Abisolierer rück (abisoliert)
+	SPBN br14
+	U "A 1.5" A1.5 -- Y-8 Abisolierer rück
+	L S5T#400MS
+	SE "Bridge_E1.4" T114 -- Brücke E1.4 Abisolierer rück (abisoliert)
+	U "Bridge_E1.4" T114 -- Brücke E1.4 Abisolierer rück (abisoliert)
+	= "E1_4" E1.4 -- R Abisolierer rück (abisoliert)
+*)
+IF RVL.sBrAbisoliererIstRUECK THEN //Brücke E1.6 (neu) Abisolierer rück (abisoliert), war VAT.M11.4
+	GVL.tonAbisoliererIstRUECK(IN := IO.outY8AbisoliererRUECK, PT := T#400MS); // war T114
+	GVL.insecAbisoliererIstRUECK := GVL.tonAbisoliererIstRUECK.Q;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecAbisoliererIstRUECK := GVL.inTmpAbisoliererIstRUECK;
+	{ELSE}	
+		GVL.insecAbisoliererIstRUECK := IO.inAbisoliererIstRUECK;
+	{END_IF}	
+END_IF
+(*
+br14: U "M11.5_Bridge_E1.5" M11.5 -- Brücke E1.5 Abisolierer links (aus Arbeitsraum)
+	SPBN br15
+	U "A 1.2" A1.2 -- Y-5 Abisolierer nach links+Abdeckung zu
+	L S5T#500MS
+	SE "Bridge_E1.5" T115 -- Brücke E1.5 Abisolierer links (aus Arbeitsraum)
+	U "Bridge_E1.5" T115 -- Brücke E1.5 Abisolierer links (aus Arbeitsraum)
+	= "E1_5" E1.5 -- R Abisolierer links (aus Arbeitsraum)
+*)
+IF RVL.sBrAbisoliererIstLINKS THEN //Brücke E1.7 (neu) Abisolierer links (aus Arbeitsraum), war VAT.M11.5
+	GVL.tonAbisoliererIstLINKS(IN := IO.outY5AbisolierNachLINKS, PT := T#500MS); // war T115
+	GVL.insecAbisoliererIstLINKS := GVL.tonAbisoliererIstLINKS.Q;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecAbisoliererIstLINKS := GVL.inTmpAbisoliererIstLINKS;
+	{ELSE}	
+		GVL.insecAbisoliererIstLINKS := IO.inAbisoliererIstLINKS;
+	{END_IF}	
+END_IF
+(*
+br15: U "M11.6_Bridge_E1.6" M11.6 -- Brücke E1.6 Crimpzange zu
+	SPBN br16
+	U "A 1.6" A1.6 -- Y-9 Crimpen zu
+	L S5T#600MS
+	SE "Bridge_E1.6" T116 -- Brücke E1.6 Crimpzange zu
+	U "Bridge_E1.6" T116 -- Brücke E1.6 Crimpzange zu
+	= "E1_6" E1.6 -- N Crimpzange zu
+*)
+IF RVL.sBrCrimpZangeIstZU THEN //Brücke E1.8 (neu) Crimpzange zu, war VAT.M11.6
+	GVL.tonCrimpZangeIstZU(IN := IO.outY9CrimperZU, PT := T#600MS); // war T116
+	GVL.insecCrimpZangeIstZU := GVL.tonCrimpZangeIstZU.Q;
+ELSE	
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecCrimpZangeIstZU := GVL.inTmpCrimpZangeIstZU;
+	{ELSE}	
+		GVL.insecCrimpZangeIstZU := IO.inCrimpZangeIstZU;
+	{END_IF}
+END_IF
+(*
+br16: U "M11.7_Bridge_E1.7" M11.7 -- Brücke E1.7 Crimpzange offen
+	SPBN br17
+	UN "A 1.6" A1.6 -- Y-9 Crimpen zu
+	L S5T#400MS
+	SE "Bridge_E1.7" T117 -- Brücke E1.7 Crimpzange offen
+	U "Bridge_E1.7" T117 -- Brücke E1.7 Crimpzange offen
+	= "E1_7" E1.7 -- R Crimpzange offen
+*)
+IF RVL.sBrCrimpZangeIstOFFEN THEN //Brücke E1.9 (neu) Crimpzange offen, war VAT.M11.7
+	GVL.tonCrimpZangeIstOFFEN(IN := NOT IO.outY9CrimperZU, PT := T#400MS); // war T117
+	GVL.insecCrimpZangeIstOFFEN := GVL.tonCrimpZangeIstOFFEN.Q;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecCrimpZangeIstOFFEN := GVL.inTmpCrimpZangeIstOFFEN;
+	{ELSE}	
+		GVL.insecCrimpZangeIstOFFEN := IO.inCrimpZangeIstOFFEN;
+	{END_IF}	
+END_IF
+(*
+br17: U "M12.0_Bridge_E2.0" M12.0 -- Brücke E2.0 Kontakt gefallen
+	SPBN br20
+	U "M 21.7" M21.7 -- Kontakt-Anforderung
+	L S5T#500MS
+	SE "Bridge_E2.0" T120 -- Brücke E2.0 Kontakt gefallen
+	U "Bridge_E2.0" T120 -- Brücke E2.0 Kontakt gefallen
+	= "E2_0" E2.0 -- L Kontakt gefallen
+*)
+IF RVL.sBrKontaktIstGefallen THEN //Brücke E1.10 (neu) Kontakt gefallen, war VAT.M12.0
+	GVL.tonBrKontaktIstGefallen(IN := VAT.bKontaktAnforderung, PT := T#500MS); // war T120 -> M21.7
+	GVL.insecKontaktIstGefallen := GVL.tonBrKontaktIstGefallen.Q;
+ELSE	
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecKontaktIstGefallen := GVL.inTmpKontaktIstGefallen;
+	{ELSE}	
+		GVL.insecKontaktIstGefallen := IO.inKontaktIstGefallen;
+	{END_IF}
+END_IF
+(*
+br20: U "M12.1_Bridge_E2.1" M12.1 -- Brücke E2.1 Crimpeinheit vorn
+	SPBN br21
+	U "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+	L S5T#300MS
+	SE "Bridge_E2.1" T121 -- Brücke E2.1 Crimpeinheit vorn
+	U "Bridge_E2.1" T121 -- Brücke E2.1 Crimpeinheit vorn
+	= "E2_1" E2.1 -- R Crimpeinheit vorn
+*)
+IF RVL.sBrCrimpEinheitIstVORN THEN //Brücke E1.11 (neu) Crimpeinheit vorn, war VAT.M12.1
+	GVL.tonCrimpEinheitIstVORN(IN := IO.outY4CrimpEinheitVOR, PT := T#300MS); // war T121
+	GVL.insecCrimpEinheitIstVORN := GVL.tonCrimpEinheitIstVORN.Q;
+ELSE	
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecCrimpEinheitIstVORN := GVL.inTmpCrimpEinheitIstVORN;
+	{ELSE}	
+		GVL.insecCrimpEinheitIstVORN := IO.inCrimpEinheitIstVORN;
+	{END_IF}	
+END_IF
+(*
+br21: U "M12.2_Bridge_E2.2" M12.2 -- Brücke E2.2 Kontakt-Schieben vorn
+	SPBN br22
+	U "A 1.0" A1.0 -- Y-3 Kontakt-Schieben
+	L S5T#400MS
+	SE "Bridge_E2.2" T122 -- Brücke E2.2 Kontakt-Schieben vorn
+	U "Bridge_E2.2" T122 -- Brücke E2.2 Kontakt-Schieben vorn
+	= "E2_2" E2.2 -- R Kontakt-Schieben vorn
+*)
+IF RVL.sBrKontaktSchiebenVORN THEN //Brücke E1.14 (neu) Kontakt-Schieben vorn, war VAT.M12.2
+	GVL.tonKontaktSchiebenVORN(IN := IO.outY3KontaktSchieben, PT := T#400MS); // war T122
+	GVL.insecKontaktSchiebenVORN := GVL.tonKontaktSchiebenVORN.Q;
+ELSE	
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecKontaktSchiebenVORN := GVL.inTmpKontaktSchiebenVORN;
+	{ELSE}
+		GVL.insecKontaktSchiebenVORN := IO.inKontaktSchiebenVORN;
+	{END_IF}
+END_IF
+(*
+br22: U "M12.3_Bridge_E2.3" M12.3 -- Brücke E2.3 Ausstoßen vorn
+	SPBN br23
+	U "A 0.6" A0.6 -- Y-1 Ausstoßen
+	L S5T#300MS
+	SE "Bridge_E2.3" T123 -- Brücke E2.3 Ausstoßen vorn
+	U "Bridge_E2.3" T123 -- Brücke E2.3 Ausstoßen vorn
+	= "E2_3" E2.3 -- R Ausstoßen vorn
+*)
+IF RVL.sBrAusstossenVORN THEN //Brücke E1.13 (neu) Ausstoßen vorn, war VAT.M12.3
+	GVL.tonAusstossenVORN(IN := IO.outY1Ausstossen, PT := T#300MS); // war T123
+	GVL.insecAusstossenVORN := GVL.tonAusstossenVORN.Q;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecAusstossenVORN := GVL.inTmpAusstossenVORN;
+	{ELSE}	
+		GVL.insecAusstossenVORN := IO.inAusstossenVORN;
+	{END_IF}
+END_IF
+(*
+br23: U "M12.4_Bridge_E2.4" M12.4 -- Brücke E2.4 Crimpeinheit rück
+	SPBN br24
+	UN "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+	L S5T#400MS
+	SE "Bridge_E2.4" T124 -- Brücke E2.4 Crimpeinheit rück
+	U "Bridge_E2.4" T124 -- Brücke E2.4 Crimpeinheit rück
+	= "E2_4" E2.4 -- R Crimpeinheit rück
+*)
+IF RVL.sBrAusstossenVORN THEN //Brücke E1.12 (neu) Crimpeinheit rück, war VAT.M12.4
+	GVL.tonCrimpEinheitIstRUECK(IN := IO.outY4CrimpEinheitVOR, PT := T#300MS); // war T124
+	GVL.insecCrimpEinheitIstRUECK := GVL.tonCrimpEinheitIstRUECK.Q;
+ELSE
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecCrimpEinheitIstRUECK := GVL.inTmpCrimpEinheitIstRUECK;
+	{ELSE}
+		GVL.insecCrimpEinheitIstRUECK := IO.inCrimpEinheitIstRUECK;
+	{END_IF}	
+END_IF
+(*
+br24: U "M12.5_Bridge_E2.5" M12.5 -- Brücke E2.5 Magazin gefüllt
+	SPBN br25
+	U "E2_5" E2.5 -- N Magazin gefüllt
+	= "E2_5" E2.5 -- N Magazin gefüllt
+*)
+IF RVL.sBrMagazinGEFUELLT THEN // //Brücke E1.15 (neu) Magazin gefüllt, war VAT.M12.5
+	GVl.insecMagazinGEFUELLT := IO.inMagazinGEFUELLT; //???
+ELSE	
+	{IF defined (CRIMP_IO_TEST)}
+		GVL.insecMagazinGEFUELLT := GVL.inTmpMagazinGEFUELLT;
+	{ELSE}
+		GVl.insecMagazinGEFUELLT := IO.inMagazinGEFUELLT;
+	{END_IF}	
+END_IF
+(*
+br25: BLD 130
+*)
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_EndschalterBruecken">
+      <LineId Id="7" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="246" Count="2" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="2" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="14" Count="3" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="283" Count="0" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="287" Count="0" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="250" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="19" Count="4" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="161" Count="1" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="292" Count="1" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="164" Count="0" />
+      <LineId Id="25" Count="5" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="166" Count="1" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="253" Count="0" />
+      <LineId Id="295" Count="1" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="294" Count="0" />
+      <LineId Id="297" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="31" Count="6" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="180" Count="2" />
+      <LineId Id="255" Count="0" />
+      <LineId Id="299" Count="1" />
+      <LineId Id="298" Count="0" />
+      <LineId Id="256" Count="0" />
+      <LineId Id="301" Count="0" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="38" Count="6" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="184" Count="2" />
+      <LineId Id="257" Count="0" />
+      <LineId Id="303" Count="1" />
+      <LineId Id="302" Count="0" />
+      <LineId Id="258" Count="0" />
+      <LineId Id="305" Count="0" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="45" Count="6" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="188" Count="2" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="307" Count="1" />
+      <LineId Id="306" Count="0" />
+      <LineId Id="260" Count="0" />
+      <LineId Id="309" Count="0" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="52" Count="6" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="192" Count="2" />
+      <LineId Id="261" Count="0" />
+      <LineId Id="311" Count="1" />
+      <LineId Id="262" Count="0" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="59" Count="6" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="196" Count="2" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="315" Count="1" />
+      <LineId Id="314" Count="0" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="317" Count="0" />
+      <LineId Id="195" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="66" Count="6" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="200" Count="2" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="319" Count="1" />
+      <LineId Id="266" Count="0" />
+      <LineId Id="318" Count="0" />
+      <LineId Id="321" Count="0" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="73" Count="6" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="204" Count="2" />
+      <LineId Id="267" Count="0" />
+      <LineId Id="323" Count="1" />
+      <LineId Id="268" Count="0" />
+      <LineId Id="322" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="80" Count="6" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="214" Count="2" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="327" Count="1" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="329" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="87" Count="6" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="218" Count="2" />
+      <LineId Id="271" Count="0" />
+      <LineId Id="331" Count="1" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="330" Count="0" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="94" Count="3" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="222" Count="2" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="335" Count="1" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="334" Count="0" />
+      <LineId Id="337" Count="0" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="105" Count="3" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="225" Count="1" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="339" Count="1" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="338" Count="0" />
+      <LineId Id="341" Count="0" />
+      <LineId Id="100" Count="1" />
+      <LineId Id="229" Count="1" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="98" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

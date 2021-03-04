@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="FB_CalcXY" Id="{3f5d1098-50c2-4f0c-9487-99b4e55b7df3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CalcXY
+(* Berechnung des a und b Wertes für die Linearisierung Y=ax+b *)
+VAR_INPUT
+     Dev : POINTER TO DUT_Device;
+END_VAR
+VAR_OUTPUT
+
+END_VAR 
+VAR
+
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* prevent Div By Zero *)
+
+Dev^.dFakt_A := 1;
+Dev^.dSmd_B := 0;
+
+IF (Dev^.rIN_HI - Dev^.rIN_LO) = 0 THEN
+     RETURN;
+END_IF
+
+Dev^.dFakt_A :=  UINT_TO_REAL(Dev^.nOUT_HI - Dev^.nOUT_LO ) / (Dev^.rIN_HI - Dev^.rIN_LO);
+Dev^.dSmd_B := Dev^.nOUT_LO - (Dev^.rIN_LO * Dev^.dFakt_A);
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_CalcXY">
+      <LineId Id="25" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="29" Count="3" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_StatusAnzeige" Id="{320c13fb-4aa5-4aee-90d1-2a8f9646054a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_StatusAnzeige
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*
+Baustein: FC95 Status-Anzeige
+Zeitstempel Code: 09.12.2014 10:56:48
+Interface: 09.07.2010 10:27:01
+*)
+
+//NBT-NEU
+
+GVL.zeigeFehler := (P_Ablauf.fbAllesInSollpos.bError AND NOT P_Ablauf.fbAllesInSollpos.bErrMute)
+					OR P_FehlerAllgemein.fbKontrolleEndschalter.bError;
+
+
+(* Netzwerk: 1 *)
+
+//ToDo: Noch keine Ahnung, was das tun soll...
+(*
+L "DB6".d42 DB6.DBB42	-- Eingangs-Byte-Select Status
+
+// https://www.sps-forum.de/simatic/81525-variabler-array-index-awl.html
+//Beispiel:
+//L #index    // 1..8 (aus MB23)
+//+ -1        // --> 0..7
+//SLD 3       // * 8 --> Byteadresse.0 -- Array_Index: 0 ... (muß * 8, weil Bit-Adressen adressiert werden, wir aber die Byte-Adresse brauchen)
+			  //  Element_Größe: 1 = Byte / 2 = Word / 4 = DWord
+			  
+
+SLW 3 					-- Schiebt Wort um 3 bit nach links, bzw. multipliziert den Wert im Akku mit 8. Siehe oben...
+// * 1 für Byte-Array rechnen nicht nötig
+
+LAR1 					-- Akku als Zeiger in Adressregister 1 laden
+L EB [AR1,P#0.0] 		-- Lade Eingangsbyte, Adressregister 1 mit Offset 0.0 adressiert
+T "DB6".d40 DB6.DBB40 	-- 8*Eingangs-Bit Status
+*)
+
+(*
+L "DB6".d46 DB6.DBB46 -- Ausgangs-Byte-Select Status
+SLW 3
+LAR1
+L "DB6".d43 DB6.DBB43 -- Zuw.v.DBB46 Status
+L "DB6".d46 DB6.DBB46 -- Ausgangs-Byte-Select Status
+T "DB6".d43 DB6.DBB43 -- Zuw.v.DBB46 Status
+==I
+= L 0.0  -- L 0.0 ist das erste bit aus den lokaldaten
+*)
+
+
+
+(*
+L "DB6".d45 DB6.DBB45 -- Zuw.vom selectierten Ausgangs-Byte Status
+L AB [AR1,P#0.0]	  -- Lade Ausgangsbyte
+T "DB6".d45 DB6.DBB45 -- Zuw.vom selectierten Ausgangs-Byte Status
+<>I
+R L 0.0
+*)
+
+
+
+(*
+//https://www.sps-forum.de/simatic/6451-awl-anweisung-verstehen.html
+//L 0.0 ist das erste bit aus den lokaldaten.
+//Auf jeden Fall ist das keine saubere Arbeit. Siemens macht sowas gerne beim umschalten von KOP/FUP in AWL,
+//aber ein Programmierer sollte das nicht tun.
+
+U L 0.0
+SPBN s1
+*)
+
+(*
+	L "DB6".d44 DB6.DBB44 -- 8*Ausgangs-Bit Status
+	T AB [AR1,P#0.0]
+*)
+	
+(*	
+s1: L AB [AR1,P#0.0]
+	T "DB6".d44 DB6.DBB44 -- 8*Ausgangs-Bit Status
+	L "DB6".d50 DB6.DBB50 -- Merker-Byte-Select Status
+	SLW 3
+	LAR1
+	L "DB6".d47 DB6.DBB47 -- Zuw.v.DBB50 Status
+	L "DB6".d50 DB6.DBB50 -- Merker-Byte-Select Status
+	T "DB6".d47 DB6.DBB47 -- Zuw.v.DBB50 Status
+	==I
+	= L 0.0
+	L "DB6".d49 DB6.DBB49 -- Zuw.vom selectierten Merker-Byte Status
+	L MB [AR1,P#0.0]
+	T "DB6".d49 DB6.DBB49 -- Zuw.vom selectierten Merker-Byte Status
+	<>I
+	R L 0.0
+	U L 0.0
+	SPBN s2
+	L "DB6".d48 DB6.DBB48 -- 8*Merker-Bit Status
+	T MB [AR1,P#0.0]
+s2: L MB [AR1,P#0.0]
+	T "DB6".d48 DB6.DBB48 -- 8*Merker-Bit Status
+	L MW [AR1,P#0.0]
+	T "DB6".d52 DB6.DBW52 -- Wert vom selectierten Merker-Byte Status
+*)
+
+;]]></ST>
+    </Implementation>
+    <LineIds Name="P_StatusAnzeige">
+      <LineId Id="9" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="120" Count="1" />
+      <LineId Id="124" Count="2" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="111" Count="1" />
+      <LineId Id="109" Count="1" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="115" Count="1" />
+      <LineId Id="24" Count="2" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="27" Count="7" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="35" Count="4" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="89" Count="1" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="96" Count="1" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="44" Count="21" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="102" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

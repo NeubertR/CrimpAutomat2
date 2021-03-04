@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_FlankenErzeugen" Id="{6bf5ba92-5f08-450d-b068-4a81e2bd5308}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_FlankenErzeugen
+VAR
+	akk1, akk2 : DWORD;
+	dwTmp : DWORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 2 Flanken erzeugen *)
+
+
+//...wird offensichtlich nicht verwendet!	
+(*
+L "DB6".d0 DB6.DBD0 -- Zuw.v. -- altes Eingangsdoppelwort aus DB6-RAM nach AKKU1
+INVD -- 1-Komplement Ganzzahl (32 Bit)
+*)
+//akk1 := NOT DB6.d0;
+(*
+L ED 0  -- L ED 0 schiebe AKKU1 nach AKKU2 und Lade Eingangsdoppelwort 0 in AKKU1
+T "DB6".d0 DB6.DBD0 -- Zuw.v. -- rette aktuelles Eingangsdoppelwort in DB6-RAM
+*)
+//akk2 := akk1;
+//akk1 := dwTmp; //Das müsste das original Eingangsdoppelwort 0 sein.
+//DB6.d0 := akk1;
+(*
+UD -- UND-Doppelwort Akku1 mit Akku 2, Das Ergebnis wird in AKKU 1 gespeichert.
+T "MD 80" MD80 -- +Fs ED0 -- das Statuswort wird nicht beeinflusst
+*) 
+//GVL.MD80 := (akk1 AND akk2); //+Fs ED0
+
+
+//ToDo, Frage: ----------------- Wirkt jetzt Akku1 noch nach? ------------------
+//sehr wahrscheinlich nicht.
+//ansonsten ist das alles unnötig...
+(*
+UN "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+UN "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+UN "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+UN "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+UN "M8.5ohneKontakt" M8.5 -- Probelauf ohne Kontakt
+UN "M8.6ohneCrmpen" M8.6 -- Probelauf ohne Crimpen
+UN "M8.7ohneLitze" M8.7 -- Probelauf ohne Litze
+= "M8.0NormalCrimp" M8.0 -- Normal Crimpen
+*)
+
+VAT.bNormalCrimp :=	NOT VAT.bMagazinLeerfahren AND //Magazin Leerfahren
+				NOT VAT.bSortiererLeerfahren AND //Sortierer Leerfahren
+				NOT VAT.bCrimpEinrichten AND //Crimpen Einrichten
+				NOT VAT.bNurAbisolieren AND //Nur Abisolieren
+				NOT VAT.bProbelOhneKontakt AND //Probelauf ohne Kontakt
+				NOT VAT.bProbelOhneCrimpen AND //Probelauf ohne Crimpen
+				NOT VAT.bProbelOhneLitze; 	  //Probelauf ohne Litze]]></ST>
+    </Implementation>
+    <LineIds Name="P_FlankenErzeugen">
+      <LineId Id="7" Count="0" />
+      <LineId Id="138" Count="1" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="9" Count="2" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="16" Count="6" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="118" Count="5" />
+      <LineId Id="117" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

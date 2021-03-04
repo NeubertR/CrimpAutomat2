@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_Ablauf" Id="{9d4c4081-be6b-41fe-a31b-cab3d89c250b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Ablauf
+VAR
+	ErrNo : WORD;
+	endstellungOk : BOOL;
+	fbAllesInSollpos : FB_AllesInSollposition;
+	AblaufketteNormal : FB_AblaufketteNormal;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*
+FC20 Ablauf
+Zeitstempel Code: 11.01.2019 13:17:50
+Interface: 16.02.2009 10:58:19
+*)
+
+fbAllesInSollpos(errorOffset := 500); //OK
+GVL.SolPosErrorIdx := fbAllesInSollpos.nErrNo;
+
+//Nur wenn SafetyFALSE UND Taste Start > 1 Sek.
+P_AblaufReset(); //OK - mit Abweichung / auskomm.
+
+AblaufketteNormal(); //OK
+
+F_AblaufketteLeerfahren(); //OK
+
+endstellungOk := F_Endstellung();
+
+F_Ventile(); //OK
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_Ablauf">
+      <LineId Id="56" Count="19" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

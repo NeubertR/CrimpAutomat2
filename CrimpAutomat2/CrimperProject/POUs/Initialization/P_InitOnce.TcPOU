@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_InitOnce" Id="{dd986b0e-7367-479a-a1bc-68a8fa7a387e}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_InitOnce
+VAR
+	done : BOOL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GVL.firstCycle := FALSE;
+
+IF done THEN
+	RETURN;
+END_IF
+
+done := TRUE;
+
+GVL.firstCycle := TRUE;
+
+
+GVL.devSortierer.wID := 100;
+GVL.devSortierer.sDevName := 'Sortierer';
+GVL.devSortierer.rIN_LO := 0;
+GVL.devSortierer.rIN_HI := 100; //ToDo: Checken
+GVL.devSortierer.nOUT_LO := 819;
+GVL.devSortierer.nOUT_HI := 65535;
+GVL.calcDev(Dev := ADR(GVL.devSortierer));
+
+GVL.devDruckVentil.wID := 101;
+GVL.devDruckVentil.sDevName := 'Druck-Ventil';
+GVL.devDruckVentil.rIN_LO := 0.0;
+GVL.devDruckVentil.rIN_HI := 100.0;
+GVL.devDruckVentil.nOUT_LO := 0;
+GVL.devDruckVentil.nOUT_HI := 65535;
+GVL.calcDev(Dev := ADR(GVL.devDruckVentil));
+
+
+VAT.byBlinkTakt := 0;
+
+DB6.runTime.seconds := 0;
+
+//Später wieder raus
+VAT.bSammelStoerung := 0;
+
+RVL.currLogLevel := 8;
+
+DB6.nAusstossverz := REAL_TO_INT(DB6.rAusstossverz * 1000);
+
+MAIN.M_Log(reqLevel:=CVL.INFO, objectName:= 'P_InitOnce', sMsg:='done', errNo:= 0);
+
+IO.safetyRUN := TRUE;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_InitOnce">
+      <LineId Id="7" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="71" Count="1" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="80" Count="3" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

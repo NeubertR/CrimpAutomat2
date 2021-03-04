@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_AnzeigeSollpositionsFehler" Id="{21cf8165-5988-47a9-814a-3a4fb28a144a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK F_AnzeigeSollpositionsFehler 
+VAR_INPUT
+	enable : BOOL;
+	errNo : WORD;
+	idOffset : WORD; 
+END_VAR
+VAR_OUTPUT
+	errID : WORD;
+END_VAR
+VAR
+	//wait : TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[errID := idOffset;
+IF enable THEN
+	
+	//wait(IN := errNo > 0, PT := T#1S);
+	//IF wait.Q THEN
+		errID := idOffset + errNo;
+	//END_IF
+
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="F_AnzeigeSollpositionsFehler">
+      <LineId Id="28" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

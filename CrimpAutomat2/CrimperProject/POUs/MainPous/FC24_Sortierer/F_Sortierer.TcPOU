@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Sortierer" Id="{7e5e0746-60e0-4a8c-a74f-39fac4d075ee}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Sortierer : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 1 Sortierer *)
+
+
+(*
+	U "E2_5" E2.5 -- N Magazin gefüllt
+	L S5T#100MS
+	SA "T 32" T32 -- Verl. E2.5 Magazin gefüllt
+*)
+GVL.tofMagazGefuellt(IN := GVL.insecMagazinGEFUELLT, PT := T#100MS);
+(*	
+	U "T 32" T32 -- Verl. E2.5 Magazin gefüllt
+	L S5T#1S
+	SE "T 33" T33 -- Verl. T32 E2.5 Magazin gefüllt
+*)	
+GVL.tofMagazGefuellt2(IN := GVL.tofMagazGefuellt.Q, PT := T#1S);	
+	
+(*	
+	L 0 //Sortierer aus
+	UN "T 33" T33 -- Verl. T32 E2.5 Magazin gefüllt
+	UN "M1.3_Stop" M1.3 -- RS Stop StST
+	UN "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+	UN "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+	U "T 72" T72 -- Verz. Alles OK von PNOZ PNOZ
+	SPBN fh
+*)
+GVL.TopfWert := 0;
+
+IF	NOT GVL.tofMagazGefuellt2.Q AND //T33
+	NOT VAT.bRsStop AND //M1.3 (Unterschied zu "Magazin Leerfahren")
+	NOT VAT.bCrimpEinrichten AND //M8.3
+	NOT VAT.bNurAbisolieren AND //M8.4
+	GVL.tonSAFETYok.Q THEN //T72
+	
+	(*	
+		L "DB6".w132_Sortierer DB6.DBW132 -- Sortierer-Sollwert (Analog)
+		L 130
+		*I   -- AKKU1 und AKKU2 multiplizieren,  und speichert das Ergebnis in AKKU1
+		+ 3000  -- Addiere AKKU1-L und 3000, speichere das Ergebnis in AKKU1-L. 
+	*)	
+	
+	//y=ax+b Ansatz -- NEU-NBT
+	GVL.TopfWert := REAL_TO_UINT(GVL.devSortierer.dFakt_A * INT_TO_REAL(DB6.iSortierer) + GVL.devSortierer.dSmd_B);
+	
+END_IF
+
+(*
+fh: T "AW 4" AW4 -- Sortierer
+	L 3500
+	>I
+	U "M9.0MitBlasen" M9.0 -- mit Sortier-Blasen
+	= "A 0.1" A0.1 -- Y-11 Blasluft Sortierer
+*)
+
+IO.outSollwertRuettelTopf := GVL.TopfWert; //Checken !!! Checken !!! Checken !!!
+IF 3500 > GVL.TopfWert THEN
+	IO.outY11SortierLuft := VAT.bSortiererBlasen;
+END_IF
+
+
+IF VAT.bSortiererBlasen THEN
+	VAT.sortierTextID := 1000;
+ELSE
+	VAT.sortierTextID := 1001;
+END_IF
+
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_Sortierer">
+      <LineId Id="7" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="14" Count="3" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="57" Count="3" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="24" Count="2" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="80" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="66" Count="2" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="75" Count="4" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="124" Count="2" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="33" Count="3" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="84" Count="2" />
+      <LineId Id="97" Count="1" />
+      <LineId Id="113" Count="3" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="83" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

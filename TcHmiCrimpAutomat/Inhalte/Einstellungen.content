@@ -1,0 +1,27 @@
+﻿<div id="Einstellungen" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="800" data-tchmi-height="640">
+
+<div id="ColorQuader_1" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="89" data-tchmi-height-unit="px" data-tchmi-left="66" data-tchmi-left-unit="px" data-tchmi-status="%s%PLC1.GVL.insecDrahthalterIstOffen|BindingMode=TwoWay%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="135" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractive" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+</div>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Aufstarten" Id="{6ad9f2d7-06fa-4c68-b4fb-05deeb3b5934}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Aufstarten : BOOL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 5 Aufstarten *)
+
+(*
+Die Operation SPA verlangt einen absoluten unbedingten Sprung ohne irgendwelche Bedingungen. SPA ist nicht abhängig vom Signalwert eines Bits
+im Statuswort oder vom VKE der vorhergehenden Verknüpfung. Das Anwenderprogramm wird an der angegebenen Sprungmarke weiter abgearbeitet.
+Gesprungen werden kann vorwärts und rückwärts, das Sprungziel muss allerdings im gleichen Baustein liegen wie der Aufruf der Sprungoperation
+SPA und darf nur einmal vorhanden sein.
+*)
+//SPA mie -- Springe absolut
+RETURN;
+
+GVL.tonTasteStart(IN := IO.inStart, PT := T#2S);
+
+IF GVL.tonTasteStart.Q THEN
+	F_ResetErrors();
+	(* GVL.MD100 := 0;
+	GVL.MD104 := 0;
+	GVL.MD108 := 0; 
+	GVL.MD112 := 0;
+	GVL.MD116 := 0; 
+	GVL.MD120 := 0; *)
+END_IF
+(*
+U "E0_0" E0.0 -- Taste Start
+L S5T#2S
+SE T 11
+U T 11
+SPB mie -- Springe wenn VKE = 1
+L 0
+T MD 100
+T MD 104
+T MD 108
+T MD 112
+T MD 116
+T MD 120
+mie: BLD 130
+*)
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_Aufstarten">
+      <LineId Id="8" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="29" Count="3" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="44" Count="4" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="11" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="37" Count="1" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="33" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

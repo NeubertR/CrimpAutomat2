@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_SignaldauerVonTastleuchte_MaschEinAuswerten" Id="{8c5f9cd0-205b-47a9-afc3-9a8da24111a4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_SignaldauerVonTastleuchte_MaschEinAuswerten : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	wTmp : UDINT;
+	setPnozSigLen : BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//HIER WEITER
+(*      
+	  U     "E0_1"
+      X     "M 3.1"
+      SPBN  s1
+*)
+
+setPnozSigLen := FALSE;
+
+IF IO.inResetNotHalt XOR VAT.bResetNotHalt_Old THEN //war M3.1
+
+(*
+      U     "E0_1"
+      =     "M 3.1"
+      SPB   zm
+	  *)
+	  //VAT.bResetNotHalt_Old := IO.inResetNotHalt; NBT - hier weggenommen...
+	  //IF NOT IO.inResetNotHalt THEN
+		  (*
+		  L     999
+		  L     "T 71"	-- gehe davon aus, dass er die Zeit von T71 lädt...
+		  -I    		-- AKKU1 von AKKU2 subtrahieren
+		  +     -1		-- Ganzzahl addieren
+		  L     4
+		  /I    		-- AKKU2 durch AKKU1 dividieren
+		  L     4		
+		  *I    		-- AKKU1 und AKKU2 multiplizieren
+		  T     "DB6".w230
+		  *)
+		  //ToDo, noch keine Ahnung, was das soll...(LSB's verschwinden lassen)
+		  //DB6.w230 := 999 - TIME_TO_INT(GVL.tofPnozSigLen.ET);
+	  //END_IF
+	  (*
+zm:   BLD   130
+      SET  -- VKE auf 1 setzen (=1)  
+      L     S5T#9S990MS
+      SA    "T 71" -- Zeit mit Ausschaltverzögerung start vorbereiten mit VKE=1
+      CLR   VKE auf 0 setzen 
+      SA    "T 71" -- Zeit mit Ausschaltverzögerung starten mit VKE=0
+*)
+setPnozSigLen := TRUE;
+	  
+END_IF //of IF IO.e01PNOZ_Signal XOR VAT.M3.1 ...
+
+//GVL.tofPnozSigLen(IN := setPnozSigLen, PT := T#9S990MS); //(ehem. T71)
+
+VAT.bResetNotHalt_Old := IO.inResetNotHalt; //NBT - hier hingesetzt...
+
+(*	  
+s1:   BLD   130
+      UN    "E0_1"
+      L     S5T#1S200MS
+      SE    "T 70"
+*)
+//GVL.tonPnozEntprell(IN := NOT IO.inResetNotHalt, PT := T#1S200MS); //(ehem. T70)
+(*	  
+      U     "E0_1"
+      L     S5T#1S
+      SE    "T 72"
+*)
+//GVL.tonSAFETYok(IN := IO.safeOutHauptLuft, PT := T#1S); -- von hier weg nach P_InputHandling() 
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_SignaldauerVonTastleuchte_MaschEinAuswerten">
+      <LineId Id="81" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="11" Count="2" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="14" Count="8" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="23" Count="5" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="92" Count="1" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="29" Count="3" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="33" Count="2" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="73" Count="1" />
+      <LineId Id="72" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

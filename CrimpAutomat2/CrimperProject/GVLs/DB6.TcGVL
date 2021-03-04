@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="DB6" Id="{47f24090-ca6e-4310-b3bc-80ac835545b3}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL RETAIN
+	
+	rAusstossverz : REAL := 0.0; //ehem. in DB6.w134
+	nAusstossverz : INT := 0; //NEU-NBT
+
+	diStueck_Vorwahl: DINT := 10000;//ehem. in DB6.d64Stueck_Vorwahl
+	diStueck_Fertig: DINT := 0; //ehem. in DB6.d68Stueck_Fertig
+	diStueck_Noch: DINT := 10000;
+	iStueck_pro_Minute: INT := 0;
+	
+	diStueck_Total : DINT := 0;
+	
+	
+	diTotalZaehler: DINT := 0; // ehem. in DB6.d140
+	diTagesZaehler: DINT := 0; // ehem. in DB6.d144
+	
+	diWartZaehlVorwahl: DINT := 0; // Vorwahl Wartung, ehem. in DB6.d148
+	diWartungsZaehler: DINT := 0; // ehem. in DB6.d152
+	
+	diReinigung_Vorw: DINT := 10000; //ehem. in DB6.d80
+	diReinigung_Zaehl: DINT := 0; //ehem. in DB6.d84
+	
+	rDrahthalterSchliessdruck : REAL := 0.5; //Umwandlung in F_Ventile() - wDrahthalterSchliessdruck := REAL_TO_WORD(DINT_TO_REAL(DB6.d376) * 2.730000E+003);
+	
+	
+	iSortierer : INT := 50; // Sortierer-Sollwert (Analog), war w132_Sortierer
+	
+	w226_Betr_Anz_Wert : INT := 0; // Betriebs-Anzeige-Wert Bedeutung noch unklar!!!
+	w230 : INT := 0; // Signaldauer-Wert von PNOZ Bedeutung noch unklar!!!
+	w228_Bef_Tast_Wert : INT := 0;
+	
+	outWordAlt : WORD; //ehem. in DB6.d408 -- Zuw.v. AW0
+	
+	d0 : DWORD := 0;
+	
+	runTime : DUT_RunTime;  //ehem. in DB6.d160 ff., todo versteckt. Reset?
+	
+	
+	//Test später raus --- Begin ---
+	
+	frceY11SortierLuft 			: BOOL; //EL1809-A1.5
+	frceY1Ausstossen 			: BOOL;
+	frceY2KontaktVereinzelung 	: BOOL; //EL1809-A1.7
+	frceY3KontaktSchieben	 	: BOOL; //EL1809-A1.8
+	frceY4CrimpEinheitVOR	 	: BOOL; //EL1809-A1.9
+	frceY5AbisolierNachLINKS	: BOOL; //EL1809-A1.10
+	frceY6AbisoliererZU		 	: BOOL; //EL1809-A1.11
+	frceY7AbfallRUNTER		 	: BOOL; //EL1809-A1.12
+	frceY8AbisoliererRUECK	 	: BOOL; //EL1809-A1.13
+	frceY9CrimperZU			 	: BOOL; //EL1809-A1.14
+	frceY10DrahthaltFuehrungZU	: BOOL; //EL1809-A1.15
+	
+	//Test später raus --- End ---
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

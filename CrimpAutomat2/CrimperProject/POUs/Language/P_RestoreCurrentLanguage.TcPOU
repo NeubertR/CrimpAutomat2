@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_RestoreCurrentLanguage" Id="{6123947d-e19f-4e88-b2d7-1ce19cf3fc3d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_RestoreCurrentLanguage
+VAR
+	waitTon:TON;
+	langDone:bool := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[waitTon(IN:=NOT langDone, PT:=T#8S);
+
+IF waitTon.Q AND NOT langDone THEN
+	langDone := TRUE;
+	
+	//MAIN.M_Log(reqLevel:=CVL.INFO, objectName:= 'P_RestoreCurrentLanguage', sMsg:=RVL.currLanguage, errNo:= 0);
+	
+	IF RVL.currLanguage <> '' THEN
+		VisuElems.CurrentLanguage := RVL.currLanguage;
+	ELSE
+		VisuElems.CurrentLanguage := 'de';
+	END_IF
+	
+	MAIN.M_Log(reqLevel:=CVL.INFO, objectName:= 'P_RestoreCurrentLanguage', sMsg:= CONCAT('Language = ', RVL.currLanguage), errNo:= 0);
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="P_RestoreCurrentLanguage">
+      <LineId Id="19" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="2" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

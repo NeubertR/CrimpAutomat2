@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Ventile" Id="{771fb853-46fe-46a5-bde1-7d96e7ec86d9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Ventile : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	wDrahthalterSchliessdruck : UINT := 0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 6 Ventile *)
+
+	(*
+	U "E1_7" E1.7 -- R Crimpzange offen
+	L S5T#50MS
+	SA "T 31" T31 -- Verl. E1.7 Crimpzange offen
+	*)
+	
+	GVL.tofCrimpzangeOffen(IN := GVL.insecCrimpZangeIstOFFEN, PT := T#50MS);
+	
+	(*
+	U "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+	UN "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+	O "M 20.0" M20.0 -- 0---Drahthalter + Drahtführung zu
+	O "M 20.1" M20.1 -- 1---Abisolierer zu
+	O "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren)
+	O "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	O(
+	U "M 20.5" M20.5 -- 5---Crimpen zu
+	U "T 31" T31 -- Verl. E1.7 Crimpzange offen
+	)
+	= "A 1.7" A1.7 -- Y-10 Drahthalter+Führung zu
+	*)
+	
+	IO.outY10DrahthaltFuehrungZU := 
+		(VAT.bAbisoliererLINKSundAUF AND
+		NOT VAT.bNurAbisolieren) OR
+		VAT.bDrahtHalterUndFuehrungZU OR
+		VAT.bAbisoliererZU OR
+		VAT.bAbisoliererRUECK OR
+		VAT.bCrimpeinheitVOR OR
+		(VAT.bCrimpenZU AND GVL.tofCrimpzangeOffen.Q);
+
+	(*
+	L 0  -- im VKE steht noch A1.7 ...
+	SPBN dr
+	*)
+	
+	IF IO.outY10DrahthaltFuehrungZU THEN 
+		(*
+		L "DB6".d376 DB6.DBD376
+		L 2.730000e+003 //Faktor 6*2730=3FFF (10V)
+		*R
+		RND -- Gleitpunktzahl zur Ganzzahl runden
+		*)
+		//ToDo: Testen: 4-20mA diese originale Linearisierung nehmen oder PArametrierung erlauben?
+		wDrahthalterSchliessdruck := REAL_TO_UINT(DB6.rDrahthalterSchliessdruck * 2.730000E+003);
+	ELSE
+		wDrahthalterSchliessdruck := 0;
+	END_IF
+(*
+dr: T "AW 6" AW6 -- Drahthalter Schließdruck
+*)
+	IO.outSollwertDruckVentil := wDrahthalterSchliessdruck;
+
+	(*
+	O "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren)
+	O "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+	= "A 1.5" A1.5 -- Y-8 Abisolierer rück
+	*)
+	IO.outY8AbisoliererRUECK := VAT.bAbisoliererRUECK OR VAT.bAbisoliererLINKSundAUF;
+	
+	(*
+	O "M 20.1" M20.1 -- 1---Abisolierer zu
+	O "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren)
+	O "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	O "M 20.5" M20.5 -- 5---Crimpen zu
+	O "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	O "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheit vor
+	O "M 21.0" M21.0 -- 8---Ausstoßen vor
+	O "M 21.1" M21.1 -- 9---Crimpeinheit rück
+	O "M 22.0" M22.0 -- 0---Abisolierer nach LinksLeerf-o-Ce
+	O "M 22.1" M22.1 -- 1---Crimpeinheit vorLeerf-o-Ce
+	O "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+	O "M 22.3" M22.3 -- 3---Crimpeinheit rückLeerf-o-Ce
+	= "A 1.3" A1.3 -- Y-6 Abisolierer zu
+	*)
+	IO.outY6AbisoliererZU :=	VAT.bAbisoliererZU OR //Abisolierer zu
+							VAT.bAbisoliererRUECK OR //Abisolierer rück (abisolieren)
+							VAT.bCrimpeinheitVOR OR //Crimpeinheit vor
+							VAT.bCrimpenZU OR //Crimpen zu
+							VAT.bDrahtHalterUndFuehrungAUF OR //Drahthalter + Drahtführung auf
+							VAT.bCrZangeAUF_AisolierVOR OR //Crimpzange auf + Abisoliereinheit vor
+							VAT.bAusstossenVOR OR //Ausstoßen vor
+							VAT.bCrimpeinheitRUECK OR //Crimpeinheit rück
+							VAT.bAbisoliererNachLinksLoC OR //Abisolierer nach LinksLeerf-o-Ce
+							VAT.bCrimpEinheitVorLoC OR //Crimpeinheit vorLeerf-o-Ce
+							VAT.bVereinzelungTakten OR //Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+							VAT.bCrimpEinheitRueckLoC ;  //Crimpeinheit rückLeerf-o-Ce
+	(*
+	O "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+	O "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	O "M 20.5" M20.5 -- 5---Crimpen zu
+	O "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	O "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheitvor
+	O "M 21.0" M21.0 -- 8---Ausstoßen vor
+	O "M 21.1" M21.1 -- 9---Crimpeinheit rück
+	O "M 22.0" M22.0 -- 0---Abisolierer nach LinksLeerf-o-Ce
+	O "M 22.1" M22.1 -- 1---Crimpeinheit vorLeerf-o-Ce
+	O "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+	O "M 22.3" M22.3 -- 3---Crimpeinheit rückLeerf-o-Ce
+	= "A 1.2" A1.2 -- Y-5 Abisolierer nach links+Abdeckungzu
+	= "A 1.4" A1.4 -- Y-7 Abfall runter
+	*)
+	IO.outY5AbisolierNachLINKS :=	VAT.bAbisoliererLINKSundAUF OR // Abisolierer nach links + Abisolierer auf
+								VAT.bCrimpeinheitVOR OR // Crimpeinheit vor
+								VAT.bCrimpenZU OR // Crimpen zu
+								VAT.bDrahtHalterUndFuehrungAUF OR // Drahthalter + Drahtführung auf
+								VAT.bCrZangeAUF_AisolierVOR OR // Crimpzange auf + Abisoliereinheitvor
+								VAT.bAusstossenVOR OR // Ausstoßen vor
+								VAT.bCrimpeinheitRUECK OR // Crimpeinheit rück
+								VAT.bAbisoliererNachLinksLoC OR // Abisolierer nach LinksLeerf-o-Ce
+								VAT.bCrimpEinheitVorLoC OR // Crimpeinheit vorLeerf-o-Ce
+								VAT.bVereinzelungTakten OR // Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+								VAT.bCrimpEinheitRueckLoC ;  // Crimpeinheit rückLeerf-o-Ce
+	
+	IO.outY7AbfallRUNTER := IO.outY5AbisolierNachLINKS;							
+
+	(*
+	O "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	O "M 20.5" M20.5 -- 5---Crimpen zu
+	O "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	O "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheitvor
+	O "M 21.0" M21.0 -- 8---Ausstoßen vor
+	O "M 22.1" M22.1 -- 1---Crimpeinheit vor Leerf-o-Ce
+	O "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu /auf Leerf-o-Ce
+	= "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+	*)
+	
+	IO.outY4CrimpEinheitVOR :=	VAT.bCrimpeinheitVOR OR // Crimpeinheit vor
+								VAT.bCrimpenZU OR // Crimpen zu
+								VAT.bDrahtHalterUndFuehrungAUF OR // Drahthalter + Drahtführung auf
+								VAT.bCrZangeAUF_AisolierVOR OR // Crimpzange auf + Abisoliereinheitvor
+								VAT.bAusstossenVOR OR // Ausstoßen vor
+								VAT.bCrimpEinheitVorLoC OR // Crimpeinheit vorLeerf-o-Ce
+								VAT.bVereinzelungTakten ;  // Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+								
+	
+	(*
+	O "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+	O "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	O "M 20.5" M20.5 -- 5---Crimpen zu
+	O "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	O "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheitvor
+	O "M 21.0" M21.0 -- 8---Ausstoßen vor
+	O "M 21.1" M21.1 -- 9---Crimpeinheit rück
+	O "T 19" T19 -- Kontaktauswurf nach Einschalten
+	= "A 1.0" A1.0 -- Y-3 Kontakt-Schieben
+	*)
+	IO.outY3KontaktSchieben :=	VAT.bAbisoliererLINKSundAUF OR // Abisolierer nach links + Abisolierer auf
+								VAT.bCrimpeinheitVOR OR // Crimpeinheit vor
+								VAT.bCrimpenZU OR // Crimpen zu
+								VAT.bDrahtHalterUndFuehrungAUF OR // Drahthalter + Drahtführung auf
+								VAT.bCrZangeAUF_AisolierVOR OR // Crimpzange auf + Abisoliereinheitvor
+								VAT.bAusstossenVOR OR // Ausstoßen vor
+								VAT.bCrimpeinheitRUECK OR // Crimpeinheit rück
+								GVL.tsvKontauswurf.Q ;   // Kontaktauswurf nach Einschalten
+								
+	(*
+	O "M 20.5" M20.5 -- 5---Crimpen zu
+	O "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	UN "M 21.6" M21.6 -- Aktueller Ablauf ohne Crimpen
+	O "M 22.6" M22.6 -- Crimpen zu bei Einstellen Leerf-o-Ce
+	= "A 1.6" A1.6 -- Y-9 Crimpen zu
+	*)
+	
+	IO.outY9CrimperZU :=	((VAT.bCrimpenZU OR  // Crimpen zu
+							VAT.bDrahtHalterUndFuehrungAUF) AND // Drahthalter + Drahtführung auf
+								NOT VAT.bAktAblaufOhneCr) OR // Aktueller Ablauf ohne Crimpen
+							VAT.bCrimpenZuBeiEinstellen; //Crimpen zu bei Einstellen Leerf-o-Ce	
+	(*
+	O "M 21.0" M21.0 -- 8---Ausstoßen vor
+	O "M 21.1" M21.1 -- 9---Crimpeinheit rück
+	O "T 19" T19 -- Kontaktauswurf nach Einschalten
+	= "A 0.6" A0.6 -- Y-1 Ausstoßen
+	*)
+	
+	IO.outY1Ausstossen :=	VAT.bAusstossenVOR OR // Ausstoßen vor
+							VAT.bCrimpeinheitRUECK OR // Crimpeinheit rück
+							GVL.tsvKontauswurf.Q; // Kontaktauswurf nach Einschalten
+	
+	
+	]]></ST>
+    </Implementation>
+    <LineIds Name="F_Ventile">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="14" Count="2" />
+      <LineId Id="116" Count="3" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="9" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="240" Count="1" />
+      <LineId Id="243" Count="5" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="31" Count="3" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="257" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="160" Count="2" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="169" Count="1" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="40" Count="5" />
+      <LineId Id="47" Count="2" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="174" Count="5" />
+      <LineId Id="183" Count="4" />
+      <LineId Id="164" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="60" Count="3" />
+      <LineId Id="65" Count="2" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="191" Count="10" />
+      <LineId Id="250" Count="0" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="78" Count="3" />
+      <LineId Id="83" Count="1" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="202" Count="1" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="207" Count="2" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="91" Count="3" />
+      <LineId Id="96" Count="3" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="216" Count="1" />
+      <LineId Id="215" Count="0" />
+      <LineId Id="218" Count="2" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="100" Count="3" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="223" Count="2" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="106" Count="2" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="226" Count="1" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="228" Count="3" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

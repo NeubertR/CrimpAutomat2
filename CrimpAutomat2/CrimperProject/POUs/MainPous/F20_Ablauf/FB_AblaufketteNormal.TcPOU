@@ -1,0 +1,682 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="FB_AblaufketteNormal" Id="{d169b1db-5af7-4754-8670-1d1fca84b6e1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AblaufketteNormal
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	dwTest:DWORD;
+	dwTest2:DWORD;
+	nTmp:INT;
+	
+	rtgAusloeseSchalt : R_TRIG;
+	rtgEinzelschritt : R_TRIG;
+	einzelSchrittOffset : WORD := 400;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+rtgAusloeseSchalt(CLK := GVL.insecAusloeseSchalter);
+VAT.bFlankeAusloeseschalter := rtgAusloeseSchalt.Q;
+
+
+rtgEinzelschritt(CLK := VAT.bEinzelSchritt);
+IF rtgEinzelschritt.Q THEN
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 20; //NBT-NEU: Einzelschritt - Start
+END_IF
+
+
+//Timer muss immer durchlaufen werden. TOF kann permanent auf FALSE gelassen werden, wenn er eine Start-Flanke erhalten hat.
+GVL.tofAblVerzProbelauf(IN := FALSE);
+
+
+//Timer hier hin verlegt von:
+//*** 8---Ausstoßen vor
+//Grund: Timer muss immer durchlaufen werden.
+//DB6.nAusstossverz := 1500; //Test später raus.
+GVL.tonAusstoss(IN := VAT.bCrZangeAUF_AisolierVOR, PT := INT_TO_TIME (DB6.nAusstossverz)); 
+
+
+//Timer muss immer durchlaufen werden. TOF kann permanent auf FALSE gelassen werden, wenn er eine Start-Flanke erhalten hat.
+GVL.tofBetrStdZaehl(IN := FALSE);
+
+
+(* Netzwerk: 3 Ablaufkette normal *)
+
+	(*
+		U "M 22.7" M22.7 -- Endstellung, //Erstabfrage, Ergebnis wird ins VKE geschrieben
+		SPBN s0 -- Springe wenn VKE = 0
+		
+		O "M 81.1" M81.1 -- +F E1.1 Auslöseschalter
+		O "M8.5ohneKontakt" M8.5 -- Probelauf ohne Kontakt
+		O "M8.6ohneCrmpen" M8.6 -- Probelauf ohne Crimpen
+		O "M8.7ohneLitze" M8.7 -- Probelauf ohne Litze
+		SPBN s0
+			
+		O "M0_3_Tipp" M0.3 -- Einzel-Schritt
+		O "M0.2" M0.2 -- 2te Ablauf-Freigabe
+		U "M 3.0" M3.0 -- Alles in Sollposition
+		UN "T 20" T20 -- Ablauf-Verz.bei Probelauf
+		SPBN s0
+	*)
+
+	
+//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+IF VAT.bEndstellung THEN 
+	//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+	IF VAT.bFlankeAusloeseschalter OR VAT.bProbelOhneKontakt OR VAT.bProbelOhneCrimpen OR VAT.bProbelOhneLitze THEN  
+		//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+		//VAT.bZweitAblaufFreig := (VAT.bSrStart OR VAT.bFlkTasteStart) AND VAT.bAblaufFreigabe in F_StartStopTipp()...
+		IF (VAT.bEinzelSchritt OR VAT.bZweitAblaufFreig) AND VAT.bAllesInSollPos AND NOT GVL.tofAblVerzProbelauf.Q THEN
+			MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= 'START',errNo := 16#FFFFFFFF);			
+			(*
+			S "M 20.0" M20.0 -- 0---Drahthalter + Drahtführung zu, Setze M20.0 auf 1, wenn VKE 1 ist
+			*)
+			VAT.bDrahtHalterUndFuehrungZU := TRUE; //Start der Kette Abisolierer zu
+			GVL.EinzelschrittIdx := einzelSchrittOffset + 21; //NBT-NEU: Drahthalter + Drahtführung zu
+			(*	
+			UN "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+			UN "M8.5ohneKontakt" M8.5 -- Probelauf ohne Kontakt
+			S "M 21.7" M21.7 -- Kontakt-Anforderung, Setze M21.7 auf 1, wenn VKE 1 ist, setze Erstabfragebit /ER zurück
+			*)
+			IF NOT VAT.bNurAbisolieren AND NOT VAT.bProbelOhneKontakt THEN
+				MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'SET', sMsg:= 'bKontaktAnforderung',errNo := 16#FFFFFFFF);
+				VAT.bKontaktAnforderung := TRUE;
+			END_IF
+			(*
+			U "M8.6ohneCrmpen" M8.6 -- Probelauf ohne Crimpen -- Erstabfrage, Ergebnis wird ins VKE geschrieben
+			= "M 21.6" M21.6 -- Aktueller Ablauf ohne Crimpen, -- = <Bit> schreibt (bei MCR = 1) das VKE in das adressierte Bit
+			SPA end -- Absoluter Sprung zur Sprungmarke 'end'
+			*)
+			
+			VAT.bAktAblaufOhneCr := VAT.bProbelOhneCrimpen;
+
+			RETURN;
+
+		END_IF
+
+	END_IF
+
+END_IF
+	
+(*
+s0: BLD 130
+
+	U "M0.2" M0.2 -- 2te Ablauf-Freigabe
+	U "M 3.0" M3.0 -- Alles in Sollposition
+	SPBN end -- springe wenn VKE = "0" nach 'end'
+*)
+//VAT.bZweitAblaufFreig := (VAT.bSrStart OR VAT.bFlkTasteStart) AND VAT.bAblaufFreigabe in F_StartStopTipp()...	
+IF (VAT.bZweitAblaufFreig AND VAT.bAllesInSollPos) = FALSE THEN
+	RETURN;
+END_IF
+	
+(*	
+	//*** 1--- Abisolierer zu
+	U "M 20.0" M20.0 -- 0---Drahthalter + Drahtführung zu
+	R "M 20.0" M20.0 -- 0---Drahthalter + Drahtführung zu
+	S "M 20.1" M20.1 -- 1---Abisolierer zu
+	SPB end  -- Springe wenn VKE = 1
+*)
+IF VAT.bDrahtHalterUndFuehrungZU THEN
+	VAT.bDrahtHalterUndFuehrungZU := FALSE;
+	VAT.bAbisoliererZU := TRUE; //M20.1
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 22; //NBT-NEU: Abisolierer zu
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '1--- Abisolierer zu',errNo := 16#FFFFFFFF);
+	RETURN;
+END_IF
+
+
+(*	
+	//*** 2---Abisolierer rück (abisolieren)
+	U "M 20.1" M20.1 -- 1---Abisolierer zu, Erstabfrage, Ergebnis wird ins VKE geschrieben
+	R "M 20.1" M20.1 -- 1---Abisolierer zu, wenn VKE 1 ist
+	S "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren), wenn VKE 1 ist
+	// SA <Zeit> startet die adressierte Zeit, wenn das VKE von "1" auf "0" wechselt. 
+	L S5T#5M
+	SA "T 34" T34 -- Verl. 5 Minuten für Betriebstunden-Zähler, Laden einer Zeit mit der Funktion Ausschaltverzögerung
+	SPB end  -- Springe wenn VKE = 1
+*)	
+	IF VAT.bAbisoliererZU THEN
+		VAT.bAbisoliererZU := FALSE; //M20.1
+		VAT.bAbisoliererRUECK := TRUE; //M20.2
+		//Zeit mit Ausschaltverzögerung starten
+		GVL.tofBetrStdZaehl(IN := VAT.bAbisoliererRUECK, PT := T#5M);
+		GVL.EinzelschrittIdx := einzelSchrittOffset + 23; //NBT-NEU: Abisolierer rück (abisolieren)
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '2---Abisolierer rück',errNo := 16#FFFFFFFF);
+		RETURN;
+	END_IF
+	//GVL.tofBetrStdZaehl(IN := VAT.bAbisoliererRUECK, PT := T#5M); //Timer muss durchlaufen werden! Checken
+	
+(*	
+	//*** 3---Abisolierer nach links + Abisolierer auf
+	U "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren)
+	SPBN s3  -- Springe wenn VKE = 0
+*)
+	IF VAT.bAbisoliererRUECK THEN //M20.2
+	(*	
+		U "M 21.7" M21.7 -- Kontakt-Anforderung --- Erstabfrage, Ergebnis wird ins VKE geschrieben
+		S "M 14.0" M14.0 -- A55 Kontakt nicht gefallen, Setzen des Operanden M14.0, wenn VKE 1 ist, setze Erstabfragebit /ER zurück
+		SPB s3 -- Springe wenn VKE = 1
+		*)
+		
+		IF VAT.bKontaktAnforderung THEN //M21.7
+			MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'FB_AblaufketteNormal', sMsg:= 'bKontaktAnforderung = TRUE',errNo := 16#FFFFFFFF);
+			VAT.bA55KontaktNichtGefallen := TRUE; //M14.0
+			// Springe wenn VKE = 1 zu s3
+		ELSE
+			MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'FB_AblaufketteNormal', sMsg:= 'bKontaktAnforderung = FALSE',errNo := 16#FFFFFFFF);	
+			//ToDo: Welche Erstabfrage, VKE sollte hier eigentlich immer 0 sein...?
+			//damit kein Setzen ??
+			
+			VAT.bA55KontaktNichtGefallen := FALSE;
+			
+			//S (Setze Bit) schreibt bei VKE = 1 und bei eingeschaltetem Master Control Relay (MCR = 1) den Wert
+			//"1" in das adressierte Bit.
+			(*
+			R "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren), Rücksetzen des Operanden M20.2, wenn VKE 1 ist
+			S "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf, Setzen des Operanden M20.3, wenn VKE 1 ist
+			*)
+			
+			VAT.bAbisoliererRUECK := FALSE;
+			VAT.bAbisoliererLINKSundAUF := TRUE;
+			GVL.EinzelschrittIdx := einzelSchrittOffset + 24; //NBT-NEU: Abisolierer nach links + Abisolierer auf
+			
+			(*
+			U "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren --- Erstabfrage, Ergebnis wird ins VKE geschrieben
+			L S5T#1S
+			SA "T 20" T20 -- Zeit mit Ausschaltverzögerung starten, Ablauf-Verz. bei Probelauf, 
+			
+
+			CLR -- VKE auf 0 setzen
+			SA "T 20" T20 -- Ablauf-Verz.bei Probelauf, startet die adressierte Zeit, wenn das VKE von "1" auf "0" wechselt.
+			SPA end
+
+			*)
+			GVL.tofAblVerzProbelauf(IN := VAT.bNurAbisolieren, PT := T#1S); //T20
+			MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '3---Abisolierer links/auf',errNo := 16#FFFFFFFF);
+			RETURN;
+		
+		END_IF
+	
+	END_IF
+
+(*	
+s3: BLD 130
+
+	//*** 4---Crimpeinheit vor
+	U "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+	UN "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+	R "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf, Rücksetzen des Operanden M20.3, wenn VKE 1 ist
+	S "M 20.4" M20.4 -- 4---Crimpeinheit vor, Setzen des Operanden M20.4, wenn VKE 1 ist
+	SPB end
+*)
+
+IF VAT.bAbisoliererLINKSundAUF AND NOT VAT.bNurAbisolieren THEN
+	VAT.bAbisoliererLINKSundAUF := FALSE;
+	VAT.bCrimpeinheitVOR := TRUE; //M20.4
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 25; //NBT-NEU: Crimpeinheit vor
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '4---Crimper vor',errNo := 16#FFFFFFFF);
+	RETURN;
+END_IF
+
+(*	
+	//*** 5---Crimpen zu
+	U "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	R "M 20.4" M20.4 -- 4---Crimpeinheit vor
+	S "M 20.5" M20.5 -- 5---Crimpen zu
+	R "M 23.3" M23.3 -- S&R 2ter Vereinzelungs-Versuch
+	SPB end
+*)
+	
+IF VAT.bCrimpeinheitVOR THEN //M20.4
+	VAT.bCrimpeinheitVOR := FALSE; //M20.4
+	VAT.bCrimpenZU := TRUE; //M20.5
+	VAT.bSr2terVereinzVersuch := FALSE; //M23.3
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 26; //NBT-NEU: Crimpen zu
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '5---Crimper zu',errNo := 16#FFFFFFFF);
+	RETURN;
+END_IF
+	
+(*	
+	//*** 6---Drahthalter + Drahtführung auf
+	U "M 20.5" M20.5 -- 5---Crimpen zu
+	R "M 20.5" M20.5 -- 5---Crimpen zu
+	S "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	SPB end
+*)
+	
+IF VAT.bCrimpenZU THEN //Crimpen zu
+	VAT.bCrimpenZU := FALSE;
+	VAT.bDrahtHalterUndFuehrungAUF := TRUE;
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 27; //NBT-NEU: Drahthalter + Drahtführung auf
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '6---Draht auf',errNo := 16#FFFFFFFF);
+	RETURN;
+END_IF
+	
+(*		
+	//*** 7---Crimpzange auf + Abisoliereinheit vor
+	U "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	R "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+	S "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheit vor
+	SPB end
+*)
+		
+IF VAT.bDrahtHalterUndFuehrungAUF THEN //Drahthalter + Drahtführung auf
+	VAT.bDrahtHalterUndFuehrungAUF := FALSE; //M20.6
+	VAT.bCrZangeAUF_AisolierVOR := TRUE; //M20.7
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 28; //NBT-NEU: Crimpzange auf + Abisoliereinheit vor
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '7---C-Zange auf, AbIso vor',errNo := 16#FFFFFFFF);
+	RETURN;
+END_IF
+
+(*		
+	//*** 8---Ausstoßen vor
+	L "DB6".w134_Ausstossverz DB6.DBW134 -- Ausstoß-Verzögerung
+	L 10
+	*I -- AKKU1 und AKKU2 multiplizieren, Das Ergebnis wird in AKKU 1 abgelegt.
+	ITB -- Ganzzahl in BCD umwandeln (3 Stellen und eine Stelle Vorzeichen)
+	
+	U "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheit vor
+	SE "T 22" T22 -- Ausstoß-Verzögerung
+	U "T 22" T22 -- Ausstoß-Verzögerung
+	R "M 20.7" M20.7 -- 7 Crimpzange auf + Abisoliereinheit vor
+	S "M 21.0" M21.0 -- 8---Ausstoßen vor
+	SPB end
+*)
+
+//ITB ??? Wert befindet sich in AKKU 1, wird aber nicht weggeschrieben...was passiert damit?
+//nach vorn verlagert
+//GVL.tonAusstoss(IN := VAT.bCrZangeAUF_AisolierVOR, PT := INT_TO_TIME (nTmp)); 
+
+IF GVL.tonAusstoss.Q THEN
+	VAT.bCrZangeAUF_AisolierVOR := FALSE; //M20.7
+	VAT.bAusstossenVOR := TRUE; //M21.0
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 29; //NBT-NEU: Ausstoßen vor
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '8---Ausstoßen vor',errNo := 16#FFFFFFFF);
+	RETURN;
+ELSE	
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 29; //NBT-NEU: Ausstoßen vor
+END_IF
+
+(*		
+	//*** 9---Crimpeinheit rück
+	U "M 21.0" M21.0 -- 8---Ausstoßen vor
+	R "M 21.0" M21.0 -- 8---Ausstoßen vor
+	S "M 21.1" M21.1 -- 9---Crimpeinheit rück
+	SPB end
+*)
+	
+IF VAT.bAusstossenVOR THEN //M21.0
+	VAT.bAusstossenVOR := FALSE;
+	VAT.bCrimpeinheitRUECK := TRUE; //M21.1
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 30; //NBT-NEU: Crimpeinheit rück
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '9---Crimper rück',errNo := 16#FFFFFFFF);
+	RETURN;
+END_IF
+(*		
+	//*** 10--Abisolierer nach rechts + Kontakt-Schieben rück
+	U "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+	U "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+	UN "T 20" T20 -- Ablauf-Verz.bei Probelauf
+	O "M 21.1" M21.1 -- 9---Crimpeinheit rück
+	SPBN l10
+*)
+	
+//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+IF VAT.bAbisoliererLINKSundAUF AND VAT.bNurAbisolieren AND NOT GVL.tofAblVerzProbelauf.Q OR VAT.bCrimpeinheitRUECK THEN
+	
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '10--Abisolierer re + K-Schieber rück',errNo := 16#FFFFFFFF);
+	(*	
+		R "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+		R "M 21.1" M21.1 -- 9---Crimpeinheit rück
+		S "M 21.2" M21.2 -- 10--Abisolierer nach rechts + Kontakt-Schieben rück
+	*)
+	VAT.bAbisoliererLINKSundAUF := FALSE; //M20.3
+	VAT.bCrimpeinheitRUECK := FALSE; //M21.1
+	VAT.bAbisoNachRE_KontSchiebRUECK := TRUE; //M21.2
+
+	(*	
+		U "M8.7ohneLitze" M8.7 -- Probelauf ohne Litze
+		R "M8.7ohneLitze" M8.7 -- Probelauf ohne Litze
+		R "M0.6" M0.6 -- SR Start
+	*)
+	
+	IF VAT.bProbelOhneLitze THEN // Probelauf ohne Litze //M8.7
+		VAT.bProbelOhneLitze := FALSE; //M8.7
+		VAT.bSrStart := FALSE; //SR Start - M0.6
+	END_IF
+	
+	(*	
+		O "M8.5ohneKontakt" M8.5 -- Probelauf ohne Kontakt
+		O "M8.6ohneCrmpen" M8.6 -- Probelauf ohne Crimpen
+		L S5T#600MS
+		SA "T 20" T20 -- Ablauf-Verz.bei Probelauf
+		CLR
+		SA "T 20" T20 -- Ablauf-Verz.bei Probelauf
+	*)
+	
+
+	GVL.tofAblVerzProbelauf(IN := VAT.bProbelOhneKontakt OR VAT.bProbelOhneCrimpen, PT := T#600MS); //T20
+	
+	(*
+		U "M8.0NormalCrimp" M8.0 -- Normal Crimpen
+		SPBN l10
+	*)
+	
+	//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+	IF VAT.bNormalCrimp THEN // Normal Crimpen
+		(*	
+			L "DB6".d140_Total_Z DB6.DBD140 -- Total-Zähler
+			+ L#1
+			T "DB6".d140_Total_Z DB6.DBD140 -- Total-Zähler
+			L "DB6".d144_Tages_Z DB6.DBD144 -- Tages-Zähler
+			+ L#1
+			T "DB6".d144_Tages_Z DB6.DBD144 -- Tages-Zähler
+			L "DB6".d68Stueck_Fertig DB6.DBD68 -- Fertig Stückz
+			+ L#1
+			T "DB6".d68Stueck_Fertig DB6.DBD68 -- Fertig Stückz
+			L "DB6".d64Stueck_Vorwahl DB6.DBD64 -- Stückzahl-Vorwahl Stückz
+			==D
+			S "A70" M107.0 -- Stückzahl-Vorwahl erreicht
+			
+			L "DB6".d152_WartZ_Z DB6.DBD152 -- Zähler Wartung
+			+ L#1
+			T "DB6".d152_WartZ_Z DB6.DBD152 -- Zähler Wartung
+			
+			L "DB6".d148_WartZ_V DB6.DBD148 -- Vorwahl Wartung
+			==D
+			S "A67" M106.7 -- Wartungs-Zähler, hat Vorwahl erreicht, weiter mit Reset
+			SPA end
+		*)
+					
+		
+		DB6.diTotalZaehler := DB6.diTotalZaehler + 1;
+		
+		DB6.diTagesZaehler := DB6.diTagesZaehler + 1;
+					
+		DB6.diStueck_Fertig := DB6.diStueck_Fertig + 1;
+		
+		IF DB6.diStueck_Fertig = DB6.diStueck_Vorwahl THEN
+			GVL.errs.StueckZaehlErreicht := TRUE; //M107.0
+		END_IF
+		
+		
+		DB6.diWartungsZaehler := DB6.diWartungsZaehler + 1;
+		
+		IF DB6.diWartungsZaehler = DB6.diWartZaehlVorwahl THEN
+			GVL.errs.WartungsZaehlErreicht := TRUE; //M106.7
+			GVL.EinzelschrittIdx := einzelSchrittOffset + 31; //NBT-NEU: Abisolierer nach rechts + Kontakt-Schieben rück
+			RETURN; //Wartungs-Zähler, hat Vorwahl erreicht, weiter mit Reset
+		END_IF
+
+	END_IF // end of IF VAT.M8.0...
+
+END_IF //end of IF VAT.M20.3 AND VAT.M8.4 AND NOT ...
+
+(*	
+l10: BLD 130
+	U "M 21.2" M21.2 -- 10--Abisolierer nach rechts + Kontakt-Schieben rück
+	R "M 21.2" M21.2 -- 10--Abisolierer nach rechts + Kontakt-Schieben rück
+*)
+
+IF VAT.bAbisoNachRE_KontSchiebRUECK THEN //M21.2
+	VAT.bAbisoNachRE_KontSchiebRUECK := FALSE; //M21.2
+	GVL.EinzelschrittIdx := einzelSchrittOffset + 32; // Einzelschritt Ende
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'Ablauf', sMsg:= '10--ENDE',errNo := 16#FFFFFFFF);
+END_IF
+
+(*	
+end: BLD 130
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="FB_AblaufketteNormal">
+      <LineId Id="687" Count="2" />
+      <LineId Id="830" Count="1" />
+      <LineId Id="829" Count="0" />
+      <LineId Id="832" Count="2" />
+      <LineId Id="873" Count="0" />
+      <LineId Id="922" Count="0" />
+      <LineId Id="920" Count="1" />
+      <LineId Id="919" Count="0" />
+      <LineId Id="913" Count="0" />
+      <LineId Id="912" Count="0" />
+      <LineId Id="902" Count="0" />
+      <LineId Id="914" Count="0" />
+      <LineId Id="948" Count="0" />
+      <LineId Id="875" Count="0" />
+      <LineId Id="951" Count="0" />
+      <LineId Id="950" Count="0" />
+      <LineId Id="903" Count="0" />
+      <LineId Id="906" Count="0" />
+      <LineId Id="905" Count="0" />
+      <LineId Id="690" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="212" Count="5" />
+      <LineId Id="219" Count="3" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="614" Count="1" />
+      <LineId Id="652" Count="4" />
+      <LineId Id="817" Count="0" />
+      <LineId Id="657" Count="12" />
+      <LineId Id="994" Count="0" />
+      <LineId Id="670" Count="6" />
+      <LineId Id="798" Count="0" />
+      <LineId Id="677" Count="0" />
+      <LineId Id="880" Count="0" />
+      <LineId Id="678" Count="0" />
+      <LineId Id="680" Count="5" />
+      <LineId Id="618" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="35" Count="2" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="804" Count="2" />
+      <LineId Id="694" Count="1" />
+      <LineId Id="230" Count="0" />
+      <LineId Id="38" Count="3" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="253" Count="0" />
+      <LineId Id="835" Count="0" />
+      <LineId Id="967" Count="0" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="250" Count="0" />
+      <LineId Id="778" Count="0" />
+      <LineId Id="777" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="43" Count="4" />
+      <LineId Id="794" Count="0" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="255" Count="3" />
+      <LineId Id="261" Count="0" />
+      <LineId Id="795" Count="0" />
+      <LineId Id="836" Count="0" />
+      <LineId Id="968" Count="0" />
+      <LineId Id="796" Count="0" />
+      <LineId Id="260" Count="0" />
+      <LineId Id="698" Count="1" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="50" Count="2" />
+      <LineId Id="268" Count="0" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="281" Count="3" />
+      <LineId Id="297" Count="0" />
+      <LineId Id="309" Count="0" />
+      <LineId Id="293" Count="0" />
+      <LineId Id="992" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="318" Count="0" />
+      <LineId Id="993" Count="0" />
+      <LineId Id="324" Count="0" />
+      <LineId Id="336" Count="0" />
+      <LineId Id="995" Count="2" />
+      <LineId Id="792" Count="1" />
+      <LineId Id="335" Count="0" />
+      <LineId Id="325" Count="1" />
+      <LineId Id="337" Count="1" />
+      <LineId Id="700" Count="3" />
+      <LineId Id="339" Count="0" />
+      <LineId Id="327" Count="3" />
+      <LineId Id="341" Count="0" />
+      <LineId Id="340" Count="0" />
+      <LineId Id="331" Count="1" />
+      <LineId Id="334" Count="0" />
+      <LineId Id="319" Count="0" />
+      <LineId Id="547" Count="0" />
+      <LineId Id="944" Count="0" />
+      <LineId Id="322" Count="1" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="396" Count="0" />
+      <LineId Id="65" Count="5" />
+      <LineId Id="386" Count="0" />
+      <LineId Id="704" Count="0" />
+      <LineId Id="706" Count="2" />
+      <LineId Id="837" Count="0" />
+      <LineId Id="969" Count="0" />
+      <LineId Id="709" Count="0" />
+      <LineId Id="705" Count="0" />
+      <LineId Id="392" Count="0" />
+      <LineId Id="390" Count="0" />
+      <LineId Id="71" Count="5" />
+      <LineId Id="402" Count="0" />
+      <LineId Id="710" Count="0" />
+      <LineId Id="799" Count="0" />
+      <LineId Id="714" Count="2" />
+      <LineId Id="838" Count="0" />
+      <LineId Id="970" Count="0" />
+      <LineId Id="717" Count="0" />
+      <LineId Id="711" Count="1" />
+      <LineId Id="406" Count="0" />
+      <LineId Id="77" Count="4" />
+      <LineId Id="407" Count="0" />
+      <LineId Id="718" Count="0" />
+      <LineId Id="721" Count="2" />
+      <LineId Id="839" Count="0" />
+      <LineId Id="971" Count="0" />
+      <LineId Id="724" Count="0" />
+      <LineId Id="719" Count="1" />
+      <LineId Id="404" Count="0" />
+      <LineId Id="82" Count="4" />
+      <LineId Id="410" Count="0" />
+      <LineId Id="429" Count="0" />
+      <LineId Id="726" Count="2" />
+      <LineId Id="840" Count="0" />
+      <LineId Id="972" Count="0" />
+      <LineId Id="729" Count="0" />
+      <LineId Id="725" Count="0" />
+      <LineId Id="435" Count="0" />
+      <LineId Id="408" Count="0" />
+      <LineId Id="87" Count="4" />
+      <LineId Id="440" Count="0" />
+      <LineId Id="92" Count="5" />
+      <LineId Id="413" Count="0" />
+      <LineId Id="901" Count="0" />
+      <LineId Id="438" Count="0" />
+      <LineId Id="442" Count="0" />
+      <LineId Id="439" Count="0" />
+      <LineId Id="443" Count="2" />
+      <LineId Id="447" Count="0" />
+      <LineId Id="841" Count="0" />
+      <LineId Id="973" Count="0" />
+      <LineId Id="448" Count="0" />
+      <LineId Id="899" Count="1" />
+      <LineId Id="446" Count="0" />
+      <LineId Id="436" Count="0" />
+      <LineId Id="411" Count="0" />
+      <LineId Id="98" Count="4" />
+      <LineId Id="416" Count="0" />
+      <LineId Id="731" Count="0" />
+      <LineId Id="733" Count="2" />
+      <LineId Id="842" Count="0" />
+      <LineId Id="974" Count="0" />
+      <LineId Id="736" Count="0" />
+      <LineId Id="732" Count="0" />
+      <LineId Id="414" Count="0" />
+      <LineId Id="103" Count="5" />
+      <LineId Id="456" Count="0" />
+      <LineId Id="464" Count="0" />
+      <LineId Id="803" Count="0" />
+      <LineId Id="801" Count="0" />
+      <LineId Id="975" Count="1" />
+      <LineId Id="487" Count="0" />
+      <LineId Id="489" Count="3" />
+      <LineId Id="530" Count="3" />
+      <LineId Id="529" Count="0" />
+      <LineId Id="494" Count="1" />
+      <LineId Id="497" Count="0" />
+      <LineId Id="534" Count="0" />
+      <LineId Id="541" Count="0" />
+      <LineId Id="739" Count="2" />
+      <LineId Id="738" Count="0" />
+      <LineId Id="537" Count="0" />
+      <LineId Id="536" Count="0" />
+      <LineId Id="498" Count="6" />
+      <LineId Id="915" Count="0" />
+      <LineId Id="918" Count="0" />
+      <LineId Id="548" Count="0" />
+      <LineId Id="945" Count="0" />
+      <LineId Id="545" Count="0" />
+      <LineId Id="506" Count="2" />
+      <LineId Id="949" Count="0" />
+      <LineId Id="550" Count="0" />
+      <LineId Id="556" Count="1" />
+      <LineId Id="559" Count="11" />
+      <LineId Id="585" Count="0" />
+      <LineId Id="571" Count="3" />
+      <LineId Id="586" Count="0" />
+      <LineId Id="575" Count="2" />
+      <LineId Id="552" Count="0" />
+      <LineId Id="751" Count="0" />
+      <LineId Id="755" Count="0" />
+      <LineId Id="555" Count="0" />
+      <LineId Id="747" Count="0" />
+      <LineId Id="578" Count="0" />
+      <LineId Id="748" Count="0" />
+      <LineId Id="579" Count="0" />
+      <LineId Id="584" Count="0" />
+      <LineId Id="581" Count="2" />
+      <LineId Id="580" Count="0" />
+      <LineId Id="745" Count="0" />
+      <LineId Id="587" Count="0" />
+      <LineId Id="589" Count="2" />
+      <LineId Id="843" Count="0" />
+      <LineId Id="592" Count="0" />
+      <LineId Id="588" Count="0" />
+      <LineId Id="554" Count="0" />
+      <LineId Id="553" Count="0" />
+      <LineId Id="472" Count="0" />
+      <LineId Id="469" Count="0" />
+      <LineId Id="486" Count="0" />
+      <LineId Id="485" Count="0" />
+      <LineId Id="142" Count="2" />
+      <LineId Id="596" Count="0" />
+      <LineId Id="802" Count="0" />
+      <LineId Id="600" Count="0" />
+      <LineId Id="602" Count="0" />
+      <LineId Id="859" Count="0" />
+      <LineId Id="977" Count="0" />
+      <LineId Id="603" Count="0" />
+      <LineId Id="599" Count="0" />
+      <LineId Id="598" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

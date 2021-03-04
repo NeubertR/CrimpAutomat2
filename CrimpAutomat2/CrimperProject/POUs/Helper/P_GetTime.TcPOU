@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_GetTime" Id="{8bbcaad1-ef8e-49a9-8c3f-cd31343b3a7d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_GetTime
+VAR
+	fbGetLocalTime  : NT_GetTime;
+    bBusy           : BOOL;
+    bError          : BOOL;
+    nErrID          : UDINT;
+    presetTime      : TIMESTRUCT;
+
+    syncTimer       : TON;
+    syncTrigger     : F_TRIG;
+    bSynchronize    : BOOL;    
+    
+    fbRTC           : RTC;
+    bValid_RTC      : BOOL;
+    time_RTC        : DT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[syncTimer(IN:= NOT syncTimer.Q, PT:= T#500MS);
+
+fbGetLocalTime(START:=syncTimer.Q,NETID:='',TMOUT:=T#500MS, TIMESTR => presetTime);
+
+syncTrigger(CLK := fbGetLocalTime.BUSY AND NOT fbGetLocalTime.ERR, Q => bSynchronize);
+
+fbRTC(EN := bSynchronize, PDT := SYSTEMTIME_TO_DT(TIMESTR:= presetTime), Q => bValid_RTC, CDT => time_RTC);
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_GetTime">
+      <LineId Id="5" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

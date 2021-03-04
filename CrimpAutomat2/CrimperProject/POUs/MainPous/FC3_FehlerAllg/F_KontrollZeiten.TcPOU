@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_KontrollZeiten" Id="{e0e17fcb-4403-4087-a554-9696ff5c6855}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_KontrollZeiten : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	bTmp : BOOL;
+	localWord:WORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 1 *** Kontroll-Zeiten *)
+
+//ToDo: den Sinn der Aktion herausbekommen...
+//evtl. Bitmuster auf dem AW erkennen...
+(*
+L AW 0 -- Akku 1 nach Akku 2, dann AW0 in Akku 1 -- AW0 offensichtlich Ausgangswort 0
+T LW 0 -- Akku 1 nach LW 0 -- Ausgangswort0 in LW 0 speichern
+L "DB6".d408 DB6.DBD408 -- Zuw.v. AW0 -- Akku 1 nach Akku 2, dann "DB6".d408 in Akku 1
+
+L LD 0 -- Akku 1 nach Akku 2, dann LD 0 in Akku 1 -- Frage, was steht in LD 0 (Lokaldaten-Doppelwort (LD))
+
+T "DB6".d408 DB6.DBD408 -- Zuw.v. AW0 -- T beeinflusst nichts...
+
+-- [XOD] ... Bei der Verknüpfung von Doppelwörtern wird der Inhalt von AKKU 2 mit dem Inhalt von AKKU 1 verknüpft.
+--  Das Verknüpfungsergebnis wird in AKKU 1 gespeichert, wobei der alte Inhalt überschrieben wird.
+
+XOD
+
+L 2# 11000000 11111111 00000000 00000000 -- Akku 1 nach Akku 2, dann Zahl in Akku 1
+UD -- UND-Doppelwort
+L 0
+==D
+*)
+
+//Versuch...die Maske L 2# 110... kann wahrscheinlich entfallen, da ich das beim Füllen von IO.outWord0 schon
+//berücksichtige NBT 2021-01-28
+
+bTmp := (DB6.outWordAlt XOR IO.outWord0) <> 0; //ToDo: ergebnis dieser Aktion
+
+(*
+L S5T#1S200MS
+SE "T 3" T3 -- Fehler-Kontr.Maschine (keine Bewegung) -- Zeit mit Einschaltverzögerung starten
+L S5T#1S600MS
+SE "T 15" T15 -- Verz. Endschalter-Brückung StSt *)
+
+GVL.tonFehlerKontrMaschine( IN := bTmp, PT := T#1S200MS);
+
+GVL.tonEndschalterBrueck( IN := bTmp, PT := T#1S600MS);
+
+DB6.outWordAlt := IO.outWord0;]]></ST>
+    </Implementation>
+    <LineIds Name="F_KontrollZeiten">
+      <LineId Id="7" Count="0" />
+      <LineId Id="33" Count="2" />
+      <LineId Id="9" Count="3" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="57" Count="1" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="68" Count="2" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="62" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

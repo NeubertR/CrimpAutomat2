@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_InputHandling" Id="{0ddd830d-15a3-432b-a0be-e1d00546f5c5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_InputHandling
+VAR
+	rTrigStart : R_TRIG;
+	fTrigStop : F_TRIG;
+	nTmp : INT := 0;
+	
+	
+	(* E1_0 : FB_INPUT_HANDLER;
+	E1_1 : FB_INPUT_HANDLER; *)
+	E1_2 : FB_INPUT_HANDLER;
+	E1_3 : FB_INPUT_HANDLER;
+	E1_4 : FB_INPUT_HANDLER;
+	E1_5 : FB_INPUT_HANDLER;
+	E1_6 : FB_INPUT_HANDLER;
+	E1_7 : FB_INPUT_HANDLER;
+
+	E1_8 : FB_INPUT_HANDLER;
+	E1_9 : FB_INPUT_HANDLER;
+	E1_10 : FB_INPUT_HANDLER;
+	E1_11 : FB_INPUT_HANDLER;
+	E1_12 : FB_INPUT_HANDLER;
+	E1_13 : FB_INPUT_HANDLER;
+	E1_14 : FB_INPUT_HANDLER;
+	E1_15 : FB_INPUT_HANDLER; 
+	
+	inWordOld : WORD;
+	
+	inTmpE1_2old : BOOL;
+	inTmpE1_3old : BOOL;
+	inTmpE1_4old : BOOL;
+	inTmpE1_5old : BOOL;
+	inTmpE1_6old : BOOL;
+	inTmpE1_7old : BOOL;
+	
+	inTmpE1_8old : BOOL;
+	inTmpE1_9old : BOOL;
+	inTmpE1_10old : BOOL;
+	inTmpE1_11old : BOOL;
+	inTmpE1_12old : BOOL;
+	inTmpE1_13old : BOOL;
+	inTmpE1_14old : BOOL;
+	inTmpE1_15old : BOOL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GVL.insecTasterStart := IO.inStart;
+
+GVL.tonSAFETYok(IN := IO.safeOutHauptLuft, PT := T#1S);
+
+{IF defined (CRIMP_IO_TEST)}
+(*
+E1_0(orgIN := IO.inResetNotHalt, onlineSwitch := RVL.e10Online, offLineState := RVL.e10OffMode,
+	resultIN => GVL.inTmpResetNotHalt); 
+	
+E1_1(orgIN := IO.inStart, onlineSwitch := RVL.e11Online, offLineState := RVL.e11OffMode,
+	resultIN => GVL.inTmpTasterStart);
+*)
+E1_2(orgIN := IO.inDrahthalterIstOffen, onlineSwitch := RVL.e12Online, offLineState := RVL.e12OffMode,
+	resultIN => GVL.inTmpDrahthalterIstOffen);
+
+E1_3(orgIN := IO.inAusloeseSchalter, onlineSwitch := RVL.e13Online, offLineState := RVL.e13OffMode,
+	resultIN => GVL.inTmpAusloeseSchalter);
+
+E1_4(orgIN := IO.inAbisoliererIstZU, onlineSwitch := RVL.e14Online, offLineState := RVL.e14OffMode,
+	resultIN => GVL.inTmpAbisoliererIstZU);
+
+E1_5(orgIN := IO.inAbisoliererIstVORN, onlineSwitch := RVL.e15Online, offLineState := RVL.e15OffMode,
+	resultIN => GVL.inTmpAbisoliererIstVORN);
+
+E1_6(orgIN := IO.inAbisoliererIstRUECK, onlineSwitch := RVL.e16Online, offLineState := RVL.e16OffMode,
+	resultIN => GVL.inTmpAbisoliererIstRUECK);
+
+E1_7(orgIN := IO.inAbisoliererIstLINKS, onlineSwitch := RVL.e17Online, offLineState := RVL.e17OffMode,
+	resultIN => GVL.inTmpAbisoliererIstLINKS);
+	
+//-------------	
+	
+E1_8(orgIN := IO.inCrimpZangeIstZU, onlineSwitch := RVL.e18Online, offLineState := RVL.e18OffMode,
+	resultIN => GVL.inTmpCrimpZangeIstZU);
+	
+E1_9(orgIN := IO.inCrimpZangeIstOFFEN, onlineSwitch := RVL.e19Online, offLineState := RVL.e19OffMode,
+	resultIN => GVL.inTmpCrimpZangeIstOFFEN);
+
+E1_10(orgIN := IO.inKontaktIstGefallen, onlineSwitch := RVL.e110Online, offLineState := RVL.e110OffMode,
+	resultIN => GVL.inTmpKontaktIstGefallen);
+
+E1_11(orgIN := IO.inCrimpEinheitIstVORN, onlineSwitch := RVL.e111Online, offLineState := RVL.e111OffMode,
+	resultIN => GVL.inTmpCrimpEinheitIstVORN);
+
+E1_12(orgIN := IO.inCrimpEinheitIstRUECK, onlineSwitch := RVL.e112Online, offLineState := RVL.e112OffMode,
+	resultIN => GVL.inTmpCrimpEinheitIstRUECK);
+
+E1_13(orgIN := IO.inAusstossenVORN, onlineSwitch := RVL.e113Online, offLineState := RVL.e113OffMode,
+	resultIN => GVL.inTmpAusstossenVORN);
+
+E1_14(orgIN := IO.inKontaktSchiebenVORN, onlineSwitch := RVL.e114Online, offLineState := RVL.e114OffMode,
+	resultIN => GVL.inTmpKontaktSchiebenVORN);
+
+E1_15(orgIN := IO.inMagazinGEFUELLT, onlineSwitch := RVL.e115Online, offLineState := RVL.e115OffMode,
+	resultIN => GVL.inTmpMagazinGEFUELLT);
+{END_IF}
+
+IF inWordOld <> IO.inWord0 THEN
+	
+	MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= '--------',errNo := 16#FFFFFFFF);
+	
+	IF inTmpE1_2old <> GVL.inTmpDrahthalterIstOffen THEN
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'DrahthalterIstOffen', errNo:= BOOL_TO_UDINT(GVL.inTmpDrahthalterIstOffen));
+	END_IF
+	inTmpE1_2old := GVL.inTmpDrahthalterIstOffen;
+	
+	IF inTmpE1_3old <> GVL.inTmpAusloeseSchalter THEN
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'AusloeseSchalter', errNo:= BOOL_TO_UDINT(GVL.inTmpAusloeseSchalter));
+	END_IF
+	inTmpE1_3old := GVL.inTmpAusloeseSchalter;
+	
+	IF inTmpE1_4old <> GVL.inTmpAbisoliererIstZU THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'AbisoliererIstZU', errNo:= BOOL_TO_UDINT(GVL.inTmpAbisoliererIstZU));
+	END_IF
+	inTmpE1_4old := GVL.inTmpAbisoliererIstZU;
+	
+	IF inTmpE1_5old <> GVL.inTmpAbisoliererIstVORN THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'AbisoliererIstVORN', errNo:= BOOL_TO_UDINT(GVL.inTmpAbisoliererIstVORN));
+	END_IF
+	inTmpE1_5old := GVL.inTmpAbisoliererIstVORN;
+	
+	IF inTmpE1_6old <> GVL.inTmpAbisoliererIstRUECK THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'AbisoliererIstRUECK', errNo:= BOOL_TO_UDINT(GVL.inTmpAbisoliererIstRUECK));
+	END_IF
+	inTmpE1_6old := GVL.inTmpAbisoliererIstRUECK;
+	
+	IF inTmpE1_7old <> GVL.inTmpAbisoliererIstLINKS THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'AbisoliererIstLINKS', errNo:= BOOL_TO_UDINT(GVL.inTmpAbisoliererIstLINKS));
+	END_IF
+	inTmpE1_7old := GVL.inTmpAbisoliererIstLINKS;
+		
+	
+	IF inTmpE1_8old <> GVL.inTmpCrimpZangeIstZU THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'CrimpZangeIstZU', errNo:= BOOL_TO_UDINT(GVL.inTmpCrimpZangeIstZU));
+	END_IF
+	inTmpE1_8old := GVL.inTmpCrimpZangeIstZU;
+	
+	IF inTmpE1_9old <> GVL.inTmpCrimpZangeIstOFFEN THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'CrimpZangeIstOFFEN', errNo:= BOOL_TO_UDINT(GVL.inTmpCrimpZangeIstOFFEN));
+	END_IF
+	inTmpE1_9old := GVL.inTmpCrimpZangeIstOFFEN;
+	
+	IF inTmpE1_10old <> GVL.inTmpKontaktIstGefallen THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'KontaktIstGefallen', errNo:= BOOL_TO_UDINT(GVL.inTmpKontaktIstGefallen));
+	END_IF
+	inTmpE1_10old := GVL.inTmpKontaktIstGefallen;
+	
+	IF inTmpE1_11old <> GVL.inTmpCrimpEinheitIstVORN THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'CrimpEinheitIstVORN', errNo:= BOOL_TO_UDINT(GVL.inTmpCrimpEinheitIstVORN));
+	END_IF
+	inTmpE1_11old := GVL.inTmpCrimpEinheitIstVORN;
+	
+	IF inTmpE1_12old <> GVL.inTmpCrimpEinheitIstRUECK THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'CrimpEinheitIstRUECK', errNo:= BOOL_TO_UDINT(GVL.inTmpCrimpEinheitIstRUECK));
+	END_IF
+	inTmpE1_12old := GVL.inTmpCrimpEinheitIstRUECK;
+	
+	IF inTmpE1_13old <> GVL.inTmpAusstossenVORN THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'AusstossenVORN', errNo:= BOOL_TO_UDINT(GVL.inTmpAusstossenVORN));
+	END_IF
+	inTmpE1_13old := GVL.inTmpAusstossenVORN;
+	
+	IF inTmpE1_14old <> GVL.inTmpAbisoliererIstLINKS THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'KontaktSchiebenVORN', errNo:= BOOL_TO_UDINT(GVL.inTmpKontaktSchiebenVORN));
+	END_IF
+	inTmpE1_14old := GVL.inTmpAbisoliererIstLINKS;
+	
+	IF inTmpE1_15old <> GVL.inTmpMagazinGEFUELLT THEN	
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'IN', sMsg:= 'MagazinGEFUELLT', errNo:= BOOL_TO_UDINT(GVL.inTmpMagazinGEFUELLT));
+	END_IF
+	inTmpE1_15old := GVL.inTmpMagazinGEFUELLT;
+END_IF
+
+inWordOld := IO.inWord0;
+
+//------- neu --- 2021-01-22
+//diese Funktionalität war nicht zu finden. ToDo: check ob nicht GVL.inTmpTasterStart direkt verwendet werden soll
+
+rTrigStart( CLK := GVL.insecTasterStart);
+VAT.bFlkTasteStart := rTrigStart.Q;
+
+
+fTrigStop(CLK := IO.inResetNotHalt);
+VAT.bFlkTasteStop := fTrigStop.Q;
+IF VAT.bFlkTasteStop THEN
+	nTmp := nTmp + 1;
+	 P_OnResetClick();
+END_IF
+
+//------- neu ---
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_InputHandling">
+      <LineId Id="171" Count="3" />
+      <LineId Id="202" Count="1" />
+      <LineId Id="233" Count="48" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="355" Count="0" />
+      <LineId Id="349" Count="0" />
+      <LineId Id="384" Count="0" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="403" Count="0" />
+      <LineId Id="334" Count="0" />
+      <LineId Id="385" Count="0" />
+      <LineId Id="335" Count="0" />
+      <LineId Id="437" Count="0" />
+      <LineId Id="399" Count="0" />
+      <LineId Id="402" Count="0" />
+      <LineId Id="386" Count="0" />
+      <LineId Id="404" Count="0" />
+      <LineId Id="438" Count="0" />
+      <LineId Id="409" Count="0" />
+      <LineId Id="337" Count="0" />
+      <LineId Id="387" Count="0" />
+      <LineId Id="405" Count="0" />
+      <LineId Id="410" Count="0" />
+      <LineId Id="439" Count="0" />
+      <LineId Id="338" Count="0" />
+      <LineId Id="388" Count="0" />
+      <LineId Id="406" Count="0" />
+      <LineId Id="440" Count="0" />
+      <LineId Id="411" Count="0" />
+      <LineId Id="339" Count="0" />
+      <LineId Id="389" Count="0" />
+      <LineId Id="407" Count="0" />
+      <LineId Id="441" Count="0" />
+      <LineId Id="412" Count="0" />
+      <LineId Id="340" Count="0" />
+      <LineId Id="390" Count="0" />
+      <LineId Id="408" Count="0" />
+      <LineId Id="413" Count="0" />
+      <LineId Id="347" Count="0" />
+      <LineId Id="400" Count="1" />
+      <LineId Id="341" Count="1" />
+      <LineId Id="442" Count="1" />
+      <LineId Id="415" Count="0" />
+      <LineId Id="414" Count="0" />
+      <LineId Id="343" Count="0" />
+      <LineId Id="444" Count="1" />
+      <LineId Id="417" Count="0" />
+      <LineId Id="416" Count="0" />
+      <LineId Id="344" Count="0" />
+      <LineId Id="446" Count="1" />
+      <LineId Id="419" Count="0" />
+      <LineId Id="418" Count="0" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="448" Count="0" />
+      <LineId Id="457" Count="0" />
+      <LineId Id="421" Count="0" />
+      <LineId Id="420" Count="0" />
+      <LineId Id="346" Count="0" />
+      <LineId Id="450" Count="1" />
+      <LineId Id="423" Count="0" />
+      <LineId Id="422" Count="0" />
+      <LineId Id="348" Count="0" />
+      <LineId Id="452" Count="1" />
+      <LineId Id="425" Count="0" />
+      <LineId Id="424" Count="0" />
+      <LineId Id="336" Count="0" />
+      <LineId Id="454" Count="1" />
+      <LineId Id="427" Count="0" />
+      <LineId Id="426" Count="0" />
+      <LineId Id="356" Count="0" />
+      <LineId Id="456" Count="0" />
+      <LineId Id="458" Count="0" />
+      <LineId Id="353" Count="1" />
+      <LineId Id="175" Count="5" />
+      <LineId Id="185" Count="2" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="189" Count="1" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="181" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

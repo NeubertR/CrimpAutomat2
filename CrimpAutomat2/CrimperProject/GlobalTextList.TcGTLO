@@ -1,0 +1,1928 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GlobalTextList Name="GlobalTextList" Id="{df4b4db2-d06d-414a-acce-30cfa6cccfff}">
+    <XmlArchive>
+      <Data>
+        <o xml:space="preserve" t="GlobalTextListObject">
+          <l n="TextList" t="ArrayList" cet="TextListRow">
+            <o>
+              <v n="TextID">"910"</v>
+              <v n="TextDefault">"   E1.10 Kontakt gefallen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.10 Contact fallen</v>
+                <v>   E1.10 Kontakt gefallen</v>
+                <v>   E1.10 Contact tombé</v>
+                <v>   E1.10 Érintkezo leesett</v>
+                <v>   E1.10 Contatti caduti</v>
+                <v>   E1.10 Контакт отсутствует</v>
+                <v>   E1.10 Contact cazut</v>
+                <v>   E1.10 Contacto caído</v>
+                <v>   E1.10 Wypadnięcie kontaktu</v>
+                <v>   E1.10 コンタクト脱落</v>
+                <v>   E1.10 针已落下</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"724"</v>
+              <v n="TextDefault">"   E1.11 Crimpeinheit vorn"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.11 Crimping unit at front</v>
+                <v>   E1.11 Crimpeinheit vorn</v>
+                <v>   E1.11 Unité de sertissage avance</v>
+                <v>   E1.11 Krimpelo egység elöl</v>
+                <v>   E1.11 Unità di crimpatura posizionata di fronte</v>
+                <v>   E1.11 Передняя обжимная матрица</v>
+                <v>   E1.11 Unitate de sertizare in fata</v>
+                <v>   E1.11 Unidad de engaste en parte frontal</v>
+                <v>   E1.11 Jednostka zaciskająca z przodu</v>
+                <v>   E1.11 圧着ユニットが前面にあります</v>
+                <v>   E1.11 压接单元在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"875"</v>
+              <v n="TextDefault">"   E1.12 Crimpeinheit rück"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.12 Crimping unit at rear</v>
+                <v>   E1.12 Crimpeinheit rück</v>
+                <v>   E1.12 Unité de sertissage retour</v>
+                <v>   E1.12 Krimpelo egység hátul</v>
+                <v>   E1.12 Unità di crimpatura posizionata dietro</v>
+                <v>   E1.12 Обжимной блок на задней панели</v>
+                <v>   E1.12 Unitatea de sertizare in spate</v>
+                <v>   E1.12 Unidad de crimpado en la parte posterior</v>
+                <v>   E1.12 Jednostka zaciskająca z tyłu</v>
+                <v>   E1.12 圧着ユニットが後方にあります</v>
+                <v>   E1.12 压接单元在后</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"515"</v>
+              <v n="TextDefault">"   E1.13 Ausstoßen vorn"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.13 Ejector at front</v>
+                <v>   E1.13 Ausstoßen vorn</v>
+                <v>   E1.13 Ejection avant</v>
+                <v>   E1.13 Kilökés elöl</v>
+                <v>   E1.13 Espulsore posizionato di fronte</v>
+                <v>   E1.13 Экстрактор на фронтальной стороне</v>
+                <v>   E1.13 Ejectorul in fata</v>
+                <v>   E1.13 Eyector al frente</v>
+                <v>   E1.13 Wyrzutnik z przodu</v>
+                <v>   E1.13 エジェクタが前面に有ります</v>
+                <v>   E1.13 弹射器在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"869"</v>
+              <v n="TextDefault">"   E1.14 Kontakt schieben vorn"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.14 Contact slides at front</v>
+                <v>   E1.14 Kont.Schieben vorn</v>
+                <v>   E1.14 Pousser contact avant</v>
+                <v>   E1.14 Érintk. tolása elöl</v>
+                <v>   E1.14 Slitta contatti posizionata di fronte</v>
+                <v>   E1.14 Завести контакт с фронтальной стороны</v>
+                <v>   E1.14 Impingatoarele de contacte in fata</v>
+                <v>   E1.14 Pasador de contactos en parte frontal</v>
+                <v>   E1.14 Zjeżdżalnia dla kontaktów z przodu</v>
+                <v>   E1.14 コンタクトが前面に有ります</v>
+                <v>   E1.14 推针器在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"858"</v>
+              <v n="TextDefault">"   E1.15 Magazin gefüllt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.15 Magazine filled up</v>
+                <v>   E1.15 Magazin gefüllt</v>
+                <v>   E1.15 Magasin rempli</v>
+                <v>   E1.15 Tároló feltöltve</v>
+                <v>   E1.15 Caricatore pieno</v>
+                <v>   E1.15 Магазин заполнен</v>
+                <v>   E1.15 Magazie plina</v>
+                <v>   E1.15 Depósito llenado</v>
+                <v>   E1.15 Magazynek wypełniony</v>
+                <v>   E1.15 マガジンが一杯です</v>
+                <v>   E1.15 填满料箱</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"1057"</v>
+              <v n="TextDefault">"   E1.2 Drahthalter offen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.2 Wire holder open</v>
+                <v>   E1.2 Drahthalter offen</v>
+                <v>   E1.2 Porte-fil ouvert</v>
+                <v>   E1.2 Huzaltartó nyitva</v>
+                <v>   E1.2 Dispositivo blocca-cavo aperto</v>
+                <v>   E1.2 Открыть кабельный захват</v>
+                <v>   E1.2 Suport fir deschis</v>
+                <v>   E1.2 Soporte de cable abierto</v>
+                <v>   E1.2 Uchwyt przewodu otwarty</v>
+                <v>   E1.2 ケーブルフォルダーオープン</v>
+                <v>   E1.2 集线器打开</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"122"</v>
+              <v n="TextDefault">"   E1.3 Auslöseschalter"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.3 Cable trigger switch</v>
+                <v>   E1.3 Auslöseschalter</v>
+                <v>   E1.3 Déclencheur</v>
+                <v>   E1.3 Kioldó kapcsoló</v>
+                <v>   E1.3 Sensore di presenza cavo</v>
+                <v>   E1.3 Тригерный переключатель</v>
+                <v>   E1.3 Comutator declansare</v>
+                <v>   E1.3 Interruptor de disparo de cable</v>
+                <v>   E1.3 Przełącznik kablowy</v>
+                <v>   E1.3 ケーブルトリガースイッチ</v>
+                <v>   E1.3  线缆触发开关</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"459"</v>
+              <v n="TextDefault">"   E1.4 Abisolierer zu"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.4 Stripping unit closed</v>
+                <v>   E1.4 Abisolierer  zu</v>
+                <v>   E1.4 Dénudeur fermé</v>
+                <v>   E1.4 Csupaszító zárva</v>
+                <v>   E1.4 Unità di spellatura chiusa</v>
+                <v>   E1.4 Закрыть блок зачистки</v>
+                <v>   E1.4 Dezizolator inchis</v>
+                <v>   E1.4 Unidad de pelado cerrada</v>
+                <v>   E1.4 Jednostka odizolowująca zamknięta</v>
+                <v>   E1.4 ストリッピングユニットクローズ</v>
+                <v>   E1.4 剥线单元闭合 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"687"</v>
+              <v n="TextDefault">"   E1.5 Abisolierer vorn"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.5 Stripping unit at front</v>
+                <v>   E1.5 Abisolierer vorn</v>
+                <v>   E1.5 Dénudeur avance</v>
+                <v>   E1.5 Csupaszító elöl</v>
+                <v>   E1.5 Unità di spellatura posizionata di fronte</v>
+                <v>   E1.5 Фронтальный блок зачистки</v>
+                <v>   E1.5 Dezizolator in fata</v>
+                <v>   E1.5 Unidad de pelado al frente</v>
+                <v>   E1.5 Jednostka odizolowująca z przodu</v>
+                <v>   E1.5 ストリッピングユニットが前面に有ります</v>
+                <v>   E1.5 剥线单元在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"302"</v>
+              <v n="TextDefault">"   E1.6 Abisolierer rück"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.6 Stripping unit at rear</v>
+                <v>   E1.6 Abisolierer rück</v>
+                <v>   E1.6 Dénudeur retour</v>
+                <v>   E1.6 Csupaszító vissza</v>
+                <v>   E1.6 Unità di spellatura posizionata dietro</v>
+                <v>   E1.6 Блок зачистки на задней панели</v>
+                <v>   E1.6 Dezizolator in spate</v>
+                <v>   E1.6 Unidad de pelado atrás</v>
+                <v>   E1.6 Jednostka odizolowująca z tyłu</v>
+                <v>   E1.6 ストリッピングユニットが後方に有ります</v>
+                <v>   E1.6 剥线单元在后</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"982"</v>
+              <v n="TextDefault">"   E1.7 Abisolierer links"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.7 Stripping unit on LH side</v>
+                <v>   E1.7 Abisolierer links</v>
+                <v>   E1.7 Dénudeur gauche</v>
+                <v>   E1.7 Csupaszító balra</v>
+                <v>   E1.7 Unità di spellatura sul lato LH</v>
+                <v>   E1.7 Левый блок зачистки</v>
+                <v>   E1.7 Dezizolator in stanga</v>
+                <v>   E1.7 Unidad de pelado  en lado LH</v>
+                <v>   E1.7 Jednostka odizolowująca po lewej stronie</v>
+                <v>   E1.7 ストリッピングユニットがLH側に有ります</v>
+                <v>   E1.7 剥线单元在左边</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"887"</v>
+              <v n="TextDefault">"   E1.8 CrimpZange zu"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.8 Crimping tool closed</v>
+                <v>   E1.8 Crimpzange zu</v>
+                <v>   E1.8 Pince à sertir fermée</v>
+                <v>   E1.8 Krimpelo fogó zárva</v>
+                <v>   E1.8 Ganasce di crimpatura chiuse</v>
+                <v>   E1.8 Обжимная матрица закрыта</v>
+                <v>   E1.8 Cleste sertizare inchis</v>
+                <v>   E1.8 Herramienta de engaste cerrada</v>
+                <v>   E1.8 Jednostka zaciskająca zamknięta</v>
+                <v>   E1.8 圧着ツールクローズ</v>
+                <v>   E1.8 压接工具闭合</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"317"</v>
+              <v n="TextDefault">"   E1.9 CrimpZange offen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>   E1.9 Crimping tool open</v>
+                <v>   E1.9 Crimpzange offen</v>
+                <v>   E1.9 Pince à sertir ouverte</v>
+                <v>   E1.9 Krimpelo fogó nyitva</v>
+                <v>   E1.9 Ganasce di crimpatura aperte</v>
+                <v>   E1.9 Обжимная матрица открыта</v>
+                <v>   E1.9 Cleste sertizare deschis</v>
+                <v>   E1.9 Herramienta de engaste abierta</v>
+                <v>   E1.9 Jednostka zaciskająca otwarta</v>
+                <v>   E1.9 圧着ツールオープン</v>
+                <v>   E1.9 压接工具打开</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"891"</v>
+              <v n="TextDefault">" DE 1.10 Kontakt ist gefallen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.10 Contact fallen</v>
+                <v> DE 1.10 Kontakt gefallen</v>
+                <v>  DI1.10 Contact tombé</v>
+                <v>  DI1.10 Érintkezo leesett</v>
+                <v>  DI1.10 Contatti caduti</v>
+                <v>  DI1.10 Контакт отсутствует</v>
+                <v>  DI1.10 Contact cazut</v>
+                <v>  DI1.10 Contacto caído</v>
+                <v>  DI1.10 Wypadnięcie kontaktu</v>
+                <v>  DI1.10 コンタクト脱落</v>
+                <v>  DI1.10 针已落下</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"583"</v>
+              <v n="TextDefault">" DE 1.11 Crimpeinheit ist VORN"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.11 Crimping unit at front</v>
+                <v> DE 1.11 Crimpeinheit vorn</v>
+                <v>  DI1.11 Unité de sertissage avance</v>
+                <v>  DI1.11 Krimpelo egység elöl</v>
+                <v>  DI1.11 Unità di crimpatura posizionata di fronte</v>
+                <v>  DI1.11 Передняя обжимная матрица</v>
+                <v>  DI1.11 Unitate de sertizare in fata</v>
+                <v>  DI1.11 Unidad de engaste en parte frontal</v>
+                <v>  DI1.11 Jednostka zaciskająca z przodu</v>
+                <v>  DI1.11 圧着ユニットが前面にあります</v>
+                <v>  DI1.11 压接单元在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"723"</v>
+              <v n="TextDefault">" DE 1.12 Crimpeinheit ist RUECK	"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.12 Crimping unit at rear</v>
+                <v> DE 1.12 Crimpeinheit rück</v>
+                <v>  DI1.12 Unité de sertissage retour</v>
+                <v>  DI1.12 Krimpelo egység hátul</v>
+                <v>  DI1.12 Unità di crimpatura posizionata dietro</v>
+                <v>  DI1.12 Обжимной блок на задней панели</v>
+                <v>  DI1.12 Unitatea de sertizare in spate</v>
+                <v>  DI1.12 Unidad de crimpado en la parte posterior</v>
+                <v>  DI1.12 Jednostka zaciskająca z tyłu</v>
+                <v>  DI1.12 圧着ユニットが後方にあります</v>
+                <v>  DI1.12 压接单元在后</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"285"</v>
+              <v n="TextDefault">" DE 1.13 Ausstossen VORN"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.13 Ejector at front</v>
+                <v> DE 1.13 Ausstoßen vorn</v>
+                <v>  DI1.13 Ejection avant</v>
+                <v>  DI1.13 Kilökés elöl</v>
+                <v>  DI1.13 Espulsore posizionato di fronte</v>
+                <v>  DI1.13 Экстрактор на фронтальной стороне</v>
+                <v>  DI1.13 Ejectorul in fata</v>
+                <v>  DI1.13 Eyector al frente</v>
+                <v>  DI1.13 Wyrzutnik z przodu</v>
+                <v>  DI1.13 エジェクタが前面に有ります</v>
+                <v>  DI1.13 弹射器在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"650"</v>
+              <v n="TextDefault">" DE 1.14 Kontakt schieben VORN"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.14 Contact slides at front</v>
+                <v> DE 1.14 Kont.Schieben vorn</v>
+                <v>  DI1.14 Pousser contact avant</v>
+                <v>  DI1.14 Érintk. tolása elöl</v>
+                <v>  DI1.14  Slitta contatti posizionata di fronte</v>
+                <v>  DI1.14 Завести контакт с фронтальной стороны</v>
+                <v>  DI1.14 Impingatoarele de contacte in fata</v>
+                <v>  DI1.14 Pasador de contactos en parte frontal</v>
+                <v>  DI1.14 Zjeżdżalnia dla kontaktów z przodu</v>
+                <v>  DI1.14 コンタクトが前面に有ります</v>
+                <v>  DI1.14 推针器在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"752"</v>
+              <v n="TextDefault">" DE 1.15 Magazin GEFÜLLT"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.15 Magazine filled up</v>
+                <v> DE 1.15 Magazin gefüllt</v>
+                <v>  DI1.15 Magasin rempli</v>
+                <v>  DI1.15 Tároló feltöltve</v>
+                <v>  DI1.15 Caricatore pieno</v>
+                <v>  DI1.15 Магазин заполнен</v>
+                <v>  DI1.15 Magazie plina</v>
+                <v>  DI1.15 Depósito llenado</v>
+                <v>  DI1.15 Magazynek wypełniony</v>
+                <v>  DI1.15 マガジンが一杯です</v>
+                <v>  DI1.15 填满料箱</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"819"</v>
+              <v n="TextDefault">" DE 1.2 Drahthalter ist Offen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.2 Wire holder open</v>
+                <v> DE 1.2 Drahthalter offen</v>
+                <v>  DI1.2 Porte-fil ouvert</v>
+                <v>  DI1.2 Huzaltartó nyitva</v>
+                <v>  DI1.2 Dispositivo blocca-cavo aperto</v>
+                <v>  DI1.2 Открыть кабельный захват</v>
+                <v>  DI1.2 Suport fir deschis</v>
+                <v>  DI1.2 Soporte de cable abierto</v>
+                <v>  DI1.2 Uchwyt przewodu otwarty</v>
+                <v>  DI1.2 ケーブルフォルダーオープン</v>
+                <v>  DI1.2 集线器打开</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"771"</v>
+              <v n="TextDefault">" DE 1.3 Auslöse Schalter"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.3 Cable trigger switch</v>
+                <v> DE 1.3 Auslöseschalter</v>
+                <v>  DI1.3 Déclencheur</v>
+                <v>  DI1.3 Kioldó kapcsoló</v>
+                <v>  DI1.3 Sensore di presenza cavo</v>
+                <v>  DI1.3 Тригерный переключатель</v>
+                <v>  DI1.3 Comutator declansare</v>
+                <v>  DI1.3 Interruptor de disparo de cable</v>
+                <v>  DI1.3 Przełącznik kablowy</v>
+                <v>  DI1.3 ケーブルトリガースイッチ</v>
+                <v>  DI1.3  线缆触发开关</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"256"</v>
+              <v n="TextDefault">" DE 1.4 Abisolierer ist ZU	"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.4 Stripping unit closed</v>
+                <v> DE 1.4 Abisolierer  zu</v>
+                <v>  DI1.4 Dénudeur fermé</v>
+                <v>  DI1.4 Csupaszító zárva</v>
+                <v>  DI1.4 Unità di spellatura chiusa</v>
+                <v>  DI1.4 Закрыть блок зачистки</v>
+                <v>  DI1.4 Dezizolator inchis</v>
+                <v>  DI1.4 Unidad de pelado cerrada</v>
+                <v>  DI1.4 Jednostka odizolowująca zamknięta</v>
+                <v>  DI1.4 ストリッピングユニットクローズ</v>
+                <v>  DI1.4 剥线单元闭合 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"591"</v>
+              <v n="TextDefault">" DE 1.5 Abisolierer ist VORN"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.5 Stripping unit at front</v>
+                <v> DE 1.5 Abisolierer vorn</v>
+                <v>  DI1.5 Dénudeur avance</v>
+                <v>  DI1.5 Csupaszító elöl</v>
+                <v>  DI1.5 Unità di spellatura posizionata di fronte</v>
+                <v>  DI1.5 Фронтальный блок зачистки</v>
+                <v>  DI1.5 Dezizolator in fata</v>
+                <v>  DI1.5 Unidad de pelado al frente</v>
+                <v>  DI1.5 Jednostka odizolowująca z przodu</v>
+                <v>  DI1.5 ストリッピングユニットが前面に有ります</v>
+                <v>  DI1.5 剥线单元在前</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"315"</v>
+              <v n="TextDefault">" DE 1.6 Abisolierer ist RÜCK"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.6 Stripping unit at rear</v>
+                <v> DE 1.6 Abisolierer rück</v>
+                <v>  DI1.6 Dénudeur retour</v>
+                <v>  DI1.6 Csupaszító vissza</v>
+                <v>  DI1.6 Unità di spellatura posizionata dietro</v>
+                <v>  DI1.6 Блок зачистки на задней панели</v>
+                <v>  DI1.6 Dezizolator in spate</v>
+                <v>  DI1.6 Unidad de pelado atrás</v>
+                <v>  DI1.6 Jednostka odizolowująca z tyłu</v>
+                <v>  DI1.6 ストリッピングユニットが後方に有ります</v>
+                <v>  DI1.6 剥线单元在后</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"227"</v>
+              <v n="TextDefault">" DE 1.7 Abisolierer ist LINKS"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.7 Stripping unit on LH side</v>
+                <v> DE 1.7 Abisolierer links</v>
+                <v>  DI1.7 Dénudeur gauche</v>
+                <v>  DI1.7 Csupaszító balra</v>
+                <v>  DI1.7 Unità di spellatura sul lato LH</v>
+                <v>  DI1.7 Левый блок зачистки</v>
+                <v>  DI1.7 Dezizolator in stanga</v>
+                <v>  DI1.7 Unidad de pelado  en lado LH</v>
+                <v>  DI1.7 Jednostka odizolowująca po lewej stronie</v>
+                <v>  DI1.7 ストリッピングユニットがLH側に有ります</v>
+                <v>  DI1.7 剥线单元在左边</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"935"</v>
+              <v n="TextDefault">" DE 1.8 Crimpzange ist ZU"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.8 Crimping tool closed</v>
+                <v> DE 1.8 Crimpzange zu</v>
+                <v>  DI1.8 Pince à sertir fermée</v>
+                <v>  DI1.8 Krimpelo fogó zárva</v>
+                <v>  DI1.8 Ganasce di crimpatura chiuse</v>
+                <v>  DI1.8 Обжимная матрица закрыта</v>
+                <v>  DI1.8 Cleste sertizare inchis</v>
+                <v>  DI1.8 Herramienta de engaste cerrada</v>
+                <v>  DI1.8 Jednostka zaciskająca zamknięta</v>
+                <v>  DI1.8 圧着ツールクローズ</v>
+                <v>  DI1.8 压接工具闭合</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"187"</v>
+              <v n="TextDefault">" DE 1.9 Crimpzange ist OFFEN"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>  DI 1.9 Crimping tool open</v>
+                <v> DE 1.9 Crimpzange offen</v>
+                <v>  DI1.9 Pince à sertir ouverte</v>
+                <v>  DI1.9 Krimpelo fogó nyitva</v>
+                <v>  DI1.9 Ganasce di crimpatura aperte</v>
+                <v>  DI1.9 Обжимная матрица открыта</v>
+                <v>  DI1.9 Cleste sertizare deschis</v>
+                <v>  DI1.9 Herramienta de engaste abierta</v>
+                <v>  DI1.9 Jednostka zaciskająca otwarta</v>
+                <v>  DI1.9 圧着ツールオープン</v>
+                <v>  DI1.9 压接工具打开</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"448"</v>
+              <v n="TextDefault">"%0.1f bar"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>%0.1f bars</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f bars</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f бар</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f bar</v>
+                <v>%0.1f bar</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"513"</v>
+              <v n="TextDefault">"%0.1f Sek"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>%0.1f sec</v>
+                <v>%0.1f Sek</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f сек</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f sec</v>
+                <v>%0.1f sec</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"44"</v>
+              <v n="TextDefault">"%d"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+                <v>%d</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"60"</v>
+              <v n="TextDefault">"%s"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+                <v>%s</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"707"</v>
+              <v n="TextDefault">"A1.10-AbisoliererLINKS"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.10-Stripping unit to LH side</v>
+                <v>A1.10-Abisolierer links</v>
+                <v>A1.10-Dénudeur gauche</v>
+                <v>A1.10-Csupaszító balra</v>
+                <v>A1.10-Unità di spellatura sul lato LH</v>
+                <v>A1.10-Левый блок зачистки</v>
+                <v>A1.10-Dezizolator in stanga</v>
+                <v>A1.10-Unidad de pelado  en lado LH</v>
+                <v>A1.10-Jednostka odizolowująca po lewej stronie</v>
+                <v>A1.10-ストリッピングユニットがLH側に有ります</v>
+                <v>A1.10-剥线单元在左边</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"708"</v>
+              <v n="TextDefault">"A1.11-AbisoliererZU"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.11-CLOSE StrippingUnit</v>
+                <v>A1.11-Abisolierer  zu</v>
+                <v>A1.11-Dénudeur fermé</v>
+                <v>A1.11-Csupaszító zárva</v>
+                <v>A1.11-Unità di spellatura chiusa</v>
+                <v>A1.11-Закрыть блок зачистки</v>
+                <v>A1.11-Dezizolator inchis</v>
+                <v>A1.11-Unidad de pelado cerrada</v>
+                <v>A1.11-Jednostka odizolowująca zamknięta</v>
+                <v>A1.11-ストリッピングユニットクローズ</v>
+                <v>A1.11-剥线单元闭合 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"64"</v>
+              <v n="TextDefault">"A1.12-AbfallRUNTER"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.12-Waste DOWN</v>
+                <v>A1.12-AbfallRUNTER</v>
+                <v>A1.12-Déchets en aval</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"709"</v>
+              <v n="TextDefault">"A1.13-AbisoliererRUECK"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.13-StrippingUnit to REAR</v>
+                <v>A1.13-AbisoliererRUECK</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"710"</v>
+              <v n="TextDefault">"A1.14-CrimperZU"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.14-CLOSE CrimpingTool</v>
+                <v>A1.14-CrimperZU</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"62"</v>
+              <v n="TextDefault">"A1.15-DrahthaltFüh.ZU"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.15-CLOSE WireHolder</v>
+                <v>A1.15-DrahthaltFüh.ZU</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"703"</v>
+              <v n="TextDefault">"A1.5-Sortierluft"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.5-Sorting Air ON</v>
+                <v>A1.5-Sortierluft</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"704"</v>
+              <v n="TextDefault">"A1.6-Ausstossen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.6-Ejector to FRONT</v>
+                <v>A1.6-Ausstossen</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"705"</v>
+              <v n="TextDefault">"A1.7-KontaktVereinz."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.8-Contact separating ON</v>
+                <v>A1.7-KontaktVereinz.</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"63"</v>
+              <v n="TextDefault">"A1.8-KontaktSchieben"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.8-SLIDE Contact</v>
+                <v>A1.8-KontaktSchieben</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"706"</v>
+              <v n="TextDefault">"A1.9-CrimpEinheitVOR"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>A1.9-CrimpingTool to FRONT</v>
+                <v>A1.9-CrimpEinheitVOR</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"874"</v>
+              <v n="TextDefault">"Abisolierung einrichten"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Set up stripping unit</v>
+                <v>Abisolierung einrichten</v>
+                <v>Réglage dénudage</v>
+                <v>Csupaszítás beállítása</v>
+                <v>Regolazione unità di spellatura</v>
+                <v>Настройка снятия изоляции</v>
+                <v>Reglare dezizolare</v>
+                <v>Configurar unidad de pelado</v>
+                <v>Ustawianie jednostki odizolowującej</v>
+                <v>ストリッピング・ユニットをセットしてください</v>
+                <v>设置剥线单元</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"638"</v>
+              <v n="TextDefault">"AUF"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>OPEN</v>
+                <v>AUF</v>
+                <v>OUVERT</v>
+                <v>Nyit</v>
+                <v>Aperto</v>
+                <v>Открыть</v>
+                <v>Deschide</v>
+                <v>Abierto</v>
+                <v>Otwórz</v>
+                <v>開く</v>
+                <v>打开</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"702"</v>
+              <v n="TextDefault">"Ausgangs-Test"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Output-Test</v>
+                <v>Ausgangs-Test</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"386"</v>
+              <v n="TextDefault">"Auslösesch.:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Trigger switch.:</v>
+                <v>Auslösesch.:</v>
+                <v>Déclencheur:</v>
+                <v>Kioldó kapcsoló:</v>
+                <v>Sens.di cavo:</v>
+                <v>Переключатель:</v>
+                <v>Comutator dec.:</v>
+                <v>Inter.de de cable:</v>
+                <v>Przełącznik:</v>
+                <v>ケーブルトリガースイッチ</v>
+                <v>线缆触发开关</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"42"</v>
+              <v n="TextDefault">"Ausstoßverzögerung"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Discharge delay</v>
+                <v>Ausstoßverzögerung</v>
+                <v>Retardement d'éjection</v>
+                <v>Kidobási késleltetés</v>
+                <v>Ritardo di espulsione</v>
+                <v>Задержка выталкивания</v>
+                <v>Intarziere ejectare</v>
+                <v>Retardo de descarga</v>
+                <v>Opóźnienie wydawania</v>
+                <v>イジェクト時間</v>
+                <v>弹出时间</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"233"</v>
+              <v n="TextDefault">"Ausstoßzeit"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Ejection time</v>
+                <v>Ausstoßzeit</v>
+                <v>Durée d'éjection</v>
+                <v>Kidobási ido</v>
+                <v>Tempo di espulsione</v>
+                <v>Время выталкивания</v>
+                <v>Timp de ejectie</v>
+                <v>Tiempo de eyección</v>
+                <v>Czas wyrzutu</v>
+                <v>駆出遅延</v>
+                <v>弹出延迟</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"524"</v>
+              <v n="TextDefault">"Bei kleinen Kontakten mit labiler Litze, muss diese unmittelbar nach dem Crimpen von Hand herausgezogen werden. Dazu kann hier eine Verzögerungszeit eingegeben werden. (Wert 0 = ohne Verzögerung)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>In the case of smaller contacts with fragile wire, it is necessary to manually pull it out immediately after crimping. A delay time can be entered for this step. (Value 0 = without delay)</v>
+                <v>Bei kleinen Kontakten mit labiler Litze, muss diese unmittelbar nach dem Crimpen von Hand herausgezogen werden. Dazu kann hier eine Verzögerungszeit eingegeben werden. (Wert 0 = ohne Verzögerung)</v>
+                <v>En cas de petits contacts avec des lithes instables, ceux-ci doivent être retirés à la main immédiatement après le crimpage. Pour ce faire, un délai de retard peut être saisi ici. (valeur 0 = sans délai)</v>
+                <v>Ha kis érintkezok huzala labilis, akkor közvetlenül a krimpelés után ki kell húzni azt.
+Ehhez be lehet írni késleltetési idot. (0 érték = nincs késleltetési ido)</v>
+                <v>Nel caso di cavi di piccola sezione, è necessario aiutare manualmente l'espulsione del cavo crimpato tirando il cavo stesso verso l'esterno alla fine dell'operazione di crimpatura. E' possibile impostare un ritardo per questa operazione (valore 0 = NO ritardo)</v>
+                <v>В случае контактов под кабель небольшого сечения, извлечь сразу же вручную после обжима.
+Для этого задается время задержки. (Значение 0 = без задержки)</v>
+                <v>La contactele mici, cu fir labil, aceasta trebuie indepărtata manual imediat după sertizare.
+Din acest motiv se poate introduce aici un timp de întârziere. (Valoare 0 = nici o întârziere)</v>
+                <v>En el caso de los contactos para secciones más pequeñas, es necesario extraerlos después del engaste. 
+Un tiempo de retardo puede ser ajustado para este paso. (Valor 0 = sin retardo)</v>
+                <v>W przypadku małych kontaktów z delikatnymi przewodami, konieczne jest manualne wyciągnięcie natychmiast po zacisku.
+Czas opóźnienia może być wprowadzony dla tego kroku (Wartość 0 = bez opóźnienia)</v>
+                <v>細いコンタクトで柔らかいケーブルを圧着する場合、機械がコンタクトを圧着したタイミングで速やかにコンタクトを引き出してください　タイミング調整はこのステップで調整できます（値0＝遅れなし</v>
+                <v>当细针压接很细的线,需要在压接之后立刻手动将针拉出来.在这个操作可以设定一定的延迟时间. (值为 0 = 没有延迟)</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"886"</v>
+              <v n="TextDefault">"BetrAnz.: %d"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"286"</v>
+              <v n="TextDefault">"Betriebsstunden:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating hours</v>
+                <v>Betriebsstunden</v>
+                <v>Pour des petits contacts avec un fil instable, retirer à la main immédiatement à la suite du sertissage. Pour cela, il est possible de saisir un temps de retardement. (Valeur 0 = sans retardement)</v>
+                <v>Üzemórák</v>
+                <v>Ore di lavoro</v>
+                <v>Эксплуатационное время</v>
+                <v>Ore functionare</v>
+                <v>Horas de operación</v>
+                <v>Ilość godzin pracy</v>
+                <v>作業時間</v>
+                <v>运行时间</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"1124"</v>
+              <v n="TextDefault">"c"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"964"</v>
+              <v n="TextDefault">"Chinesisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Chinese</v>
+                <v>Chinesisch</v>
+                <v>Chinois</v>
+                <v>Kínai</v>
+                <v>Cinese</v>
+                <v>китайский</v>
+                <v>chineză</v>
+                <v>Chino</v>
+                <v>Chiński</v>
+                <v>中国の</v>
+                <v>中国</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"876"</v>
+              <v n="TextDefault">"Crimpen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Crimping</v>
+                <v>Crimpen</v>
+                <v>Sertir</v>
+                <v>Krimpelés</v>
+                <v>Crimpatura</v>
+                <v>Обжим</v>
+                <v>Sertizare</v>
+                <v>Engastando</v>
+                <v>Zaciskanie</v>
+                <v>圧着</v>
+                <v>压接</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"817"</v>
+              <v n="TextDefault">"Crimpzange einrichten"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Set up crimping tool</v>
+                <v>Crimpzange einrichten</v>
+                <v>Réglage pince de sertissage</v>
+                <v>Krimpelo fogó beállítása</v>
+                <v>Regolazione unità di crimpatura</v>
+                <v>Настройка обжимного элемента</v>
+                <v>Reglare cleste sertizare</v>
+                <v>Ajuste herramienta de engastado</v>
+                <v>Ustawianie jednostki zaciskającej</v>
+                <v>圧着ツールのセットアップ</v>
+                <v>设定压接工具</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"372"</v>
+              <v n="TextDefault">"DE Klemme EL1809-01"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"973"</v>
+              <v n="TextDefault">"DE Klemme EL1809-02"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"581"</v>
+              <v n="TextDefault">"Deutsch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>German</v>
+                <v>Deutsch</v>
+                <v>Allemand</v>
+                <v>Német</v>
+                <v>Tedesco</v>
+                <v>Немецкий</v>
+                <v>Germana</v>
+                <v>Alemán</v>
+                <v>Niemiecki</v>
+                <v>ドイツ語</v>
+                <v>德语</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"740"</v>
+              <v n="TextDefault">"Drahthalter Druck"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Wire holder pressure</v>
+                <v>Drahthalter Druck</v>
+                <v>Pression de support de fil</v>
+                <v>Huzal tartó nyomása</v>
+                <v>Pressione del supporto del filo</v>
+                <v>Давление в держателе</v>
+                <v>Presiunea suportului de susținere</v>
+                <v>Presión del soporte de alambre</v>
+                <v>Nacisk uchwytu drutu</v>
+                <v>ワイヤーホルダーの圧力</v>
+                <v>集线器压力</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"551"</v>
+              <v n="TextDefault">"Drahthalter:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>wire holder</v>
+                <v>Drahthalter</v>
+                <v>support de fil</v>
+                <v>drótra</v>
+                <v>supporto del legare</v>
+                <v>держатель провода</v>
+                <v>titularul de sârmă</v>
+                <v>soporte de alambre</v>
+                <v>uchwyt na drut</v>
+                <v>電線ホルダー</v>
+                <v>集线器</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"30"</v>
+              <v n="TextDefault">"Einzel/Auto"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Single / Auto</v>
+                <v>Einzel/Auto</v>
+                <v>Simple / Auto</v>
+                <v>Single / Auto</v>
+                <v>Singolo / Auto</v>
+                <v>Одном./Aвто</v>
+                <v>Single / Auto</v>
+                <v>Individual / Auto</v>
+                <v>Single / Auto</v>
+                <v>シングル/オート</v>
+                <v>单个/自动</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"91"</v>
+              <v n="TextDefault">"Englisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>English</v>
+                <v>Englisch</v>
+                <v>Anglais</v>
+                <v>Angol</v>
+                <v>Inglese</v>
+                <v>Английский</v>
+                <v>Engleză</v>
+                <v>Inglés</v>
+                <v>Angielski</v>
+                <v>英語</v>
+                <v>英文</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"730"</v>
+              <v n="TextDefault">"Ergebnis"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Result</v>
+                <v>Ergebnis</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"640"</v>
+              <v n="TextDefault">"Esc"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>Esc</v>
+                <v>退出</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"214"</v>
+              <v n="TextDefault">"Fertig:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Finished</v>
+                <v>Fertig</v>
+                <v>Fini</v>
+                <v>Kész</v>
+                <v>Crimpature effettuate</v>
+                <v>Готово</v>
+                <v>Incheiat</v>
+                <v>Finalizado</v>
+                <v>Skończone</v>
+                <v>終了</v>
+                <v>完成</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"714"</v>
+              <v n="TextDefault">"Französisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>French</v>
+                <v>Französisch</v>
+                <v>Français</v>
+                <v>Francia</v>
+                <v>Francese</v>
+                <v>Францу́зский</v>
+                <v>Franceză</v>
+                <v>Francés</v>
+                <v>Francuski</v>
+                <v>フランス語</v>
+                <v>法国</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"761"</v>
+              <v n="TextDefault">"HARTING Crimpautomat TK-M"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>HARTING Crimping Machine TK-M</v>
+                <v>HARTING Crimpautomat TK-M</v>
+                <v>Automate de sertissage TK-M HARTING</v>
+                <v>HARTING TK-M automata krimpelo gép</v>
+                <v>Crimpatrice HARTING TK-M</v>
+                <v>HARTING обжимная машина TK-M</v>
+                <v>Automat sertizare HARTING TK-M</v>
+                <v>Máquina de engaste TK-M de HARTING</v>
+                <v>HARTING maszyna zaciskająca TK-M</v>
+                <v>ハーティング自動圧着機　TK-M</v>
+                <v>HARTING 自动压接机 TK-M</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"311"</v>
+              <v n="TextDefault">"Italienisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Italian</v>
+                <v>Italienisch</v>
+                <v>Italien</v>
+                <v>Olasz</v>
+                <v>Italiano</v>
+                <v>Италья́нский</v>
+                <v>Italiană</v>
+                <v>Italiano</v>
+                <v>Włoski</v>
+                <v>イタリア語</v>
+                <v>意大利</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"993"</v>
+              <v n="TextDefault">"Japanisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Japanese</v>
+                <v>Japanisch</v>
+                <v>Japonais</v>
+                <v>Japán</v>
+                <v>Giapponese</v>
+                <v>японский</v>
+                <v>Japoneză</v>
+                <v>Japonés</v>
+                <v>Japoński</v>
+                <v>日本の</v>
+                <v>日本</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"110"</v>
+              <v n="TextDefault">"Löschen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Delete</v>
+                <v>Löschen</v>
+                <v>Effacer</v>
+                <v>Törlés</v>
+                <v>Cancella</v>
+                <v>Удалить</v>
+                <v>Sterge</v>
+                <v>Borrar</v>
+                <v>Kasowanie</v>
+                <v>削除</v>
+                <v>删除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"816"</v>
+              <v n="TextDefault">"Magazin leerfahren"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Run magazine empty</v>
+                <v>Magazin leerfahren</v>
+                <v>Vider le magasin</v>
+                <v>Tároló üresre járatása</v>
+                <v>Scarico canale contatti</v>
+                <v>Очистить магазин</v>
+                <v>Golire magazie</v>
+                <v>Ejecutar vaciado de depósito</v>
+                <v>Uruchom magazynek pusty</v>
+                <v>マガジンを空にする</v>
+                <v>运行料箱清空</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"355"</v>
+              <v n="TextDefault">"Menü"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Menu</v>
+                <v>Menü</v>
+                <v>Menu</v>
+                <v>Menü</v>
+                <v>Menù</v>
+                <v>Меню</v>
+                <v>Meniu</v>
+                <v>Menu</v>
+                <v>Menu</v>
+                <v>メニュー</v>
+                <v>操作菜单</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"429"</v>
+              <v n="TextDefault">"Noch: %d"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Still: %d</v>
+                <v>Noch: %d</v>
+                <v>Encore:  %d</v>
+                <v>Még:  %d</v>
+                <v>Mancanti:</v>
+                <v>Eще:  %d</v>
+                <v>Inca:  %d</v>
+                <v>Todavía:  %d</v>
+                <v>Wciąż:  %d</v>
+                <v>まだ:  %d</v>
+                <v>继续:  %d</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"919"</v>
+              <v n="TextDefault">"Off- / On Line"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"634"</v>
+              <v n="TextDefault">"Offline: Low / High"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"765"</v>
+              <v n="TextDefault">"ohne Sortierluft"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>without sorting air</v>
+                <v></v>
+                <v>sans tri d'air</v>
+                <v>buborékok nélkül</v>
+                <v>senza aria</v>
+                <v>без пузырьков</v>
+                <v>fără bule</v>
+                <v>sin burbujas</v>
+                <v>bez bąbelków</v>
+                <v>空気をソートせずに</v>
+                <v>没有分拣气</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"527"</v>
+              <v n="TextDefault">"OutTest"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"514"</v>
+              <v n="TextDefault">"Polnisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Polish</v>
+                <v>Polnisch</v>
+                <v>Polonais</v>
+                <v>Lengyel</v>
+                <v>Polacco</v>
+                <v>Польский</v>
+                <v>Polonez</v>
+                <v>Polaco</v>
+                <v>Polski</v>
+                <v>ポーランド語</v>
+                <v>波兰语</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"590"</v>
+              <v n="TextDefault">"Probelauf"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Trial run</v>
+                <v>Probelauf</v>
+                <v>Marche d'essai</v>
+                <v>Próbaüzem</v>
+                <v>Ciclo di prova</v>
+                <v>Тест</v>
+                <v>Test</v>
+                <v>Modo de prueba</v>
+                <v>Przebieg testowy</v>
+                <v>テスト動作</v>
+                <v>试运行</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"92"</v>
+              <v n="TextDefault">"Probelauf ohne Crimpen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Trial run without crimping</v>
+                <v>Probelauf ohne Crimpen</v>
+                <v>Marche d'essai sans sertissage</v>
+                <v>Próbaüzem krimpelés nélkül</v>
+                <v>Ciclo di prova senza crimpatura</v>
+                <v>Тест без обжима</v>
+                <v>Test fara sertizare</v>
+                <v>Prueba sin engaste</v>
+                <v>Przebieg testowy bez zaciskania</v>
+                <v>圧着なしでのテスト動作</v>
+                <v>不压接试运行</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"371"</v>
+              <v n="TextDefault">"Probelauf ohne Kontakt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Trial run without contact</v>
+                <v>Probelauf ohne Kontakt</v>
+                <v>Marche d'essai sans contact</v>
+                <v>Próbaüzem érintkezo nélkül</v>
+                <v>Ciclo di prova senza contatto</v>
+                <v>Тест без контакта</v>
+                <v>Test fara contact</v>
+                <v>Prueba sin contacto</v>
+                <v>Przebieg testowy bez kontaktu</v>
+                <v>コンタクトなしでのテスト動作</v>
+                <v>不带针试运行</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"61"</v>
+              <v n="TextDefault">"Probelauf ohne Litze"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Trial run without wire</v>
+                <v>Probelauf ohne Litze</v>
+                <v>Marche d'essai sans fil</v>
+                <v>Próbaüzem huzal nélkül</v>
+                <v>Ciclo di prova senza cavo</v>
+                <v>Тест без провода</v>
+                <v>Test fara lita</v>
+                <v>Prueba sin cable</v>
+                <v>Przebieg testowy bez przewodu</v>
+                <v>ケーブルなしでのテスト動作</v>
+                <v>不带线试运行</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"896"</v>
+              <v n="TextDefault">"R"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>R</v>
+                <v>R</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"786"</v>
+              <v n="TextDefault">"Reset"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Reset</v>
+                <v>Reset</v>
+                <v>Reset</v>
+                <v>Visszaállítás</v>
+                <v>Reset</v>
+                <v>Перезагрузка</v>
+                <v>Reset</v>
+                <v>Reset</v>
+                <v>Reset</v>
+                <v>リセット</v>
+                <v>重置</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"770"</v>
+              <v n="TextDefault">"Rezeptur"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Recipe</v>
+                <v>Rezeptur</v>
+                <v>Recette</v>
+                <v>Receptúra</v>
+                <v>Menù</v>
+                <v>Рецепт</v>
+                <v>Reteta</v>
+                <v>Receta</v>
+                <v>Przepis</v>
+                <v>レシピ</v>
+                <v>接收</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"339"</v>
+              <v n="TextDefault">"Rumänisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Romanian</v>
+                <v>Rumänisch</v>
+                <v>Roumain</v>
+                <v>Román</v>
+                <v>Rumeno</v>
+                <v>Румы́нский</v>
+                <v>Român</v>
+                <v>Rumano</v>
+                <v>Rumuński</v>
+                <v>ルーマニア語</v>
+                <v>罗马尼亚</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"985"</v>
+              <v n="TextDefault">"Russisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Russian</v>
+                <v>Russisch</v>
+                <v>Russe</v>
+                <v>Orosz</v>
+                <v>Russo</v>
+                <v>ру́сский</v>
+                <v>Rusă</v>
+                <v>Ruso</v>
+                <v>rosyjski</v>
+                <v>ロシア</v>
+                <v>俄</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"366"</v>
+              <v n="TextDefault">"Sensoren brücken"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Sensor bridging</v>
+                <v>Sensoren brücken</v>
+                <v>Invalidation de capteurs</v>
+                <v>Érzékelok áthidalása</v>
+                <v>Disattivazione sensori</v>
+                <v>Шунтировать датчик</v>
+                <v>Ocolire senzor</v>
+                <v>Puenteo del sensor</v>
+                <v>Mostkowanie czujników</v>
+                <v>センサーブリッジ</v>
+                <v>传感器桥接</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"503"</v>
+              <v n="TextDefault">"Sensoren Brücken"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"790"</v>
+              <v n="TextDefault">"Sortierer leerfahren"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Run sorter empty</v>
+                <v>Sortierer leerfahren</v>
+                <v>Vider trieuse</v>
+                <v>Szortírozó üresre járatása</v>
+                <v>Svuotamento contenitore contatti</v>
+                <v>Холостой ход сортировщика</v>
+                <v>Golire sortator</v>
+                <v>Ejecutar vaciado de clasificador</v>
+                <v>Uruchom sorter pusty</v>
+                <v>ソーター空ので動作</v>
+                <v>运行分拣清空</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"313"</v>
+              <v n="TextDefault">"Sortierer:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Sorter:</v>
+                <v>Sortierer:</v>
+                <v>Trieuse :</v>
+                <v>Szortírozó berendezés:</v>
+                <v>Livello vibrazione</v>
+                <v>Сортировщик:</v>
+                <v>Sortator:</v>
+                <v>Clasificador:</v>
+                <v>Sorter:</v>
+                <v>ソーター</v>
+                <v>分拣:</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"901"</v>
+              <v n="TextDefault">"Spanisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Spanish</v>
+                <v>Spanisch</v>
+                <v>Espagnol</v>
+                <v>Spanyol</v>
+                <v>Spagnolo</v>
+                <v>Испа́нский</v>
+                <v>Spaniolă</v>
+                <v>Español</v>
+                <v>Hiszpański</v>
+                <v>スペイン語</v>
+                <v>西班牙语</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"840"</v>
+              <v n="TextDefault">"Speichern"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Save</v>
+                <v>Speichern</v>
+                <v>Enregistrer</v>
+                <v>Mentés</v>
+                <v>Salvare</v>
+                <v>Сохранить</v>
+                <v>Salveaza</v>
+                <v>Guardar</v>
+                <v>Zapisz</v>
+                <v>保存</v>
+                <v>保存</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"217"</v>
+              <v n="TextDefault">"Sprache"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Language</v>
+                <v>Sprache</v>
+                <v>Langue</v>
+                <v>Nyelv</v>
+                <v>Lingua</v>
+                <v>Язык</v>
+                <v>Limba</v>
+                <v>Idioma</v>
+                <v>Język</v>
+                <v>言語</v>
+                <v>语言</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"543"</v>
+              <v n="TextDefault">"Status"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Status</v>
+                <v>Status</v>
+                <v>Statut</v>
+                <v>Állapot</v>
+                <v>Status</v>
+                <v>Статус</v>
+                <v>Stadiu</v>
+                <v>Estado</v>
+                <v>Status</v>
+                <v>状態</v>
+                <v>状态</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"382"</v>
+              <v n="TextDefault">"Stop"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Stop</v>
+                <v>Stop</v>
+                <v>Stop</v>
+                <v>Leállítás</v>
+                <v>Stop</v>
+                <v>Стоп</v>
+                <v>Stop</v>
+                <v>Parada</v>
+                <v>Stop</v>
+                <v>停止</v>
+                <v>停止</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"486"</v>
+              <v n="TextDefault">"Stückzahl-Total:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Total quantity</v>
+                <v>Stückzahl Total</v>
+                <v>Nombre de pièces total</v>
+                <v>Összes darabszám</v>
+                <v>Contatore parziale</v>
+                <v>Общее кол-во</v>
+                <v>Cantitate totala</v>
+                <v>Cantidad total</v>
+                <v>Ilość całkowita</v>
+                <v>設定数量</v>
+                <v>总数</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"949"</v>
+              <v n="TextDefault">"Stückzahl-Vorwahl"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Quantity presel.</v>
+                <v>Stückzahl-Vorwahl</v>
+                <v>Présélection nombre de pièces</v>
+                <v>Darabszám eloválasztása</v>
+                <v>Impostazione quantità crimpature</v>
+                <v>Выбор кол-ва</v>
+                <v>Preselectie cantitate</v>
+                <v>Cantidad preseleccionada</v>
+                <v>Ilość wybór wstępny</v>
+                <v>トータル数量</v>
+                <v>预设总数.</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"332"</v>
+              <v n="TextDefault">"System"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"269"</v>
+              <v n="TextDefault">"Tageszähler:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Daily counter:</v>
+                <v>Tageszähler:</v>
+                <v>Compteur journalier :</v>
+                <v>Napi számláló:</v>
+                <v>Contatore giornaliero</v>
+                <v>Дневной счетчик</v>
+                <v>Numarator zilnic:</v>
+                <v>Contador diario:</v>
+                <v>Licznik dzienny:</v>
+                <v>デイリーカウンター</v>
+                <v>每日计数:</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"234"</v>
+              <v n="TextDefault">"Totalzähler"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Total counter</v>
+                <v>Totalzähler</v>
+                <v>Compteur total</v>
+                <v>Összes számláló</v>
+                <v>Contatore totale</v>
+                <v>Общий счетчик</v>
+                <v>Numarator total</v>
+                <v>Contador total:</v>
+                <v>Licznik całkowity</v>
+                <v>トータルカウンター</v>
+                <v>总数</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"1113"</v>
+              <v n="TextDefault">"Um Abdrücke des Drahthalters auf dem Isoliermantel zu vermeiden, kann hier der Pneumatik-Druck des Drahthalters zwischen 0,5 und 6,0 bar eingestellt werden."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>In order to avoid impressions of the wire holder on the insulating jacket, the pneumatic pressure of the wire holder can be adjusted here between 0.5 and 6.0 bar.</v>
+                <v>Um Abdrücke des Drahthalters auf dem Isoliermantel zu vermeiden, kann hier der Pneumatik-Druck des Drahthalters zwischen 0,5 und 6,0 bar eingestellt werden.</v>
+                <v>Afin d'éviter les empreintes du porte-fil sur la chemise isolante, la pression pneumatique du porte-fil peut être ajustée ici entre 0,5 et 6,0 bars.</v>
+                <v>Annak érdekében, hogy elkerülje a szigetelő burkolat dróttartójának benyomódását, a vezetéktartó pneumatikus nyomása 0,5 és 6,0 bar között állítható.</v>
+                <v>Al fine di evitare impronte del supporto del filo sulla guaina isolante, la pressione pneumatica del supporto del filo può essere regolata qui tra 0,5 e 6,0 bar.</v>
+                <v>Чтобы избежать впечатлений от держателя проволоки на изолирующем кожухе, пневматическое давление держателя проволоки можно регулировать здесь от 0,5 до 6,0 бар.</v>
+                <v>Pentru a evita impresiile suportului de sârmă de pe mantaua izolatoare, presiunea pneumatică a suportului de sârmă poate fi reglată aici între 0,5 și 6,0 bari.</v>
+                <v>Para evitar impresiones del soporte del cable en la camisa aislante, la presión neumática del soporte del cable se puede ajustar aquí entre 0,5 y 6,0 bar.</v>
+                <v>Aby uniknąć odcisków drutu na płaszczu izolacyjnym, ciśnienie pneumatyczne uchwytu drutu można ustawić w zakresie od 0,5 do 6,0 bar.</v>
+                <v>ワイヤーホルダーの絶縁ジャケットへの印象を避けるために、ワイヤーホルダーの空気圧を0.5〜6 barに設定することができます。</v>
+                <v>为了避免集线器压触到绝缘皮, 可以把集线器气压调整到0,5到6,0 bar</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"616"</v>
+              <v n="TextDefault">"Ungarisch"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Hungarian</v>
+                <v>Ungarisch</v>
+                <v>Hongrois</v>
+                <v>Magyar</v>
+                <v>Ungherese</v>
+                <v>Венге́рский</v>
+                <v>Maghiară</v>
+                <v>Húngaro</v>
+                <v>Węgierski</v>
+                <v>ハンガリー</v>
+                <v>匈牙利</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"191"</v>
+              <v n="TextDefault">"V"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"168"</v>
+              <v n="TextDefault">"Vorwahl:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Preselection</v>
+                <v>Vorwahl</v>
+                <v>Présélection</v>
+                <v>Eloválasztás</v>
+                <v>Crimpature impostate</v>
+                <v>Код</v>
+                <v>Preselectare</v>
+                <v>Preselección</v>
+                <v>Wybór wstępny</v>
+                <v>設定値</v>
+                <v>预设</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"981"</v>
+              <v n="TextDefault">"Vorwahl: %d"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Preselection: %d</v>
+                <v>Vorwahl: %d</v>
+                <v>Présélection: %d</v>
+                <v>Eloválasztás: %d</v>
+                <v>Crimpature impostate: %d</v>
+                <v>Код: %d</v>
+                <v>Preselectare: %d</v>
+                <v>Preselección: %d</v>
+                <v>Wybór wstępny: %d</v>
+                <v>設定値: %d</v>
+                <v>预设: %d</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"314"</v>
+              <v n="TextDefault">"Wartungsvorwahl:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Maintenance code</v>
+                <v>Wartungsvorwahl</v>
+                <v>Présélection de maintenance</v>
+                <v>Karbantartás eloválasztása</v>
+                <v>Manutenzione a (cicli):</v>
+                <v>Код обслуживания</v>
+                <v>Codul de intretinere</v>
+                <v>Código de mantenimiento</v>
+                <v>Kod obsługi</v>
+                <v>メンテナンスコード</v>
+                <v>维护代码</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"188"</v>
+              <v n="TextDefault">"Wartungszähler:"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Maintenance counter</v>
+                <v>Wartungszähler</v>
+                <v>Compteur de maintenance</v>
+                <v>Karbantartás számláló</v>
+                <v>Contatore totale per manutenzione</v>
+                <v>Счетчик обслуживания</v>
+                <v>Numarator intretinere</v>
+                <v>Contador de mantenimiento</v>
+                <v>Licznik obsługi</v>
+                <v>メンテナンスカウンター</v>
+                <v>保养计数</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"47"</v>
+              <v n="TextDefault">"Weiter"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Next</v>
+                <v>Weiter</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"934"</v>
+              <v n="TextDefault">"ZU"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>CLOSE</v>
+                <v>ZU</v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+          </l>
+          <l n="Languages" t="ArrayList" cet="String">
+            <v>EN</v>
+            <v>DE</v>
+            <v>FR</v>
+            <v>HU</v>
+            <v>IT</v>
+            <v>RU</v>
+            <v>RO</v>
+            <v>ES</v>
+            <v>PL</v>
+            <v>JA</v>
+            <v>ZH</v>
+          </l>
+          <v n="GuidInit">{17a94fc2-1e4a-4aa6-b99f-0233cb547283}</v>
+          <v n="GuidReInit">{a20f1717-e213-4d69-8a10-2f712ccd9406}</v>
+          <v n="GuidExitX">{edce77a6-c0d1-4da2-8a56-e37f9b152083}</v>
+        </o>
+      </Data>
+      <TypeList>
+        <Type n="ArrayList">System.Collections.ArrayList</Type>
+        <Type n="GlobalTextListObject">{63784cbb-9ba0-45e6-9d69-babf3f040511}</Type>
+        <Type n="Guid">System.Guid</Type>
+        <Type n="String">System.String</Type>
+        <Type n="TextListRow">{53da1be7-ad25-47c3-b0e8-e26286dad2e0}</Type>
+      </TypeList>
+    </XmlArchive>
+  </GlobalTextList>
+</TcPlcObject>

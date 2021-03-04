@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="FB_KontrolleEndschalter" Id="{499e0784-d2fb-4b41-b1d0-c3cfa7eddd3f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_KontrolleEndschalter 
+VAR_INPUT
+	errorOffset : WORD := 600;
+END_VAR
+VAR_OUTPUT
+	bError : BOOL;
+	nErrNo : WORD;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 4 Kontr. Endschalter *)
+(*
+U "T 3" T3 -- Fehler-Kontr.Maschine (keine Bewegung)
+U "T 72" T72 -- Verz. Alles OK von PNOZ
+SPBN kk
+*)
+nErrNo := 0;
+bError := FALSE;
+IF NOT (GVL.tonFehlerKontrMaschine.Q AND GVL.tonSAFETYok.Q) THEN
+	RETURN;
+END_IF
+
+(*
+UN "A 1.7" A1.7 -- Y-10 Drahthalter+Führung zu
+UN "E1_0" E1.0 -- R Drahthalter offen
+S "F40 E1.0f" M104.0 -- Drahthalter nicht offen
+*)
+IF NOT IO.outY10DrahthaltFuehrungZU AND NOT GVL.insecDrahthalterIstOffen THEN
+	GVL.errs.DrahthltNichtOffen := TRUE;
+	nErrNo := errorOffset;
+END_IF
+(*
+U "A 1.7" A1.7 -- Y-10 Drahthalter+Führung zu
+U "E1_0" E1.0 -- R Drahthalter offen
+S "F41 E1.0nw" M104.1 -- Drahthalter nicht zu
+*)
+IF IO.outY10DrahthaltFuehrungZU AND GVL.insecDrahthalterIstOffen THEN
+	GVL.errs.DrahthltNichtZu := TRUE;
+	nErrNo := errorOffset + 1;
+END_IF
+
+
+(*
+UN "A 1.3" A1.3 -- Y-6 Abisolierer zu
+U "E1_2" E1.2 -- N Abisolierer zu
+S "F43 E1.2nw" M104.3 -- Abisolierer nicht offen
+*)
+IF NOT IO.outY6AbisoliererZU AND GVL.insecAbisoliererIstZU THEN
+	GVL.errs.AbisolierNichtOffen := TRUE;
+	nErrNo := errorOffset + 3;
+END_IF
+
+
+(*
+U "A 1.3" A1.3 -- Y-6 Abisolierer zu
+UN "E1_2" E1.2 -- N Abisolierer zu
+S "F44 E1.2f" M104.4 -- Abisolierer nicht zu
+*)
+IF  IO.outY6AbisoliererZU AND NOT GVL.insecAbisoliererIstZU THEN
+	GVL.errs.AbisolierNichtZu := TRUE;
+	nErrNo := errorOffset + 4;
+END_IF
+
+(*
+UN "A 1.5" A1.5 -- Y-8 Abisolierer rück
+UN "E1_3" E1.3 -- R Abisolierer vorn
+S "F46 E1.3f" M104.6 -- Abisolierer nicht vorn
+*)
+IF NOT IO.outY8AbisoliererRUECK AND NOT GVL.insecAbisoliererIstVORN THEN
+	GVL.errs.AbisolierNichtVorn := TRUE;
+	nErrNo := errorOffset + 6;
+END_IF
+
+
+(*
+U "A 1.5" A1.5 -- Y-8 Abisolierer rück
+UN "E1_4" E1.4 -- R Abisolierer rück (abisoliert)
+S "F47 E1.4f" M104.7 -- Abisolierer nicht rück (abisoliert)
+*)
+IF IO.outY8AbisoliererRUECK AND NOT GVL.insecAbisoliererIstRUECK THEN
+	GVL.errs.AbisolierNichtRueck := TRUE;
+	nErrNo := errorOffset + 7;
+END_IF
+
+
+(*
+U "A 1.2" A1.2 -- Y-5 Abisolierer nach links+Abdeckung zu
+UN "E1_5" E1.5 -- R Abisolierer links (aus Arbeitsraum)
+S "F50 E1.5f" M105.0 -- Abisolierer nicht links (aus Arbeitsraum)
+*)
+IF IO.outY5AbisolierNachLINKS AND NOT GVL.insecAbisoliererIstLINKS THEN
+	GVL.errs.AbisolierNichtLinks := TRUE;
+	nErrNo := errorOffset + 8;	
+END_IF
+
+
+(*
+UN "A 1.2" A1.2 -- Y-5 Abisolierer nach links+Abdeckung zu
+U "E1_5" E1.5 -- R Abisolierer links (aus Arbeitsraum)
+S "F51 E1.5nw" M105.1 -- Abisolierer nicht rechts
+*)
+IF NOT IO.outY5AbisolierNachLINKS AND GVL.insecAbisoliererIstLINKS THEN
+	GVL.errs.AbisolierNichtRechts := TRUE;
+	nErrNo := errorOffset + 9;
+END_IF
+
+
+(*
+U "A 1.6" A1.6 -- Y-9 Crimpen zu
+UN "E1_6" E1.6 -- N Crimpzange zu
+S "F53 E1.6f" M105.3 -- Crimpzange nicht zu
+*)
+IF IO.outY9CrimperZU AND NOT GVL.insecCrimpZangeIstZU THEN
+	GVL.errs.CrimpZangeNichtZu := TRUE;
+	nErrNo := errorOffset + 11;
+END_IF
+
+
+(*
+UN "A 1.6" A1.6 -- Y-9 Crimpen zu
+UN "E1_7" E1.7 -- R Crimpzange offen
+S "F54 E1.7f" M105.4 -- Crimpzange nicht offen
+*)
+IF NOT IO.outY9CrimperZU AND NOT GVL.insecCrimpZangeIstOFFEN THEN
+	GVL.errs.CrimpZangeNichtOffen := TRUE;
+	nErrNo := errorOffset + 12;
+END_IF
+
+
+(* ToDo:
+errKontaktNichtGefallen : BOOL; //(ehem. M105.5) !! nur xls File !! --
+*)
+
+//NEU
+GVL.tonKontaktIstZuLangeEin(IN := GVL.insecKontaktIstGefallen, PT := T#2S);
+IF GVL.tonKontaktIstZuLangeEin.Q THEN
+	GVL.errs.DauerMlgKontaktGefallen := TRUE; //(ehem. 105.6) !! nur xls File !! --
+	nErrNo := errorOffset + 14;
+END_IF
+(*
+U "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+UN "E2_1" E2.1 -- R Crimpeinheit vorn
+S "F60 E2.1f" M106.0 -- Crimpeinheit nicht vorn
+*)
+IF IO.outY4CrimpEinheitVOR AND NOT GVL.insecCrimpEinheitIstVORN THEN
+	GVL.errs.CrimpeinheitNichtVorn := TRUE;
+nErrNo := errorOffset + 16;	
+END_IF
+
+
+(*
+UN "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+UN "E2_4" E2.4 -- R Crimpeinheit rück
+S "F61 E2.4f" M106.1 -- Crimpeinheit nicht rück
+*)
+IF NOT IO.outY4CrimpEinheitVOR AND NOT GVL.insecCrimpEinheitIstRUECK THEN
+	GVL.errs.CrimpeinheitNichtRueck := TRUE;
+nErrNo := errorOffset + 17;	
+END_IF
+
+
+(*
+U "A 1.0" A1.0 -- Y-3 Kontakt-Schieben
+UN "E2_2" E2.2 -- R Kontakt-Schieben vorn
+S "F62 E2.2f" M106.2 -- Kontakt-Schieben nicht vorn
+*)
+IF IO.outY3KontaktSchieben AND NOT GVL.insecKontaktSchiebenVORN THEN
+	GVL.errs.KontaktSchiebenNichtVorn := TRUE;
+	nErrNo := errorOffset + 18;
+END_IF
+
+
+(*
+UN "A 1.0" A1.0 -- Y-3 Kontakt-Schieben
+U "E2_2" E2.2 -- R Kontakt-Schieben vorn
+S "F63 E2.2nw" M106.3 -- Kontakt-Schieben nicht rück
+*)
+IF NOT IO.outY3KontaktSchieben AND GVL.insecKontaktSchiebenVORN THEN
+	GVL.errs.KontaktSchiebenNichtRueck := TRUE;
+	nErrNo := errorOffset + 19;
+END_IF
+
+
+(*
+U "A 0.6" A0.6 -- Y-1 Ausstoßen
+UN "E2_3" E2.3 -- R Ausstoßen vorn
+S "F64 E2.3f" M106.4 -- Ausstoßen nicht vorn
+*)
+IF IO.outY1Ausstossen AND NOT GVL.insecAusstossenVORN THEN
+	GVL.errs.AusstossenNichtVorn := TRUE;
+	nErrNo := errorOffset + 20;	
+END_IF
+
+
+(*
+UN "A 0.6" A0.6 -- Y-1 Ausstoßen
+U "E2_3" E2.3 -- R Ausstoßen vorn
+S "F65 E2.3nw" M106.5 -- Ausstoßen nicht rück
+*)
+IF NOT IO.outY1Ausstossen AND GVL.insecAusstossenVORN THEN
+	GVL.errs.AusstossenNichtRueck := TRUE;
+	nErrNo := errorOffset + 21;
+END_IF
+
+
+//NBT-NEU
+IF nErrNo <> 0 THEN
+	bError := TRUE;
+END_IF
+
+(*
+kk: BLD 130
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="FB_KontrolleEndschalter">
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="250" Count="1" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="67" Count="1" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="13" Count="2" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="16" Count="2" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="161" Count="1" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="79" Count="1" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="166" Count="1" />
+      <LineId Id="225" Count="0" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="168" Count="1" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="25" Count="2" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="171" Count="1" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="116" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="28" Count="2" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="174" Count="1" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="119" Count="1" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="177" Count="1" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="179" Count="0" />
+      <LineId Id="122" Count="1" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="34" Count="2" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="180" Count="1" />
+      <LineId Id="230" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="125" Count="1" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="37" Count="2" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="186" Count="1" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="128" Count="1" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="40" Count="2" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="183" Count="1" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="185" Count="0" />
+      <LineId Id="212" Count="3" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="219" Count="1" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="233" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="189" Count="1" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="152" Count="1" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="47" Count="2" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="192" Count="1" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="134" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="50" Count="2" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="195" Count="1" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="197" Count="0" />
+      <LineId Id="137" Count="1" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="198" Count="1" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="200" Count="0" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="201" Count="1" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="146" Count="1" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="59" Count="2" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="204" Count="1" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="262" Count="1" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="260" Count="1" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

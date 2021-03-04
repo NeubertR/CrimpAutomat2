@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_AblaufReset" Id="{10f7f5a1-7821-4184-af1c-b9698051c773}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_AblaufReset 
+VAR
+//rTrig : R_TRIG;
+//bTmp:BOOL := FALSE;
+tsv1 : TSV;	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 2 Ablauf-Reset *)
+
+(* 
+U "E0_0" E0.0	-- Taste Start
+U "M0.7" M0.7	-- Störung aufgetreten (gesammelt)
+L S5T#1S		-- mandatory!
+SE "T 1" T1 -- Verz. Taste Start, SE <Zeit> startet die adressierte Zeit, wenn das VKE von "0" auf "1" wechselt.
+*)
+
+(*
+Klassisches TON-Verhalten:
+Die programmierte Zeitdauer läuft ab, solange das VKE = 1 ist. Wechselt das VKE auf "0", bevor die programmierte
+Zeitdauer abgelaufen ist, wird die Zeit angehalten. Für diese Operation (Starten der Zeit) müssen der
+Zeitwert und die Zeitbasis im BCD-Format in AKKU1-L gespeichert sein.
+*)
+//Also nur wenn eine Sammelstörung aufgetreten ist und 1 sek. gedrückt wird!...
+GVL.tonTasteStartOnErr(IN := GVL.insecTasterStart AND VAT.bSammelStoerung, PT := T#1S);
+
+(*
+	ON "T 72" T72 -- Verz. Alles OK von PNOZ
+	O "T 1" T1 -- Verz. Taste Start
+	SPBN res -- Springe nach 'res' wenn VKE = 0
+
+	R "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+	R "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+	R "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+	R "M8.5ohneKontakt" M8.5 -- Probelauf ohne Kontakt
+	R "M8.6ohneCrmpen" M8.6 -- Probelauf ohne Crimpen
+	R "M8.7ohneLitze" M8.7 -- Probelauf ohne Litze
+
+	L 0
+	T MD 20 -- Bedeutung noch Unklar
+	T MW 0 -- Bedeutung noch Unklar
+	T AW 0 -- Bedeutung noch Unklar
+	T AW 2 -- Bedeutung noch Unklar
+	T MD 104 -- Bedeutung noch Unklar
+	T MD 108 -- Bedeutung noch Unklar
+	SET -- 	VKE auf 1 setzen (=1)
+	S "M1.3_Stop" M1.3 -- RS Stop StST
+*)
+
+IF (* NOT GVL.tonSAFETYok.Q OR *) GVL.tonTasteStartOnErr.Q THEN
+	VAT.bMagazinLeerfahren := FALSE;
+	VAT.bSortiererLeerfahren := FALSE;
+	VAT.bCrimpEinrichten := FALSE;
+	VAT.bProbelOhneKontakt := FALSE;
+	VAT.bProbelOhneCrimpen := FALSE;
+	VAT.bProbelOhneLitze := FALSE;
+	
+	//GVL.MD20 := 0; //Bedeutung noch Unklar
+	//GVL.MW0 := 0; //Bedeutung noch Unklar
+	//T AW 0 -- Bedeutung noch Unklar(evtl. alle 8 Ausg. auf 0)
+	//T AW 2 -- Bedeutung noch Unklar (evtl. alle 8 Ausg. als WORD auf 2)
+	//GVL.MD104 := 0; //war Fehererkennung, jtzt GVL.errs
+	//GVL.MD108 := 0; //war Fehererkennung, jtzt GVL.errs
+	
+	F_ResetErrors(); //Reset Fehlerflags
+	
+	VAT.bRsStop := TRUE; //(ehemals M1.3) RS Stop
+END_IF
+
+(*	
+res: BLD 130
+	U "T 72" T72 -- Verz. Alles OK von PNOZ
+	L S5T#500MS
+	SV "T 19" T19 -- Kontaktauswurf nach Einschalten, Zeit als Zeit mit verlängertem Impuls starten: TSV.
+*)
+
+GVL.tsvKontauswurf(IN := GVL.tonSAFETYok.Q, PT := T#500MS);
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_AblaufReset">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="12" Count="3" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="147" Count="1" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="16" Count="2" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="19" Count="4" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="50" Count="8" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="153" Count="4" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="180" Count="2" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="171" Count="1" />
+      <LineId Id="249" Count="1" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="59" Count="2" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="219" Count="1" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="109" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_AusloeseschalterDauermeldung" Id="{7cf76f0e-119d-4980-8ca6-892b4d9c841a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_AusloeseschalterDauermeldung : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	tmp:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 3 Auslöseschalter Dauermeldung *)
+
+(*
+U "M 22.7" M22.7 -- Endstellung
+U "E1_1" E1.1 -- N Auslöseschalter
+L S5T#2S
+SE "T 16" T16 -- Kontr.Auslöseschalter Dauermeldung
+U "T 16" T16 -- Kontr.Auslöseschalter Dauermeldung
+S "F42 E1.1nw" M104.2 -- Auslöseschalter Dauermelung
+*)
+//SE == TON
+
+GVL.tonAusloesDauermld(IN := VAT.bEndstellung AND IO.inAusloeseSchalter, PT := T#2S);
+IF GVL.tonAusloesDauermld.Q THEN
+	GVL.errs.AusloesSchaltDauerMldg := TRUE;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_AusloeseschalterDauermeldung">
+      <LineId Id="7" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="9" Count="5" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="32" Count="2" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="20" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

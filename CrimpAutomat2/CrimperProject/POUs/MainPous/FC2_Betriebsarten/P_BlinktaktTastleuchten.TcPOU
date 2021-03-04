@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_BlinktaktTastleuchten" Id="{6c5c6349-eff9-41a1-a3a1-4d2d046f67d0}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BlinktaktTastleuchten
+VAR
+	//locByte0 : BYTE;
+	blink:FB_MY_BLINK;
+	blinkOld:BOOL := FALSE;
+	b1HzOld:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 3 Blinktakt Tastleuchten - OK *)
+
+//125 ms sind 8 Hz, mal sehen, ob ich die überhaupt brauche
+blink(bEn := TRUE, udiTiOn_ms := 62, udiTiOff_ms := 63);
+
+VAT.b1HzFlanke := FALSE;
+
+IF blink.bQ <> blinkOld THEN
+		
+	VAT.byBlinkTakt := VAT.byBlinkTakt + 1;
+	
+	IO.outMldTasteStart :=	VAT.byBlinkTakt.0 AND // 8-Hz Blinktakt
+							VAT.byBlinkTakt.1 AND // 4-Hz Blinktakt
+							VAT.byBlinkTakt.2 AND // 2-Hz Blinktakt
+							VAT.bEinzelSchritt
+						 OR
+							VAT.bSrStart AND
+							NOT VAT.bSammelStoerung;
+	
+							
+							
+							
+	IF b1HzOld <> VAT.byBlinkTakt.3 THEN
+		VAT.b1HzFlanke := VAT.byBlinkTakt.3; //todo noch keine flanke
+	END_IF	
+	b1HzOld := VAT.byBlinkTakt.3;
+
+	IF DB6.diStueck_Vorwahl > DB6.diStueck_Fertig THEN
+		DB6.diStueck_Noch := DB6.diStueck_Vorwahl - DB6.diStueck_Fertig;
+	END_IF						
+END_IF
+
+blinkOld := blink.bQ;
+
+//IO.outResA1_2 := VAT.b1HzFlanke;
+
+
+IF NOT VAT.b1HzFlanke THEN
+	RETURN;
+END_IF
+
+//Verl. 5 Minuten für Betriebstunden-Zähler, todo Warum?
+
+ 
+
+
+(*
+	
+		(*
+			L 0
+			T "MB 5" MB5 -- +F Blinktakt-Generator
+		*)	
+		VAT.M5 := 0;	
+		(*	
+			U "T 0" T0 -- Taktgeber
+			SPB Takt -- Springe wenn VKE = 1
+		*)	
+		IF NOT GVL.T0.Q THEN
+			(*
+				L S5T#60MS
+				SA "T 0" T0 -- Taktgeber
+				CLR
+				SA "T 0" T0 -- Taktgeber
+			*)
+			GVL.T0(IN := TRUE, PT := T#60MS);
+			(*	
+				L "MB 4" MB4 -- Blinktakt-Generator
+				T LB 0
+				INC 1
+				T "MB 4" MB4 -- Blinktakt-Generator
+				
+				L LB 0
+				INVI
+				L "MB 4" MB4 -- Blinktakt-Generator
+				UW
+				
+				T "MB 5" MB5 -- +F Blinktakt-Generator
+			*)
+			locByte0 := VAT.M4;
+			VAT.M4 := VAT.M4 + 1;
+			locByte0 := NOT locByte0;
+			VAT.M5 := locByte0 AND VAT.M4;
+			
+			(*	
+				U "M 4.0" M4.0 -- 8-Hz Blinktakt
+				U "M 4.1" M4.1 -- 4-Hz Blinktakt
+				U "M 4.2" M4.2 -- 2-Hz Blinktakt
+				U "M0_3_Tipp" M0.3 -- Einzel-Schritt
+				O "M0.6" M0.6 -- SR Start
+				UN "M0.7" M0.7 -- Störung aufgetreten (gesammelt)
+				= "A 0.0" A0.0 -- Tastleuchte Start
+			*)	
+			IO.outMldTasteStart :=	VAT.M4.0 AND // 8-Hz Blinktakt
+									VAT.M4.1 AND // 4-Hz Blinktakt
+									VAT.M4.2 AND // 2-Hz Blinktakt
+									VAT.M0.3 OR  // Einzel-Schritt   
+									VAT.M0.6 AND // SR Start
+									NOT VAT.M0.7; // Störung aufgetreten (gesammelt)
+			(*	
+				L "DB6".d64Stueck_Vorwahl DB6.DBD64 -- Stückzahl-Vorwahl Stückz
+				L "DB6".d68Stueck_Fertig DB6.DBD68 -- Fertig Stückz
+				<D -- AKKU2 kleiner als AKKU1
+				SPB Takt
+				
+				-D -- AKKU1 von AKKU2 subtrahieren
+				T "DB6".d72Stueck_Noch DB6.DBD72 -- Noch Stückzahl
+			*)
+			IF DB6.d64Stueck_Vorwahl > DB6.d68Stueck_Fertig THEN
+				DB6.d72Stueck_Noch := DB6.d64Stueck_Vorwahl - DB6.d68Stueck_Fertig;
+			END_IF
+		ELSE
+			GVL.T0(IN := FALSE);	
+		END_IF	//end if NOT GVL.T0.Q...
+		
+		(*	
+		Takt: BLD 130
+			U "M 5.3" M5.3 -- +F 1-Hz Blinktakt
+			SPBN bz
+		*)	
+		IF NOT VAT.M5.3 THEN
+			RETURN;
+		END_IF
+*)
+
+
+		
+(*
+	U "T 34" T34 -- Verl. 5 Minuten für Betriebstunden-Zähler
+	SPBN bz
+*)
+IF NOT GVL.tofBetrStdZaehl.Q THEN
+	RETURN;
+END_IF
+	
+(*	
+	L "DB6".d160 DB6.DBD160 -- Betriebs-Sekunden
+	+ L#1
+	T "DB6".d160 DB6.DBD160 -- Betriebs-Sekunden
+	L L#3600
+	<D -- AKKU2 kleiner als AKKU1
+	SPB bz
+*)
+	
+DB6.runTime.seconds := DB6.runTime.seconds + 1;
+IF DB6.runTime.seconds < 3600 THEN
+	RETURN;
+END_IF
+	
+(*	
+	L 0
+	T "DB6".d160 DB6.DBD160 -- Betriebs-Sekunden
+*)	
+DB6.runTime.seconds := 0;
+(*	
+	L "DB6".d164_Betriebs_St DB6.DBD164 -- Betriebs-Stunden
+	+ L#1
+	T "DB6".d164_Betriebs_St DB6.DBD164 -- Betriebs-Stunden
+*)
+DB6.runTime.hours := DB6.runTime.hours  + 1;
+(*	
+bz: BLD 130
+*)
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_BlinktaktTastleuchten">
+      <LineId Id="7" Count="0" />
+      <LineId Id="167" Count="1" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="196" Count="0" />
+      <LineId Id="178" Count="1" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="187" Count="1" />
+      <LineId Id="190" Count="3" />
+      <LineId Id="248" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="189" Count="0" />
+      <LineId Id="195" Count="0" />
+      <LineId Id="256" Count="2" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="198" Count="2" />
+      <LineId Id="197" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="201" Count="1" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="203" Count="2" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="213" Count="1" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="66" Count="2" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="69" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="17" Count="2" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="20" Count="3" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="24" Count="3" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="97" Count="1" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="29" Count="6" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="107" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="36" Count="3" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="121" Count="1" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="42" Count="3" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="127" Count="1" />
+      <LineId Id="266" Count="0" />
+      <LineId Id="273" Count="1" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="134" Count="1" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="47" Count="5" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="278" Count="3" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="284" Count="2" />
+      <LineId Id="55" Count="2" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="60" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

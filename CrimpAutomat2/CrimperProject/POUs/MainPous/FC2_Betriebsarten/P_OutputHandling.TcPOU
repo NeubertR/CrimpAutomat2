@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_OutputHandling" Id="{9f2ef360-e1da-4003-bbaf-41ab82b65912}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_OutputHandling
+VAR
+	outWordOld : WORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+	IO.outY1Ausstossen := IO.outY1Ausstossen OR DB6.frceY1Ausstossen;
+	IO.outY2KontaktVereinzelung := IO.outY2KontaktVereinzelung OR DB6.frceY2KontaktVereinzelung; //EL1809-A1.7
+	IO.outY3KontaktSchieben := IO.outY3KontaktSchieben OR DB6.frceY3KontaktSchieben; //EL1809-A1.8
+	IO.outY4CrimpEinheitVOR := IO.outY4CrimpEinheitVOR OR DB6.frceY4CrimpEinheitVOR;//EL1809-A1.9
+	IO.outY5AbisolierNachLINKS := IO.outY5AbisolierNachLINKS OR DB6.frceY5AbisolierNachLINKS;//EL1809-A1.10
+	IO.outY6AbisoliererZU := IO.outY6AbisoliererZU OR DB6.frceY6AbisoliererZU; //EL1809-A1.11
+	IO.outY7AbfallRUNTER := IO.outY7AbfallRUNTER OR DB6.frceY7AbfallRUNTER; //EL1809-A1.12
+	IO.outY8AbisoliererRUECK := IO.outY8AbisoliererRUECK OR DB6.frceY8AbisoliererRUECK; //EL1809-A1.13
+	IO.outY9CrimperZU := IO.outY9CrimperZU OR DB6.frceY9CrimperZU; //EL1809-A1.14
+	IO.outY10DrahthaltFuehrungZU := IO.outY10DrahthaltFuehrungZU OR DB6.frceY10DrahthaltFuehrungZU; //EL1809-A1.15
+	IO.outY11SortierLuft := IO.outY11SortierLuft OR DB6.frceY11SortierLuft; //EL1809-A1.5
+	
+	IO.outWord0 :=
+		
+	SHL(BOOL_TO_WORD(IO.outY11SortierLuft		), 5) + //EL1809-A1.5
+	SHL(BOOL_TO_WORD(IO.outY1Ausstossen			), 6) + //EL1809-A1.6
+	SHL(BOOL_TO_WORD(IO.outY2KontaktVereinzelung), 7) + //EL1809-A1.7
+	SHL(BOOL_TO_WORD(IO.outY3KontaktSchieben	), 8) + //EL1809-A1.8
+	SHL(BOOL_TO_WORD(IO.outY4CrimpEinheitVOR	), 9) + //EL1809-A1.9
+	SHL(BOOL_TO_WORD(IO.outY5AbisolierNachLINKS	), 10) + //EL1809-A1.10
+	SHL(BOOL_TO_WORD(IO.outY6AbisoliererZU		), 11) + //EL1809-A1.11
+	SHL(BOOL_TO_WORD(IO.outY7AbfallRUNTER		), 12) + //EL1809-A1.12
+	SHL(BOOL_TO_WORD(IO.outY8AbisoliererRUECK	), 13) + //EL1809-A1.13
+	SHL(BOOL_TO_WORD(IO.outY9CrimperZU			), 14) + //EL1809-A1.14
+	SHL(BOOL_TO_WORD(IO.outY10DrahthaltFuehrungZU),15); //EL1809-A1.15
+	
+	
+	IF outWordOld <> IO.outWord0 THEN
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= '--------',errNo := 16#FFFFFFFF);
+		//MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y11SortierLuft', errNo:= BOOL_TO_UDINT(IO.outY11SortierLuft));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y1Ausstossen', errNo:= BOOL_TO_UDINT(IO.outY1Ausstossen));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y2KontaktVereinzelung', errNo:= BOOL_TO_UDINT(IO.outY2KontaktVereinzelung));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y3KontaktSchieben', errNo:= BOOL_TO_UDINT(IO.outY3KontaktSchieben));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y4CrimpEinheitVOR', errNo:= BOOL_TO_UDINT(IO.outY4CrimpEinheitVOR));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y5AbisolierNachLINKS', errNo:= BOOL_TO_UDINT(IO.outY5AbisolierNachLINKS));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y6AbisoliererZU', errNo:= BOOL_TO_UDINT(IO.outY6AbisoliererZU));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y7AbfallRUNTER', errNo:= BOOL_TO_UDINT(IO.outY7AbfallRUNTER));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y8AbisoliererRUECK', errNo:= BOOL_TO_UDINT(IO.outY8AbisoliererRUECK));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y9CrimperZU', errNo:= BOOL_TO_UDINT(IO.outY9CrimperZU));
+		MAIN.M_Log(reqLevel:=CVL.TRACE, objectName:= 'OUT', sMsg:= 'Y10DrahthaltFuehrungZU', errNo:= BOOL_TO_UDINT(IO.outY10DrahthaltFuehrungZU));
+	
+	END_IF
+
+outWordOld := IO.outWord0;
+	]]></ST>
+    </Implementation>
+    <LineIds Name="P_OutputHandling">
+      <LineId Id="6" Count="9" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="35" Count="9" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="74" Count="9" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="27" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Vereinzelung" Id="{8206bc55-f6ee-4400-b8fa-8c0d2e50a3be}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Vereinzelung : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	rtrM24_1 : R_TRIG;
+	bTmp : BOOL;
+	
+	svTrg17:R_TRIG;
+	svMerker17 : BOOL; //todo: evtl. nach oben in das PRG bubblen lassen.
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 2 Vereinzelung *)
+
+(*
+U "M 14.0" M14.0 -- A55 Kontakt nicht gefallen
+U "T 3" T3 -- Fehler-Kontr.Maschine (keine Bewegung)
+U "M 82.5" M82.5 -- +F E2.5 Magazin gefüllt
+S "M 23.3" M23.3 -- S&R 2ter Vereinzelungs-Versuch
+*)
+bTmp := VAT.bA55KontaktNichtGefallen AND GVL.tonFehlerKontrMaschine.Q AND VAT.bFlankeMagazGefuellt;
+IF bTmp THEN
+	VAT.bSr2terVereinzVersuch := TRUE;
+END_IF
+
+(*
+U "M 23.3" M23.3 -- S&R 2ter Vereinzelungs-Versuch
+L S5T#300MS
+SE "T 21" T21 -- Verz. 2ter Vereinzelungs-Versuch
+*)
+GVL.ton2terVersuch(IN := VAT.bSr2terVereinzVersuch, PT := T#300MS); // war T21
+
+(*
+U "T 21" T21 -- Verz. 2ter Vereinzelungs-Versuch
+FP "M 24.1" M24.1 -- Positive Flanke, Zuw.v.T21 2ter Vereinzelungs-Versuch
+= "M 24.2" M24.2 -- +F 2ter Vereinzelungs-Versuch
+*)
+//M24.1 ist offensichtlich der Arbeits-Speicher für den Trigger..., Seite 1-28 AWL_d.pdf
+rtrM24_1(Clk := GVL.ton2terVersuch.Q);
+VAT.bFlk2terVersuch := rtrM24_1.Q;
+
+(*
+U "M 21.7" M21.7 -- Kontakt-Anforderung
+UN "M 24.2" M24.2 -- +F 2ter Vereinzelungs-Versuch
+L S5T#300MS
+SV "T 17" T17 -- Vereinzelungs-Zeit, Zeit als Zeit mit verlängertem Impuls starten
+*)
+
+//Zeit als Zeit mit verlängertem Impuls TSV
+GVL.tsvVereinzelZeit(IN := VAT.bKontaktAnforderung AND NOT VAT.bFlk2terVersuch, PT := T#300MS);
+
+(*
+O "T 17" T17 -- Vereinzelungs-Zeit
+O "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+= "A 0.7" A0.7 -- Y-2 Kontakt-Vereinzelung
+*)
+IO.outY2KontaktVereinzelung := (GVL.tsvVereinzelZeit.Q OR VAT.bTaktVereinzLeerF);
+
+(*
+U "E2_0" E2.0 -- L Kontakt gefallen
+L S5T#300MS
+SE "T 18" T18 -- Verz.v. E2.0 Kontakt gefallen (SE->TON)
+*)
+
+//NBT: Warum und so lange??? War 300ms
+GVL.tonKontaktIstGefallen(IN := GVL.insecKontaktIstGefallen, PT := T#300MS);
+(*
+U "T 18" T18 -- Verz.v. E2.0 Kontakt gefallen
+R "M 21.7" M21.7 -- Kontakt-Anforderung
+*)
+IF GVL.tonKontaktIstGefallen.Q THEN
+	VAT.bKontaktAnforderung := FALSE;
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_Vereinzelung">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="13" Count="3" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="47" Count="2" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="17" Count="2" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="57" Count="1" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="23" Count="3" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="75" Count="1" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="27" Count="2" />
+      <LineId Id="69" Count="2" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="100" Count="1" />
+      <LineId Id="98" Count="1" />
+      <LineId Id="96" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

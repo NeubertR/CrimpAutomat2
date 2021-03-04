@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="GVL" Id="{4e4e3efd-14c9-407e-b77d-db86011f331d}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	firstCycle : BOOL;	
+	
+	insecResetNotHalt			: BOOL; //result of P_InputHandling.E1_0
+	insecTasterStart 			: BOOL; //result of P_InputHandling.E1_1
+	insecDrahthalterIstOffen 	: BOOL; //result of P_InputHandling.E1_2
+	insecAusloeseSchalter		: BOOL; //result of P_InputHandling.E1_3
+	insecAbisoliererIstZU		: BOOL; //result of P_InputHandling.E1_4
+	insecAbisoliererIstVORN		: BOOL; //result of P_InputHandling.E1_5
+	insecAbisoliererIstRUECK	: BOOL; //result of P_InputHandling.E1_6
+	insecAbisoliererIstLINKS	: BOOL; //result of P_InputHandling.E1_7
+	
+	insecCrimpZangeIstZU		: BOOL; //result of P_InputHandling.E1_8
+	insecCrimpZangeIstOFFEN		: BOOL; //result of P_InputHandling.E1_9
+	insecKontaktIstGefallen		: BOOL; //result of P_InputHandling.E1_10
+	insecCrimpEinheitIstVORN	: BOOL; //result of P_InputHandling.E1_11
+	insecCrimpEinheitIstRUECK	: BOOL; //result of P_InputHandling.E1_12
+	insecAusstossenVORN			: BOOL; //result of P_InputHandling.E1_13
+	insecKontaktSchiebenVORN	: BOOL; //result of P_InputHandling.E1_14
+	insecMagazinGEFUELLT		: BOOL; //result of P_InputHandling.E1_15
+	
+	
+	inTmpResetNotHalt			: BOOL; //result of P_InputHandling.E1_0
+	inTmpTasterStart 			: BOOL; //result of P_InputHandling.E1_1
+	inTmpDrahthalterIstOffen 	: BOOL; //result of P_InputHandling.E1_2
+	inTmpAusloeseSchalter		: BOOL; //result of P_InputHandling.E1_3
+	inTmpAbisoliererIstZU		: BOOL; //result of P_InputHandling.E1_4
+	inTmpAbisoliererIstVORN		: BOOL; //result of P_InputHandling.E1_5
+	inTmpAbisoliererIstRUECK	: BOOL; //result of P_InputHandling.E1_6
+	inTmpAbisoliererIstLINKS	: BOOL; //result of P_InputHandling.E1_7
+	
+	inTmpCrimpZangeIstZU		: BOOL; //result of P_InputHandling.E1_8
+	inTmpCrimpZangeIstOFFEN		: BOOL; //result of P_InputHandling.E1_9
+	inTmpKontaktIstGefallen		: BOOL; //result of P_InputHandling.E1_10
+	inTmpCrimpEinheitIstVORN	: BOOL; //result of P_InputHandling.E1_11
+	inTmpCrimpEinheitIstRUECK	: BOOL; //result of P_InputHandling.E1_12
+	inTmpAusstossenVORN			: BOOL; //result of P_InputHandling.E1_13
+	inTmpKontaktSchiebenVORN	: BOOL; //result of P_InputHandling.E1_14
+	inTmpMagazinGEFUELLT		: BOOL; //result of P_InputHandling.E1_15
+	
+	
+	
+	tof00Test : TOF;
+	(* ehem. T0 ersetzt durch BLINK *)
+	tonTasteStartOnErr : TON;	// (ehem. T1 SE->TON) Verzögerung Taste Start
+	//T2 Verz.v. Taste Stop, existierte im AWL-Text nicht
+	tonFehlerKontrMaschine  : TON; // (ehem. T3) Fehler-Kontr.Maschine (keine Bewegung)
+	
+	tonTasteStart : TON; // (ehem. T11) Taster-Start Verz. in F_Aufstarten(), für StörMldgLöschen
+	tonBetrAnzeigReset : TON; // (ehem. T14) Verz. Betriebs-Anzeigen-Reset
+	tonEndschalterBrueck : TON; // (ehem. T15) Verz. Endschalter-Brückung
+	tonAusloesDauermld : TON; // (ehem. T16) Kontr.Auslöseschalter Dauermeldung
+	tsvVereinzelZeit : TSV; // (ehem. T17) AWL-SV: Vereinzelungs-Zeit, Zeit mit verlängertem Impuls
+	tonKontaktIstGefallen : TON; // (ehem. T18) Verz.v. E1.10 Kontakt gefallen
+	tsvKontauswurf : TSV;	// (ehem. T19) AWL-SV: Kontaktauswurf nach Einschalten, Zeit mit verlängertem Impuls
+	
+	tofAblVerzProbelauf : TOF; 	// (ehem. T20) Ablauf-Verz.bei Probelauf
+	ton2terVersuch : TON; //(ehem. T21) Verz. 2ter Vereinzelungs-Versuch
+	tonAusstoss : TON; // (ehem. T22) Ausstoß-Verzögerung
+	tonKontaktIstZuLangeEin : TON; //NEU Fehlererzeugung für DauermeldungKontaktGefallen
+	
+	tofCrimpzangeOffen : TOF; // (ehem. T31) Verl. E1.9 Crimpzange offen
+	tofMagazGefuellt : TOF; // (ehem. T32) Verl. E1.15 Magazin gefüllt
+	tofMagazGefuellt2 : TON; // (ehem. T33) 2te Verl. T32 E1.15 Magazin gefüllt
+	
+	tofBetrStdZaehl : TOF; // (ehem. T34)  Verl. 5 Minuten für Betriebstunden-Zähler, Zeit mit Ausschaltverzögerung
+	tofMagazLeerFahr : TOF; // // (ehem. T41) Takt für Magazin leerfahren, wird 2x verwendet???
+
+	
+	tonResetNotHalt : TON; // Neu: check rote Stop-Taste
+	//tonPnozEntprell  : TON; //(ehem. T70) PNOZ ???Entprell??
+	//tofPnozSigLen : TOF; // (ehem. T71) PNOZ Signaldauer ???
+	tonSAFETYok : TON; // (ehem. T72) Verzögerung Alles Ok von PNOZ, tonOkPNOZ
+	
+	
+	tonDrahthaltOffen : TON; // (ehem. T110) Brücke EL1809-E1.2 Drahthalter offen
+	tonAbisoliererIstZU : TON; // (ehem. T112) Brücke EL1809-E1.4 Abisolierer zu
+	tonAbisoliererIstVORN : TON; // (ehem. T113) Brücke EL1809-E1.5 Abisolierer vorn
+	tonAbisoliererIstRUECK : TON; // (ehem. T114) Brücke EL1809-E1.6 Abisolierer rück (abisoliert)
+	tonAbisoliererIstLINKS : TON; // (ehem. T115) Brücke EL1809-E1.7 Abisolierer links (aus Arbeitsraum)
+	tonCrimpZangeIstZU : TON; // (ehem. T116) Brücke EL1809-E1.8 Crimpzange zu
+	tonCrimpZangeIstOFFEN : TON; // (ehem. T117) Brücke EL1809-E1.9 Crimpzange offen
+	
+	tonBrKontaktIstGefallen : TON; // (ehem. T120) Brücke EL1809-E1.10 Kontakt gefallen
+	tonCrimpEinheitIstVORN : TON; // (ehem. T121) Brücke EL1809-E1.11 Crimpeinheit vorn
+	tonKontaktSchiebenVORN : TON; // (ehem. T122) Brücke EL1809-E1.14 Kontakt-Schieben vorn
+	tonAusstossenVORN : TON; // (ehem. T123) Brücke EL1809-E1.13 Ausstoßen vorn
+	tonCrimpEinheitIstRUECK : TON; // (ehem. T124) Brücke EL1809-E1.12 Crimpeinheit rück
+	
+	bTEMP : BOOL;
+	
+	MW0 : WORD; //Bedeutung noch Unklar
+	
+	
+	
+	//MD20 : DWORD; //Bedeutung noch Unklar
+	MD80 : DWORD; // +Fs ED0, wird offensichtlich nicht verwendet!	
+		
+	
+	//MD100 : DWORD; //Bedeutung noch Unklar, irgendwas mit Störungen
+	//MD104 : DWORD; //Bedeutung noch Unklar, irgendwas mit Störungen
+	//MD108 : DWORD; //Bedeutung noch Unklar, irgendwas mit Störungen
+	//MD112 : DWORD; //Bedeutung noch Unklar, irgendwas mit Störungen
+	//MD116 : DWORD; //Bedeutung noch Unklar, irgendwas mit Störungen
+	//MD120 : DWORD; //Bedeutung noch Unklar, irgendwas mit Störungen
+	
+	BetrAnzeigeIdx : INT; // (ehem. MW14 : WORD) // enthält Betriebs-Anzeige-Bits (jetzt Index)
+	BetrAnzeigeTmp : INT;
+	TopfWert : UINT;
+	
+	SolPosErrorIdx : WORD;
+	EinzelschrittIdx : WORD;
+	
+	devSortierer : DUT_Device;
+	devDruckVentil : DUT_Device;
+	calcDev : FB_CalcXY;
+	
+	errs : DUT_Errors;
+	errsAsDword : DWORD;
+	zeigeFehler : BOOL;
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

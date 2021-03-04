@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_ResetEndSchalterFehler" Id="{5db2a59e-2fe8-4cb2-b559-7c3199861e79}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_ResetEndSchalterFehler : BOOL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GVL.errs.DrahthltNichtOffen := FALSE;
+GVL.errs.DrahthltNichtZu := FALSE;
+GVL.errs.AbisolierNichtOffen := FALSE;
+GVL.errs.AbisolierNichtZu := FALSE;
+GVL.errs.AbisolierNichtVorn := FALSE;
+GVL.errs.AbisolierNichtRueck := FALSE;
+GVL.errs.AbisolierNichtLinks := FALSE;
+GVL.errs.AbisolierNichtRechts := FALSE;
+GVL.errs.CrimpZangeNichtZu := FALSE;
+GVL.errs.CrimpZangeNichtOffen := FALSE;
+GVL.errs.CrimpeinheitNichtVorn := FALSE;
+GVL.errs.CrimpeinheitNichtRueck := FALSE;
+GVL.errs.KontaktSchiebenNichtVorn := FALSE;
+GVL.errs.KontaktSchiebenNichtRueck := FALSE;
+GVL.errs.AusstossenNichtVorn := FALSE;
+GVL.errs.AusstossenNichtRueck := FALSE;
+
+GVL.errs.DoppelMlgAbisoVornRueck := FALSE;
+GVL.errs.DoppelMlgCrimpzZuOffen := FALSE;
+GVL.errs.DoppelMlgCrimpEinhVornZurueck := FALSE;]]></ST>
+    </Implementation>
+    <LineIds Name="F_ResetEndSchalterFehler">
+      <LineId Id="7" Count="15" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_FehlerAllgemein" Id="{82b7a904-a1be-42ee-894f-6421b6623774}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_FehlerAllgemein
+VAR
+	fbKontrolleEndschalter : FB_KontrolleEndschalter;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Baustein: FC3 Fehlererkennung allgemein *)
+(* Name: FEHL_ERK *)
+(* Zeitstempel Code: 19.10.2011 10:02:13 *)
+(* Interface: 09.07.2010 10:27:01 *)
+
+F_KontrollZeiten();
+
+F_Doppelmeldung(); //OK
+
+F_AusloeseschalterDauermeldung(); //noch ohne Wirkung
+
+fbKontrolleEndschalter(errorOffset := 600); //OK - 600er ID-Bereich
+
+//F_Aufstarten();
+
+F_FehlerAufgetreten();
+(*
+IF F_FehlerAufgetreten() THEN
+	F_StoerungsbitsAuswerten();
+END_IF
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="P_FehlerAllgemein">
+      <LineId Id="21" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="1" />
+      <LineId Id="35" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="RVL" Id="{d3b9362e-742c-4712-a481-acb3cc19a096}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL PERSISTENT
+	
+	e10Online : BOOL := TRUE; //ON-, OFF-line switch E1.0
+	e11Online : BOOL := TRUE;
+	e12Online : BOOL := TRUE;
+	e13Online : BOOL := TRUE;
+	e14Online : BOOL := TRUE;
+	e15Online : BOOL := TRUE;
+	e16Online : BOOL := TRUE;
+	e17Online : BOOL := TRUE;
+	
+	e18Online : BOOL := TRUE;
+	e19Online : BOOL := TRUE;
+	e110Online : BOOL := TRUE; //ON-, OFF-line switch E1.10
+	e111Online : BOOL := TRUE;
+	e112Online : BOOL := TRUE;
+	e113Online : BOOL := TRUE;
+	e114Online : BOOL := TRUE;
+	e115Online : BOOL := TRUE;
+	
+	e10OffMode : BOOL := FALSE; //Low-, High-switch for Offline mode E1.0
+	e11OffMode : BOOL := FALSE;
+	e12OffMode : BOOL := FALSE;
+	e13OffMode : BOOL := FALSE;
+	e14OffMode : BOOL := FALSE;
+	e15OffMode : BOOL := FALSE;
+	e16OffMode : BOOL := FALSE;
+	e17OffMode : BOOL := FALSE;
+		
+	e18OffMode : BOOL := FALSE;
+	e19OffMode : BOOL := FALSE;
+	e110OffMode : BOOL := FALSE; //Low-, High-switch for Offline mode E1.10
+	e111OffMode : BOOL := FALSE;
+	e112OffMode : BOOL := FALSE;
+	e113OffMode : BOOL := FALSE;
+	e114OffMode : BOOL := FALSE;
+	e115OffMode : BOOL := FALSE;
+
+	
+	currLogLevel : WORD := 0;
+	currLanguage : STRING(10);
+	
+	
+	//sBr: Sensor Brücke TRUE = eingeschalet, Sensor überbrückt
+	sBrDrahthalterIstOffen 		: BOOL; //Brücke für: EL1809-E1.2
+	sBrAusloeseSchalter			: BOOL; //Brücke für: EL1809-E1.3
+	sBrAbisoliererIstZU			: BOOL; //Brücke für: EL1809-E1.4
+	sBrAbisoliererIstVORN		: BOOL; //Brücke für: EL1809-E1.5
+	sBrAbisoliererIstRUECK		: BOOL; //Brücke für: EL1809-E1.6
+	sBrAbisoliererIstLINKS		: BOOL; //Brücke für: EL1809-E1.7
+	
+	sBrCrimpZangeIstZU			: BOOL; //Brücke für: EL1809-E1.8
+	sBrCrimpZangeIstOFFEN		: BOOL; //Brücke für: EL1809-E1.9
+	sBrKontaktIstGefallen		: BOOL; //Brücke für: EL1809-E1.10
+	sBrCrimpEinheitIstVORN		: BOOL; //Brücke für: EL1809-E1.11
+	sBrCrimpEinheitIstRUECK		: BOOL; //Brücke für: EL1809-E1.12
+	sBrAusstossenVORN			: BOOL; //Brücke für: EL1809-E1.13
+	sBrKontaktSchiebenVORN		: BOOL; //Brücke für: EL1809-E1.14
+	sBrMagazinGEFUELLT			: BOOL; //Brücke für: EL1809-E1.15
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Leerfahren" Id="{6b9ade98-69de-4b4e-8046-6d83073b01a0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Leerfahren : BOOL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 3 Leerfahren *)
+
+(*
+	O "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+	O "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+	S "M 23.1" M23.1 -- Zylinder sollen IN Leerfahrstellung
+*)	
+IF VAT.bMagazinLeerfahren OR VAT.bSortiererLeerfahren THEN
+	VAT.bZylINLeerFahrt := TRUE; //Zylinder sollen IN Leerfahrstellung
+END_IF
+
+(*	
+	UN "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+	UN "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+	U "M 23.1" M23.1 -- Zylinder sollen IN Leerfahrstellung
+	R "M 23.1" M23.1 -- Zylinder sollen IN Leerfahrstellung
+	S "M 23.2" M23.2 -- Zylinder sollen AUS Leerfahrstellung
+*)
+IF NOT VAT.bMagazinLeerfahren AND
+	NOT VAT.bSortiererLeerfahren AND
+	VAT.bZylINLeerFahrt THEN
+	
+	VAT.bZylINLeerFahrt := FALSE;
+	VAT.bZylAUSLeerFahrt := TRUE;
+END_IF
+
+(*	
+	O "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+	SPBN kl
+*)
+
+IF NOT VAT.bTaktVereinzLeerF THEN
+	RETURN;
+END_IF
+
+(*	
+	U "T 41" T41 -- Takt für Magazin leerfahren
+	SPB kl
+*)
+GVL.tofMagazLeerFahr(IN := FALSE, PT := T#500MS);
+IF GVL.tofMagazLeerFahr.Q THEN
+	RETURN;
+END_IF
+
+(*
+	L S5T#500MS
+	SA "T 41" T41 -- Takt für Magazin leerfahren
+	CLR
+	SA "T 41" T41 -- Takt für Magazin leerfahren
+	
+	UN "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+	= "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+*)
+GVL.tofMagazLeerFahr(IN := TRUE, PT := T#500MS);
+VAT.bTaktVereinzLeerF := NOT VAT.bTaktVereinzLeerF;
+
+(*
+kl: BLD 130
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="F_Leerfahren">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="14" Count="2" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="17" Count="4" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="53" Count="3" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="60" Count="1" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="27" Count="2" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="68" Count="1" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_ResetErrors" Id="{830e0505-0ad4-4dc3-a89a-7080017540af}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_ResetErrors : BOOL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//M104.0
+	GVL.errs.DrahthltNichtOffen := FALSE; //(ehem. M104.0) Drahthalter nicht offen
+	GVL.errs.DrahthltNichtZu := FALSE; //(ehem. M104.1) Drahthalter nicht zu
+	GVL.errs.AusloesSchaltDauerMldg := FALSE;//(ehem. M104.2) -- Auslöseschalter Dauermelung
+	GVL.errs.AbisolierNichtOffen  := FALSE; //(ehem. M104.3) Abisolierer nicht offen
+	GVL.errs.AbisolierNichtZu  := FALSE; //(ehem. M104.4) Abisolierer nicht zu
+	GVL.errs.DoppelMlgAbisoVornRueck  := FALSE; //(ehem. M104.5) Doppelmeldung Abisolierer vorn+rück
+	GVL.errs.AbisolierNichtVorn  := FALSE; //(ehem. M104.6) Abisolierer nicht vorn
+	GVL.errs.AbisolierNichtRueck  := FALSE; //(ehem. M104.7) Abisolierer nicht rück (abisoliert)
+	
+	//M105.0
+	GVL.errs.AbisolierNichtLinks  := FALSE; //(ehem. M105.0) Abisolierer nicht links (aus Arbeitsraum)
+	GVL.errs.AbisolierNichtRechts  := FALSE; //(ehem. M105.1) Abisolierer nicht rechts
+	GVL.errs.DoppelMlgCrimpzZuOffen  := FALSE; //(ehem. M105.2) Doppelmeldung Crimpzange zu+offen
+	GVL.errs.CrimpZangeNichtZu  := FALSE; //(ehem. M105.3) Crimpzange nicht zu
+	GVL.errs.CrimpZangeNichtOffen  := FALSE; //(ehem. M105.4) Crimpzange nicht offen
+	GVL.errs.KontaktNichtGefallen  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.DauerMlgKontaktGefallen  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.DoppelMlgCrimpEinhVornZurueck  := FALSE; //(ehem. M105.7) Doppelmeldung Crimpeinheit vorn+rück
+	
+	//M106.0
+	GVL.errs.CrimpeinheitNichtVorn  := FALSE; //(ehem. M106.0)Crimpeinheit nicht vorn
+	GVL.errs.CrimpeinheitNichtRueck  := FALSE; //(ehem. M106.1) Crimpeinheit nicht rück
+	GVL.errs.KontaktSchiebenNichtVorn  := FALSE; //(ehem. M106.2) Kontakt-Schieben nicht vorn
+	GVL.errs.KontaktSchiebenNichtRueck  := FALSE; //(ehem. M106.3) Kontakt-Schieben nicht rück
+	GVL.errs.AusstossenNichtVorn  := FALSE; //(ehem. M106.4) Ausstoßen nicht vorn
+	GVL.errs.AusstossenNichtRueck  := FALSE; //(ehem. M106.5) Ausstoßen nicht rück
+	GVL.errs.r106_6  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.WartungsZaehlErreicht := FALSE; //(ehem. M106.7) Wartungs-Zähler, hat Vorwahl erreicht
+	
+	//M107.0
+	GVL.errs.StueckZaehlErreicht := FALSE; //(ehem. M107.0 Stückzahl-Vorwahl erreicht)
+	GVL.errs.r107_1  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.r107_2  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.r107_3  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.r107_4  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.r107_5  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.r107_6  := FALSE; //Reserve, war in AWL nicht belegt
+	GVL.errs.r107_7  := FALSE; //Reserve, war in AWL nicht belegt]]></ST>
+    </Implementation>
+    <LineIds Name="F_ResetErrors">
+      <LineId Id="8" Count="37" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

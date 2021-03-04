@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_GetErrorsAsDWORD" Id="{252b440e-f64d-44dd-8962-5b1b25ec9e28}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_GetErrorsAsDWORD : DWORD
+VAR_INPUT
+	errStruct : DUT_Errors; 
+END_VAR
+VAR
+	pTmp : POINTER TO DWORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+pTmp := ADR(errStruct);
+
+
+//pTmp := ADR(errStruct.DrahthltNichtOffen); //erstes Element von err : DUT_Errors
+
+F_GetErrorsAsDWORD := pTmp^;]]></ST>
+    </Implementation>
+    <LineIds Name="F_GetErrorsAsDWORD">
+      <LineId Id="8" Count="0" />
+      <LineId Id="16" Count="2" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

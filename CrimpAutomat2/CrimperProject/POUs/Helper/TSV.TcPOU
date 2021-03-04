@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="TSV" Id="{9b44882a-5eda-4ddc-93c2-52d832530036}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TSV
+
+VAR_INPUT
+	IN : BOOL;
+	PT : TIME := T#2s;
+END_VAR
+VAR_OUTPUT
+	Q : BOOL;
+END_VAR
+VAR
+	rTrig : R_TRIG;
+	tonTime : TON;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*
+SV-Verhalten [AWL-SV gibt es in ST nicht, deshalb dieser Nachbau]:
+SV <Zeit> startet die adressierte Zeit, wenn das VKE von "0" auf "1" wechselt. Die programmierte
+Zeitdauer läuft ab, auch wenn das VKE inzwischen auf "0" wechselt. Wechselt das VKE von "0" auf
+"1", bevor die programmierte Zeit abgelaufen ist, wird die programmierte Zeitdauer neu gestartet.
+*)
+
+rTrig(CLK := IN);
+IF rTrig.Q THEN
+	tonTime(IN := FALSE, PT := PT);
+	Q := TRUE;
+END_IF
+
+tonTime(IN := Q, PT := PT);
+
+IF tonTime.Q THEN
+	Q := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="TSV">
+      <LineId Id="13" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="14" Count="2" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="30" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

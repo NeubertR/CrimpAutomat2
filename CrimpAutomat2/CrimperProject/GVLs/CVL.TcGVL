@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="CVL" Id="{c3a45ba2-6637-4b4f-99d0-6550c84546f3}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+
+(* LogLevels: 0-Nothing, 1-ErrOnly, 2-Warnings, 4-Info , 8-All *)
+ERROR:WORD:=1;
+WARNING:WORD:=2;
+INFO:WORD:=4;
+TRACE:WORD:=8;
+	
+enableIN1_2 : BOOL := TRUE; // (ehem. M11.0, insecDrahthalterIstOffen)
+
+BTN_STOP : INT := 130; // Stop-Taste im Start-Menü ??? original ??? noch klären
+
+BTRART_RESET : INT := 800; // Bertriebsarten-Reset 
+RESET_BUTTON : INT := 801; // Reset-Button
+MAGAZIN_LEER : INT := 810; // Magazin Leerfahren
+SORTIER_LEER : INT := 820; // Sortierer Leerfahren
+CRIMP_EINRICHTEN : INT := 830; //Crimpen Einrichten
+NUR_ABISOLIER : INT := 840; // Nur Abisolieren
+PROBE_OHNE_KONT : INT := 850; // Probelauf ohne Kontakt
+PROBE_OHNE_CRIMP : INT := 860; // Probelauf ohne Crimpen
+PROBE_OHNE_LITZE : INT :=870; // Probelauf ohne Litze
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

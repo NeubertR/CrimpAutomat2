@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="MAIN" Id="{3e924d03-094f-4f3e-9add-d5e64d32ee14}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	//rTrig : R_TRIG;
+	dwTmp : DWORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[P_InitOnce(); // NBT-NEU 
+
+P_GetTime(); // NBT-NEU 
+
+P_RestoreCurrentLanguage(); // NBT-NEU 
+
+P_InputHandling(); // NBT-NEU 
+
+P_TpKommunikation(); //ehem. FC4 -- OK
+
+P_Betriebsarten(); //ehem. FC2 -- OK
+
+P_Ablauf(); //ehem. FC20 -- OK -- 500er ID-Bereich
+
+P_Sortierer(); //ehem. FC24 -- OK
+
+P_FehlerAllgemein(); //ehem. FC3 -- OK -- 600er ID-Bereich
+
+P_StatusAnzeige(); //ehem. FC95
+
+//P_LetzterFC(); //ehem. FC99
+
+P_OutputHandling(); // OK
+
+P_HmiHandling(); //NBT-NEU 
+
+
+
+
+
+
+
+
+
+]]></ST>
+    </Implementation>
+    <Method Name="M_Log" Id="{83d80e76-90e5-41a8-a3c5-944026f261b4}">
+      <Declaration><![CDATA[METHOD M_Log : DINT
+VAR_INPUT
+	reqLevel : WORD; (* 0-Nothing, 1-ErrOnly, 2-Warnings, 4-Info , 8-Verbose *)
+	objectName : STRING(40);
+	sMsg	: T_MaxString;(* Message string *)
+	errNo : UDINT := 16#FFFFFFFF;
+END_VAR
+VAR
+	sTmp : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF WORD_TO_BOOL(RVL.currLogLevel AND reqLevel) = TRUE THEN
+	
+	sTmp := '[';
+	sTmp := CONCAT( sTmp, objectName);
+	sTmp := CONCAT( sTmp, '], ');
+	
+	CASE reqLevel OF
+	 1:  sTmp := CONCAT( sTmp,'[E] ');
+	 2:  sTmp := CONCAT( sTmp,'[W] ');
+	 4:  sTmp := CONCAT( sTmp,'[I] ');
+	 8:  sTmp := CONCAT( sTmp,'[T] ');
+	ELSE 
+		sTmp := CONCAT( sTmp,'[...] ');
+	END_CASE 
+
+	IF errNo <> 16#FFFFFFFF THEN
+		sMsg := CONCAT( sMsg,': ');
+		sMsg := CONCAT( sMsg, UDINT_TO_STRING(errNo));
+	END_IF
+	(*
+	{IF defined (LOG_VIA_TCP)}
+		LOG_PUSH_MSG(msg := CONCAT( sTmp, sMsg));
+	{END_IF}
+	*)
+	M_Log := ADSLOGSTR( ADSLOG_MSGTYPE_HINT OR ADSLOG_MSGTYPE_LOG, CONCAT( sTmp, '%s' ), sMsg );
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="MAIN">
+      <LineId Id="19" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="60" Count="1" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="86" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN.M_Log">
+      <LineId Id="9" Count="15" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="27" Count="2" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

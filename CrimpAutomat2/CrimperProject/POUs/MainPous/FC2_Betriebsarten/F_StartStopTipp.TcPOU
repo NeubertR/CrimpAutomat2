@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_StartStopTipp" Id="{898f9851-f761-4815-a023-6743b64b1e02}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_StartStopTipp : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	bTmp:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 4 Start, Stop, Tipp... *)
+
+(*
+U "T 19" T19 -- Kontaktauswurf nach Einschalten
+U "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+O "M 80.0" M80.0 -- +F E0.0 Taste Start
+S "M0.6" M0.6 -- SR Start -- /ER geht auf 0 !!!
+R "M1.3_Stop" M1.3 -- RS Stop StST -- /ER geht auf 0 !!!
+UN "M0.7" M0.7 -- Störung aufgetreten (gesammelt)
+= "M0.5" M0.5 -- Bedingung für Ablauf-Freigabe
+*)
+
+//VAT.bFlkTasteStart set in P_InputHandling() -- NBT-NEU
+	
+IF (GVL.tsvKontauswurf.Q AND VAT.bNurAbisolieren) OR VAT.bFlkTasteStart THEN	
+	VAT.bSrStart := TRUE;
+	VAT.bRsStop := FALSE;
+END_IF
+
+VAT.bAblaufFreigabe := NOT VAT.bSammelStoerung;
+
+(*
+O "M0_3_Tipp" M0.3 -- Einzel-Schritt
+ON "M0.5" M0.5 -- Bedingung für Ablauf-Freigabe
+O "M1.3_Stop" M1.3 -- RS Stop
+R "M0.6" M0.6 -- SR Start -- R (Rücksetze Bit) schreibt bei VKE = 1 (und MCR = 1) den Wert "0" in das adressierte Bit.
+							-- Bei MCR = 0 wird das adressierte Bit nicht verändert.
+*)
+			
+IF VAT.bEinzelSchritt OR NOT VAT.bAblaufFreigabe OR VAT.bRsStop THEN	
+	VAT.bSrStart := FALSE;
+END_IF
+
+(*							-- /ER geht auf 0 !!!
+U "M0.6" M0.6 -- SR Start
+O "M 80.0" M80.0 -- +F E0.0 Taste Start
+U "M0.5" M0.5 -- Bedingung für Ablauf-Freigabe
+= "M0.2" M0.2 -- 2te Ablauf-Freigabe
+*)
+
+
+VAT.bZweitAblaufFreig := (VAT.bSrStart OR VAT.bFlkTasteStart) AND VAT.bAblaufFreigabe;
+			
+
+
+		]]></ST>
+    </Implementation>
+    <LineIds Name="F_StartStopTipp">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="15" Count="6" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="22" Count="3" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="92" Count="4" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="53" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

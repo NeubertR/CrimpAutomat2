@@ -1,0 +1,929 @@
+﻿<div id="SensorBruecken" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="800" data-tchmi-height="640">
+
+<div id="gridMainSensorBrueck" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 5.0,
+    "heightUnit": "%",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  },
+  {
+    "height": 95.0,
+    "heightUnit": "%",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="bridSensorBrUnten" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 50.0,
+    "widthUnit": "%",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  },
+  {
+    "width": 50.0,
+    "widthUnit": "%",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="gridSensBrck_E1-2" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div id="colQuSensBrck_E1-3" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecDrahthalterIstOffen%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.2 Drahthalter offen%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrDrahthalterIstOffen%/s%">
+
+
+
+</div>
+
+</div>
+
+<div id="gridSensBrck_E1-3" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="14" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="colQuSensBrck_E1-3_1" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecAusloeseSchalter%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.3 Auslöseschalter%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrAusloeseSchalter%/s%">
+
+
+
+</div>
+
+</div>
+
+<div id="gridSensBrck_E1-4" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="28" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="colQuSensBrck_E1-4" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecAbisoliererIstZU%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="12.1" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.4 Abisolierer zu%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrAbisoliererIstZU%/s%">
+
+
+
+</div>
+
+</div>
+
+<div id="gridSensBrck_E1-5" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="42" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="colQuSensBrck_E1-5" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecAbisoliererIstVORN%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="12.1" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+
+
+</div>
+
+<div id="TcHmiToggleSwitch__E1-5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.5 Abisolierer vorn%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrAbisoliererIstVORN%/s%">
+
+
+
+</div>
+
+</div>
+
+<div id="gridSensBrck_E1-6" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="56" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="colQuSensBrck_E1-6" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecAbisoliererIstRUECK%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="12.1" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.6 Abisolierer rück%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrAbisoliererIstRUECK%/s%">
+
+
+
+</div>
+
+</div>
+
+<div id="gridSensBrck_E1-7" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="70" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="colQuSensBrck_E1-7" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecAbisoliererIstLINKS%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="12.1" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.7 Abisolierer links%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrAbisoliererIstLINKS%/s%">
+
+
+
+</div>
+
+</div>
+
+<div id="gridSensBrck_E1-8" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="84" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+
+
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="colQuSensBrck_E1-8" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecCrimpZangeIstZU%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="12.1" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.8 CrimpZange zu%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrCrimpZangeIstZU%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-9" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_2" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecCrimpZangeIstOFFEN%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.9 CrimpZange offen%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrCrimpZangeIstOFFEN%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-10" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="14" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_3" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecKontaktIstGefallen%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.10 Kontakt gefallen%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrKontaktIstGefallen%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-11" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="28" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_4" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecCrimpEinheitIstVORN%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.11 Crimpeinheit vorn%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrCrimpZangeIstOFFEN%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-12" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="42" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_5" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecCrimpEinheitIstRUECK%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.12 Crimpeinheit rück%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrCrimpEinheitIstRUECK%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-13" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="56" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_6" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecAusstossenVORN%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.13 Ausstoßen vorn%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrAusstossenVORN%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-14" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="70" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_7" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecKontaktSchiebenVORN%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.14 Kontakt schieben vorn%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrKontaktSchiebenVORN%/s%">
+
+
+
+</div>
+
+</div>
+
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="1" id="gridSensBrck_E1-15" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="14" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="84" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "width": 1,
+    "widthUnit": "factor",
+    "widthMode": "Value",
+    "maxWidthUnit": "px",
+    "minWidthUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+
+<div id="colQuSensBrck_E1-3_8" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="70" data-tchmi-height-unit="%" data-tchmi-left="3" data-tchmi-left-unit="%" data-tchmi-status="%s%PLC1.GVL.insecCrimpZangeIstOFFEN%/s%" data-tchmi-target-user-control="UserControl/ColorQuader.usercontrol" data-tchmi-top="15" data-tchmi-top-unit="%" data-tchmi-width="14" data-tchmi-width-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-colordefault" type="application/json">
+{
+  "color": "None"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-coloractiv" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(54, 168, 54, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(3, 215, 3, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+
+</div>
+
+<div id="TcHmiToggleSwitch_E1-2_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-height="50" data-tchmi-height-unit="%" data-tchmi-left="20" data-tchmi-left-unit="%" data-tchmi-text="%l%E1.15 Magazin gefüllt%/l%" data-tchmi-top="25" data-tchmi-top-unit="%" data-tchmi-width="77" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-state-symbol="%s%PLC1.RVL.sBrMagazinGEFUELLT%/s%">
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<div id="TcHmiRectangle" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-width-mode="Value" data-tchmi-height-mode="Value">
+
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(222, 213, 23, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(225, 255, 0, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+</div>
+
+</div>
+
+</div>

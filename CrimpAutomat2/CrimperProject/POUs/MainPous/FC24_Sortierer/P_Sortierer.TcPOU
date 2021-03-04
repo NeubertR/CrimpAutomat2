@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_Sortierer" Id="{65b34c3b-6004-40b5-a999-e2ce64598a68}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Sortierer
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* 
+Baustein: FC24 Sortierer
+Zeitstempel Code: 25.06.2018 11:16:45
+Interface: 27.09.2011 10:59:21
+*)
+
+F_Sortierer(); //OK
+
+F_Vereinzelung(); //SV noch den block verwenden
+
+F_Leerfahren(); //OK]]></ST>
+    </Implementation>
+    <LineIds Name="P_Sortierer">
+      <LineId Id="9" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

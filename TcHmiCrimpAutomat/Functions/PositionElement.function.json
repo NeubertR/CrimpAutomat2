@@ -1,0 +1,66 @@
+﻿{
+  "function": {
+    "name": "PositionElement",
+    "namespace": "TcHmi.Functions.TcHmiProject1",
+    "displayName": "PositionElement",
+    "description": "Position the destination element besids the source element.",
+    "waitMode": "Synchronous",
+    "category": "",
+    "returnValue": {
+      "type": "tchmi:general#/definitions/String"
+    },
+    "visible": true,
+    "injectContextObject": false,
+    "arguments": [
+      {
+        "name": "SourceElement",
+        "displayName": "SourceElement",
+        "type": "tchmi:general#/definitions/Object",
+        "description": "Source element for the position.",
+        "defaultValue": "",
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": false,
+        "allowControlAttributeBindingOptions": false
+      },
+      {
+        "name": "DestElement",
+        "displayName": "DestElement",
+        "type": "tchmi:general#/definitions/Object",
+        "description": "Destination element to set the position.",
+        "defaultValue": "",
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": false,
+        "allowControlAttributeBindingOptions": false
+      },
+      {
+        "name": "PosArea",
+        "displayName": "PosArea",
+        "type": "tchmi:general#/definitions/Object",
+        "description": "Area for positioning, to set borders, if \"Null\" then complete window is for positioning",
+        "defaultValue": "",
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": false,
+        "allowControlAttributeBindingOptions": false
+      },
+      {
+        "name": "AutoRezise",
+        "displayName": "AutoRezise",
+        "type": "tchmi:general#/definitions/BOOL",
+        "description": "Enable auto resize mode, min max has to be set in destination element.",
+        "defaultValue": false,
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": false,
+        "allowControlAttributeBindingOptions": false
+      }
+    ]
+  },
+  "$schema": "../.hmiframework/Schema/FunctionDescription.Schema.json"
+}

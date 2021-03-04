@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_LetzterFC" Id="{4c91bd8f-46c5-45d3-b84f-f53d1eff0b50}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_LetzterFC
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 1 *)
+(*
+TMD 40
+TDB6.DBD 60
+*)
+
+(*
+U "M0.2" M0.2 -- 2te Ablauf-Freigabe
+= A 0.4
+U "M 3.0" M3.0 -- Alles in Sollposition
+= A 0.5
+*)
+
+//physische Ausgänge eintragen...
+// A0.4 := VAT0.M0.2;
+// A0.5 := VAT0.M0.3;
+
+(* Netzwerk: 2 *)
+
+(*
+BEA -- Bausteinende absolut !!! ??? !!! Nur Test ?
+U "E1_4" E1.4 -- R Abisolierer rück (abisoliert)
+= A 0.4
+NOT
+= A 0.5
+U "E1_5" E1.5 -- R Abisolierer links (aus Arbeitsraum)
+= "A 0.6" A0.6 -- Y-1 Ausstoßen
+NOT
+= "A 0.7" A0.7 -- Y-2 Kontakt-Vereinzelung
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="P_LetzterFC">
+      <LineId Id="5" Count="1" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="2" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="22" Count="7" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="30" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

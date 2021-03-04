@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_IncSollRuettel" Id="{e574cddf-dcb6-4bd8-939a-53a2adb08fbc}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_IncSollRuettel
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF DB6.iSortierer < 100 THEN
+	DB6.iSortierer := DB6.iSortierer + 1;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="P_IncSollRuettel">
+      <LineId Id="5" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

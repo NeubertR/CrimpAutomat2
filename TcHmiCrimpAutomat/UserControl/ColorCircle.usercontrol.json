@@ -1,0 +1,89 @@
+﻿{
+  "parameters": [
+    {
+      "name": "data-tchmi-status",
+      "displayName": "Status",
+      "visible": true,
+      "type": "tchmi:general#/definitions/BOOL",
+      "category": "User",
+      "description": "",
+      "defaultValue": false,
+      "defaultValueInternal": false,
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "Status",
+      "propertySetterName": "setStatus",
+      "propertyGetterName": "getStatus",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-colordefault",
+      "displayName": "ColorDefault",
+      "visible": true,
+      "type": "tchmi:framework#/definitions/Color",
+      "category": "User",
+      "description": "",
+      "defaultValue": {
+        "color": "None"
+      },
+      "defaultValueInternal": {
+        "color": "None"
+      },
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "ColorDefault",
+      "propertySetterName": "setColorDefault",
+      "propertyGetterName": "getColorDefault",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-coloractive",
+      "displayName": "ColorActive",
+      "visible": true,
+      "type": "tchmi:framework#/definitions/Color",
+      "category": "User",
+      "description": "",
+      "defaultValue": {
+        "angle": 0.0,
+        "stopPoints": [
+          {
+            "color": "rgba(54, 168, 54, 1)",
+            "stop": "0%"
+          },
+          {
+            "color": "rgba(3, 215, 3, 1)",
+            "stop": "100%"
+          }
+        ]
+      },
+      "defaultValueInternal": {
+        "angle": 0.0,
+        "stopPoints": [
+          {
+            "color": "rgba(54, 168, 54, 1)",
+            "stop": "0%"
+          },
+          {
+            "color": "rgba(3, 215, 3, 1)",
+            "stop": "100%"
+          }
+        ]
+      },
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "ColorActive",
+      "propertySetterName": "setColorActive",
+      "propertyGetterName": "getColorActive",
+      "refTo": ""
+    }
+  ],
+  "virtualRights": [],
+  "$schema": "../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.744.2/runtimes/native1.12-tchmi/Schema/UserControlConfig.Schema.json",
+  "description": ""
+}

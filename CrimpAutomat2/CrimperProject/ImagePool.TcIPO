@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <ImagePool Name="ImagePool" Id="{0dd67d86-8811-41f6-ae8e-e99188fce772}">
+    <XmlArchive>
+      <Data>
+        <o xml:space="preserve" t="ImagePoolObject">
+          <v n="UniqueIdGenerator">"19"</v>
+          <l n="BitmapPool" t="ArrayList" cet="ImagePoolItem">
+            <o>
+              <v n="BitmapID">"switch_off"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|C:\Users\Roland\source\repos\EL\CrimpAutomat\CrimpAutomat02\CrimpAutomat2\CrimpAutomat2\Images\switch_off.png"</v>
+              <v n="ItemID">6</v>
+            </o>
+            <o>
+              <v n="BitmapID">"switch_on"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|C:\Users\Roland\source\repos\EL\CrimpAutomat\CrimpAutomat02\CrimpAutomat2\CrimpAutomat2\Images\switch_on.png"</v>
+              <v n="ItemID">7</v>
+            </o>
+            <o>
+              <v n="BitmapID">"switch_undef"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|C:\Users\Roland\source\repos\EL\CrimpAutomat\CrimpAutomat02\CrimpAutomat2\CrimpAutomat2\Images\switch_undef.png"</v>
+              <v n="ItemID">9</v>
+            </o>
+            <o>
+              <v n="BitmapID">"switch_mid"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|C:\Users\Roland\source\repos\EL\CrimpAutomat\CrimpAutomat02\CrimpAutomat2\CrimpAutomat2\Images\switch_mid.png"</v>
+              <v n="ItemID">11</v>
+            </o>
+            <o>
+              <v n="BitmapID">"harting_logo"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|C:\Users\Roland\source\repos\EL\CrimpAutomat\CrimpAutomat02\CrimpAutomat2\CrimpAutomat2\Images\harting_logo.png"</v>
+              <v n="ItemID">13</v>
+            </o>
+            <o>
+              <v n="BitmapID">"img_modal_error"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|C:\Users\Roland\source\repos\EL\CrimpAutomat\CrimpAutomat02\CrimpAutomat2\CrimpAutomat2\Images\img_modal_error64.png"</v>
+              <v n="ItemID">15</v>
+            </o>
+            <o>
+              <v n="BitmapID">""</v>
+              <v n="FileID">""</v>
+              <v n="ItemID">17</v>
+            </o>
+          </l>
+          <v n="GuidInit">{6cb1a060-c27c-43b1-81aa-72fa99c62831}</v>
+          <v n="GuidReInit">{634bd6d4-8a58-4920-8eb3-6f4bf5e298f3}</v>
+          <v n="GuidExitX">{a36af653-24d9-47cb-9e8f-03f7c7235eb3}</v>
+          <v n="ValidIds">true</v>
+        </o>
+      </Data>
+      <TypeList>
+        <Type n="ArrayList">System.Collections.ArrayList</Type>
+        <Type n="Boolean">System.Boolean</Type>
+        <Type n="Guid">System.Guid</Type>
+        <Type n="ImagePoolItem">{215b2719-0347-4e4d-ba85-8bcd66946f66}</Type>
+        <Type n="ImagePoolObject">{bb0b9044-714e-4614-ad3e-33cbdf34d16b}</Type>
+        <Type n="Int32">System.Int32</Type>
+        <Type n="String">System.String</Type>
+      </TypeList>
+    </XmlArchive>
+  </ImagePool>
+</TcPlcObject>

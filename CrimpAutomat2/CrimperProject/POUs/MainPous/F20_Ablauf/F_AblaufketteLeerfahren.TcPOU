@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_AblaufketteLeerfahren" Id="{f167418b-9bc6-4336-b367-158ce6a6b006}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_AblaufketteLeerfahren : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 4 Ablaufkette Leerfahren oder Cripen einrichten *)
+
+//Timer muss immer durchlaufen werden. TOF kann permanent auf FALSE gelassen werden, wenn er eine Start-Flanke erhalten hat.
+GVL.tofMagazLeerFahr(IN := FALSE, PT := T#500MS);
+
+
+(*
+	U "M 22.7" M22.7 -- Endstellung
+	SPBN l0
+*)
+
+//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+IF VAT.bEndstellung THEN
+
+	(*	
+		O "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+		O "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+		O "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+		U "M 3.0" M3.0 -- Alles in Sollposition
+		SPBN l0
+		
+		S "M 22.0" M22.0 -- 0---Abisolierer nach Links Leerf-o-Ce -- S (Setze Bit) schreibt bei VKE = 1 (und MCR = 1) den Wert "1" in das adressierte Bit.
+		SPB Lend
+	*)
+
+	//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+	IF (VAT.bMagazinLeerfahren OR VAT.bSortiererLeerfahren OR VAT.bCrimpEinrichten) AND VAT.bAllesInSollPos THEN
+
+		//'Statemachine' Start:
+		VAT.bAbisoliererNachLinksLoC := TRUE; //wenn er nicht gesprungen ist, muss VKE 1 gewesen sein, dehalb stumpf TRUE.
+		RETURN;
+		
+	END_IF
+END_IF
+		
+(*
+l0: BLD 130
+
+	//*** 1---Crimpeinheit vor Leerf-ohne-Ce
+	U "M 22.0" M22.0 -- 0---Abisolierer nach Links Leerf-o-Ce
+	U "M 3.0" M3.0 -- Alles in Sollposition
+	R "M 22.0" M22.0 -- 0---Abisolierer nach Links Leerf-o-Ce
+	S "M 22.1" M22.1 -- 1---Crimpeinheit vor Leerf-o-Ce
+	SPB Lend
+*)
+	
+IF VAT.bAbisoliererNachLinksLoC AND VAT.bAllesInSollPos THEN
+	VAT.bAbisoliererNachLinksLoC := FALSE;	//M22.0
+	VAT.bCrimpEinheitVorLoC := TRUE; //M22.1
+	RETURN;
+END_IF
+	
+(*	
+	//*** 2---Vereinzelung takten od. Crimpen zu/auf Leerf-o-Ce
+	U "M 22.1" M22.1 -- 1---Crimpeinheit vor Leerf-o-Ce
+	U "M 3.0" M3.0 -- Alles in Sollposition
+	R "M 22.1" M22.1 -- 1---Crimpeinheit vor Leerf-o-Ce
+	S "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+	SPB Lend
+*)	
+	
+IF VAT.bCrimpEinheitVorLoC AND VAT.bAllesInSollPos THEN
+	VAT.bCrimpEinheitVorLoC := FALSE;	 //M22.1
+	VAT.bVereinzelungTakten := TRUE; //M22.2
+	RETURN;
+END_IF
+	
+(*	
+	U "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+	SPBN l3
+*)
+
+//SPBN -> Springe wenn VKE = 0 -> 'Springe bei FALSE' heißt 'Tu was bei TRUE'.
+IF VAT.bVereinzelungTakten THEN
+	(*	
+		U "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+		U "M 80.0" M80.0 -- +F E0.0 Taste Start
+		SPBN caz
+	*)
+	
+	IF VAT.bCrimpEinrichten AND VAT.bFlkTasteStart THEN
+		(*	
+		UN "M 22.6" M22.6 -- Crimpen zu bei Einstellen Leerf-o-Ce
+		= "M 22.6" M22.6 -- Crimpen zu bei Einstellen Leerf-o-Ce
+		*)
+		VAT.bCrimpenZuBeiEinstellen := NOT VAT.bCrimpenZuBeiEinstellen;	 //M22.6
+	END_IF 
+	
+	(*		
+	caz: O "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+		O "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+		UN "T 41" T41 -- Takt für Magazin leerfahren
+		SPBN kl
+		
+		L S5T#500MS
+		SA "T 41" T41 -- Takt für Magazin leerfahren
+		CLR
+		SA "T 41" T41 -- Takt für Magazin leerfahren
+		UN "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+		= "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+		//*** 3---Crimpeinheit rück Leerf-o-Ce
+	*)
+	IF (VAT.bMagazinLeerfahren OR VAT.bSortiererLeerfahren) AND NOT GVL.tofMagazLeerFahr.Q THEN
+		GVL.tofMagazLeerFahr(IN := TRUE, PT := T#500MS);
+		VAT.bTaktVereinzLeerF := NOT VAT.bTaktVereinzLeerF;	
+	END_IF
+	
+	(*	
+	kl: UN "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+		UN "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+		UN "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+		UN "M 23.0" M23.0 -- Takt für Vereinzelung bei Leerfahren
+		R "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+		S "M 22.3" M22.3 -- 3---Crimpeinheit rück Leerf-o-Ce
+		R "M 22.6" M22.6 -- Crimpen zu bei Einstellen Leerf-o-Ce
+		SPB Lend
+	*)	
+	
+	IF NOT VAT.bMagazinLeerfahren AND NOT VAT.bSortiererLeerfahren AND NOT VAT.bCrimpEinrichten  AND NOT VAT.bTaktVereinzLeerF THEN
+		VAT.bVereinzelungTakten := FALSE;
+		VAT.bCrimpEinheitRueckLoC := TRUE;
+		VAT.bCrimpenZuBeiEinstellen := FALSE;
+		RETURN;
+	END_IF //end of IF VAT.M22.2
+		
+END_IF // end of IF VAT.bVereinzelungTakten
+
+(*	
+l3: BLD 130
+	U "M 22.3" M22.3 -- 3---Crimpeinheit rück Leerf-o-Ce
+	U "M 3.0" M3.0 -- Alles in Sollposition
+	R "M 22.3" M22.3 -- 3---Crimpeinheit rück Leerf-o-Ce
+*)
+
+IF VAT.bCrimpEinheitRueckLoC AND VAT.bAllesInSollPos THEN
+	VAT.bCrimpEinheitRueckLoC := FALSE; //M22.3
+END_IF
+	
+(*	
+Lend: BLD 130
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="F_AblaufketteLeerfahren">
+      <LineId Id="212" Count="0" />
+      <LineId Id="406" Count="3" />
+      <LineId Id="213" Count="1" />
+      <LineId Id="216" Count="2" />
+      <LineId Id="386" Count="0" />
+      <LineId Id="385" Count="0" />
+      <LineId Id="384" Count="0" />
+      <LineId Id="387" Count="0" />
+      <LineId Id="383" Count="0" />
+      <LineId Id="219" Count="8" />
+      <LineId Id="381" Count="1" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="397" Count="0" />
+      <LineId Id="240" Count="0" />
+      <LineId Id="388" Count="0" />
+      <LineId Id="241" Count="4" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="390" Count="0" />
+      <LineId Id="250" Count="6" />
+      <LineId Id="262" Count="14" />
+      <LineId Id="282" Count="10" />
+      <LineId Id="391" Count="0" />
+      <LineId Id="293" Count="6" />
+      <LineId Id="394" Count="0" />
+      <LineId Id="300" Count="23" />
+      <LineId Id="326" Count="2" />
+      <LineId Id="330" Count="9" />
+      <LineId Id="361" Count="0" />
+      <LineId Id="365" Count="4" />
+      <LineId Id="362" Count="1" />
+      <LineId Id="346" Count="14" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

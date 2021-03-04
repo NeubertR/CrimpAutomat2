@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Doppelmeldung" Id="{c6e37c1e-2b6c-4de6-a31f-ae008768269d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Doppelmeldung : BOOL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 2 Doppelmeldung *)
+
+(*
+U "E1_3" E1.3 -- R Abisolierer vorn
+U "E1_4" E1.4 -- R Abisolierer rück (abisoliert)
+S "F45 E1.3+E1.4" M104.5 -- Doppelmeldung Abisolierer vorn+rück *)
+IF GVL.insecAbisoliererIstVORN AND GVL.insecAbisoliererIstRUECK THEN
+	GVL.errs.DoppelMlgAbisoVornRueck := TRUE;
+END_IF
+
+
+(*
+U "E1_6" E1.6 -- N Crimpzange zu
+U "E1_7" E1.7 -- R Crimpzange offen
+S "F52 E1.6+E1.7" M105.2 -- Doppelmeldung Crimpzange zu+offen
+*)
+IF GVL.insecCrimpZangeIstZU AND GVL.insecCrimpZangeIstOFFEN THEN
+	GVL.errs.DoppelMlgCrimpzZuOffen := TRUE;
+END_IF
+
+
+(*
+U "E2_1" E2.1 -- R Crimpeinheit vorn
+U "E2_4" E2.4 -- R Crimpeinheit rück
+S "F57 E2.1+E2.4" M105.7 -- Doppelmeldung Crimpeinheit vorn+rück
+*)
+IF GVL.insecCrimpEinheitIstVORN AND GVL.insecCrimpEinheitIstRUECK THEN
+	GVL.errs.DoppelMlgCrimpEinhVornZurueck := TRUE;
+END_IF
+
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_Doppelmeldung">
+      <LineId Id="7" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="9" Count="3" />
+      <LineId Id="37" Count="2" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="13" Count="2" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="40" Count="2" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="43" Count="2" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

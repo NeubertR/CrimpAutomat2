@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <DUT Name="DUT_Errors" Id="{bcc0c3d8-e756-41ca-9836-0e3587484029}">
+    <Declaration><![CDATA[TYPE DUT_Errors :
+STRUCT
+
+    //M104.0
+	DrahthltNichtOffen : BIT; //(ehem. M104.0) Drahthalter nicht offen, BetrAnzeigeListe.ID 600
+	DrahthltNichtZu : BIT; //(ehem. M104.1) Drahthalter nicht zu, BetrAnzeigeListe.ID 601
+	AusloesSchaltDauerMldg: BIT;//(ehem. M104.2) -- Auslöseschalter Dauermelung, BetrAnzeigeListe.ID 602
+	AbisolierNichtOffen : BIT; //(ehem. M104.3) Abisolierer nicht offen, BetrAnzeigeListe.ID 603
+	AbisolierNichtZu : BIT; //(ehem. M104.4) Abisolierer nicht zu, BetrAnzeigeListe.ID 604
+	DoppelMlgAbisoVornRueck : BIT; //(ehem. M104.5) Doppelmeldung Abisolierer vorn+rück, BetrAnzeigeListe.ID 605
+	AbisolierNichtVorn : BIT; //(ehem. M104.6) Abisolierer nicht vorn, BetrAnzeigeListe.ID 606
+	AbisolierNichtRueck : BIT; //(ehem. M104.7) Abisolierer nicht rück (abisoliert), BetrAnzeigeListe.ID 607
+	
+	//M105.0
+	AbisolierNichtLinks : BIT; //(ehem. M105.0) Abisolierer nicht links (aus Arbeitsraum) , BetrAnzeigeListe.ID 608
+	AbisolierNichtRechts : BIT; //(ehem. M105.1) Abisolierer nicht rechts, BetrAnzeigeListe.ID 609
+	DoppelMlgCrimpzZuOffen : BIT; //(ehem. M105.2) Doppelmeldung Crimpzange zu+offen, BetrAnzeigeListe.ID 610
+	CrimpZangeNichtZu : BIT; //(ehem. M105.3) Crimpzange nicht zu, BetrAnzeigeListe.ID 611
+	CrimpZangeNichtOffen : BIT; //(ehem. M105.4) Crimpzange nicht offen, BetrAnzeigeListe.ID 612
+	KontaktNichtGefallen : BIT; //(ehem. M105.5) !! nur xls File !!, BetrAnzeigeListe.ID 613
+	DauerMlgKontaktGefallen : BIT; //(ehem. 105.6) !! nur xls File !!, BetrAnzeigeListe.ID 614
+	DoppelMlgCrimpEinhVornZurueck : BIT; //(ehem. M105.7) Doppelmeldung Crimpeinheit vorn+rück, BetrAnzeigeListe.ID 615
+	
+	//M106.0
+	CrimpeinheitNichtVorn : BIT; //(ehem. M106.0)Crimpeinheit nicht vorn, BetrAnzeigeListe.ID 616
+	CrimpeinheitNichtRueck : BIT; //(ehem. M106.1) Crimpeinheit nicht rück, BetrAnzeigeListe.ID 617
+	KontaktSchiebenNichtVorn : BIT; //(ehem. M106.2) Kontakt-Schieben nicht vorn, BetrAnzeigeListe.ID 618
+	KontaktSchiebenNichtRueck : BIT; //(ehem. M106.3) Kontakt-Schieben nicht rück, BetrAnzeigeListe.ID 619
+	AusstossenNichtVorn : BIT; //(ehem. M106.4) Ausstoßen nicht vorn, BetrAnzeigeListe.ID 620
+	AusstossenNichtRueck : BIT; //(ehem. M106.5) Ausstoßen nicht rück, BetrAnzeigeListe.ID 621
+	r106_6 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 622
+	WartungsZaehlErreicht : BIT; //(ehem. M106.7) Wartungs-Zähler, hat Vorwahl eicht, BetrAnzeigeListe.ID 623
+	
+	//M107.0
+	StueckZaehlErreicht : BIT; //(ehem. M107.0 Stückzahl-Vorwahl eicht), BetrAnzeigeListe.ID 624
+	r107_1 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 625 
+	r107_2 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 626
+	r107_3 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 627
+	r107_4 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 628
+	r107_5 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 629
+	r107_6 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 630
+	r107_7 : BIT; //Reserve, war in AWL nicht belegt, BetrAnzeigeListe.ID 631   
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

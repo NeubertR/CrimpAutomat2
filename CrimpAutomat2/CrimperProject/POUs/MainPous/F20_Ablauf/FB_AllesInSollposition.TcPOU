@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="FB_AllesInSollposition" Id="{06a7d7a3-5ffe-4501-94d6-cb6b6faa14be}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AllesInSollposition
+VAR_INPUT
+	errorOffset : WORD := 0;
+END_VAR
+	
+VAR_OUTPUT
+	bError : BOOL;
+	nErrNo : WORD;
+	bErrMute : BOOL;
+END_VAR
+
+VAR
+	fehlerBlocker : TSV;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 1 Alles in Sollposition *)
+nErrNo := 0;
+bError := TRUE;
+(*
+
+UN "A 0.6" A0.6 -- Y-1 Ausstoßen
+UN "E2_3" E2.3 -- R Ausstoßen vorn
+O
+U "A 0.6" A0.6 -- Y-1 Ausstoßen
+U "E2_3" E2.3 -- R Ausstoßen vorn
+= "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//VAT0.M3.0 := (NOT IO.a06Ausstossen AND NOT IO.e23AusstossenVorn) OR
+//			(IO.a06Ausstossen AND IO.e23AusstossenVorn);
+
+VAT.bAllesInSollPos	:=	(NOT IO.outY1Ausstossen AND NOT GVL.insecAusstossenVORN) OR
+						(IO.outY1Ausstossen AND GVL.insecAusstossenVORN);	
+			
+			
+			
+(*
+UN "A 1.0" A1.0 -- Y-3 Kontakt-Schieben
+U "E2_2" E2.2 -- R Kontakt-Schieben vorn
+R "M 3.0" M3.0 -- (Rücksetzen, wenn VKE 1 ist) Alles in Sollposition
+*)
+//IF NOT IO.a10KontaktSchieben AND IO.e22KontaktSchiebenVorn THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF NOT IO.outY3KontaktSchieben AND GVL.insecKontaktSchiebenVORN THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 1;
+	M_BlockTimer();
+	RETURN;
+END_IF
+
+(*
+U "A 1.0" A1.0 -- Y-3 Kontakt-Schieben
+UN "E2_2" E2.2 -- R Kontakt-Schieben vorn
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF IO.a10KontaktSchieben AND NOT IO.e22KontaktSchiebenVorn THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF IO.outY3KontaktSchieben AND NOT GVL.insecKontaktSchiebenVORN THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 2;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+O "E2_1" E2.1 -- R Crimpeinheit vorn
+ON "E2_4" E2.4 -- R Crimpeinheit rück
+UN "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF IO.e21CrimpEinheitVorn OR NOT IO.e24CrimpeinheitRueck AND NOT IO.a11CrimpeinheitVor THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF (GVL.insecCrimpEinheitIstVORN OR NOT GVL.insecCrimpEinheitIstRUECK) AND NOT IO.outY4CrimpEinheitVOR THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 3;
+	M_BlockTimer();
+	RETURN;
+END_IF
+
+(*
+ON "E2_1" E2.1 -- R Crimpeinheit vorn
+O "E2_4" E2.4 -- R Crimpeinheit rück
+U "A 1.1" A1.1 -- Y-4 Crimpeinheit vor
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF NOT GVL.e21CrimpEinheitVorn OR IO.e24CrimpeinheitRueck AND IO.a11CrimpeinheitVor THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF (NOT GVL.insecCrimpEinheitIstVORN OR GVL.insecCrimpEinheitIstRUECK) AND IO.outY4CrimpEinheitVOR THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 4;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+U "E1_5" E1.5 -- R Abisolierer links (aus Arbeitsraum)
+UN "A 1.2" A1.2 -- Y-5 Abisolierer nach links+Abdeckung zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF IO.e15AbisoliererLinks AND NOT IO.a12AbisoliererNachLi THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF GVL.insecAbisoliererIstLINKS AND NOT IO.outY5AbisolierNachLINKS THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 5;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+UN "E1_5" E1.5 -- R Abisolierer links (aus Arbeitsraum)
+U "A 1.2" A1.2 -- Y-5 Abisolierer nach links+Abdeckung zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF NOT IO.e15AbisoliererLinks AND IO.a12AbisoliererNachLi THEN
+//VAT0.M3.0 := FALSE;
+//END_IF
+IF NOT GVL.insecAbisoliererIstLINKS AND IO.outY5AbisolierNachLINKS THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 6;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+U "E1_2" E1.2 -- N Abisolierer zu
+UN "A 1.3" A1.3 -- Y-6 Abisolierer zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF IO.e12AbisoliererZu AND NOT IO.a13AbisoliererZu THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF GVL.insecAbisoliererIstZU AND NOT IO.outY6AbisoliererZU THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 7;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+UN "E1_2" E1.2 -- N Abisolierer zu
+U "A 1.3" A1.3 -- Y-6 Abisolierer zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF NOT IO.e12AbisoliererZu AND IO.a13AbisoliererZu THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF NOT GVL.insecAbisoliererIstZU AND IO.outY6AbisoliererZU THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 8;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+ON "E1_3" E1.3 -- R Abisolierer vorn
+O "E1_4" E1.4 -- R Abisolierer rück (abisoliert)
+UN "A 1.5" A1.5 -- Y-8 Abisolierer rück
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+
+IF (NOT GVL.insecAbisoliererIstVORN OR GVL.insecAbisoliererIstRUECK) AND NOT IO.outY8AbisoliererRUECK THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 9;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+O "E1_3" E1.3 -- R Abisolierer vorn
+ON "E1_4" E1.4 -- R Abisolierer rück (abisoliert)
+U "A 1.5" A1.5 -- Y-8 Abisolierer rück
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+
+IF (GVL.insecAbisoliererIstVORN OR NOT GVL.insecAbisoliererIstRUECK) AND IO.outY8AbisoliererRUECK THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 10;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+// O E 1.6
+ON "E1_7" E1.7 -- R Crimpzange offen
+UN "A 1.6" A1.6 -- Y-9 Crimpen zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF NOT IO.e17CrimpzangeOffen AND NOT IO.a16CrimpenZu THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF NOT GVL.insecCrimpZangeIstOFFEN AND NOT IO.outY9CrimperZU THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 11;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+ON "E1_6" E1.6 -- N Crimpzange zu
+O "E1_7" E1.7 -- R Crimpzange offen
+U "A 1.6" A1.6 -- Y-9 Crimpen zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF NOT IO.e16CrimpzangeZu OR IO.e17CrimpzangeOffen AND IO.a16CrimpenZu THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF (NOT GVL.insecCrimpZangeIstZU OR GVL.insecCrimpZangeIstOFFEN) AND IO.outY9CrimperZU THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 12;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+UN "E1_0" E1.0 -- R Drahthalter offen
+UN "A 1.7" A1.7 -- Y-10 Drahthalter+Führung zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF NOT IO.e10DrahthalterOffen AND NOT IO.a17DrahthalterUndFuehrungZu THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF NOT GVL.insecDrahthalterIstOffen AND NOT IO.outY10DrahthaltFuehrungZU THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 13;
+	M_BlockTimer();
+	RETURN;
+END_IF
+(*
+U "E1_0" E1.0 -- R Drahthalter offen
+U "A 1.7" A1.7 -- Y-10 Drahthalter+Führung zu
+R "M 3.0" M3.0 -- Alles in Sollposition
+*)
+//IF IO.e10DrahthalterOffen AND IO.a17DrahthalterUndFuehrungZu THEN
+//	VAT0.M3.0 := FALSE;
+//END_IF
+IF GVL.insecDrahthalterIstOffen AND IO.outY10DrahthaltFuehrungZU THEN
+	VAT.bAllesInSollPos := FALSE;
+	nErrNo := errorOffset + 14;
+	M_BlockTimer();
+	RETURN;
+END_IF
+
+fehlerBlocker(IN := FALSE);
+bErrMute := fehlerBlocker.Q;
+bError := FALSE;
+
+]]></ST>
+    </Implementation>
+    <Method Name="M_BlockTimer" Id="{7abc3bd8-8981-48b5-b059-74facb188fba}">
+      <Declaration><![CDATA[METHOD PRIVATE M_BlockTimer : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fehlerBlocker(IN := TRUE, PT := T#800MS);
+bErrMute := fehlerBlocker.Q;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_AllesInSollposition">
+      <LineId Id="469" Count="1" />
+      <LineId Id="681" Count="0" />
+      <LineId Id="471" Count="27" />
+      <LineId Id="698" Count="0" />
+      <LineId Id="499" Count="13" />
+      <LineId Id="699" Count="0" />
+      <LineId Id="513" Count="13" />
+      <LineId Id="700" Count="0" />
+      <LineId Id="527" Count="14" />
+      <LineId Id="701" Count="0" />
+      <LineId Id="542" Count="12" />
+      <LineId Id="702" Count="0" />
+      <LineId Id="555" Count="12" />
+      <LineId Id="703" Count="0" />
+      <LineId Id="568" Count="12" />
+      <LineId Id="704" Count="0" />
+      <LineId Id="581" Count="12" />
+      <LineId Id="705" Count="0" />
+      <LineId Id="594" Count="11" />
+      <LineId Id="706" Count="0" />
+      <LineId Id="606" Count="11" />
+      <LineId Id="707" Count="0" />
+      <LineId Id="618" Count="13" />
+      <LineId Id="708" Count="0" />
+      <LineId Id="632" Count="13" />
+      <LineId Id="709" Count="0" />
+      <LineId Id="646" Count="12" />
+      <LineId Id="710" Count="0" />
+      <LineId Id="659" Count="12" />
+      <LineId Id="712" Count="0" />
+      <LineId Id="672" Count="1" />
+      <LineId Id="695" Count="0" />
+      <LineId Id="682" Count="0" />
+      <LineId Id="697" Count="0" />
+      <LineId Id="674" Count="1" />
+      <LineId Id="169" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AllesInSollposition.M_BlockTimer">
+      <LineId Id="5" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_SAFETY_AnzeigenHohePrio_Neu" Id="{f26f96e0-783d-49b9-8930-e262973b7688}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_SAFETY_AnzeigenHohePrio_Neu : BOOL (* Ehemals F_PNOZ_AnzeigenHohePrio() *)
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+GVL.tonResetNotHalt(IN := NOT IO.inResetNotHalt, PT := T#2S);
+IF GVL.tonResetNotHalt.Q THEN
+	DB6.w226_Betr_Anz_Wert := 105; //Kein Signal von Taste Maschine-Aus
+END_IF
+
+IF GVL.tonSAFETYok.Q THEN //(ehem. T72)
+	RETURN;
+END_IF
+
+DB6.w226_Betr_Anz_Wert := 127; //warte auf SAFETY-Signal...
+
+IF NOT IO.safeOutHauptLuft THEN
+		DB6.w226_Betr_Anz_Wert := 101; //Druckluft nicht ein (weiter mit Masch-Ein)
+	IF NOT IO.safeOutSchutzTueren THEN
+		DB6.w226_Betr_Anz_Wert := 102; //Schutztür nicht zu
+	ELSIF NOT IO.safeOutNotHalt THEN
+		DB6.w226_Betr_Anz_Wert := 108; //Not-Aus Steuerpult nicht OK   
+	END_IF
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_SAFETY_AnzeigenHohePrio_Neu">
+      <LineId Id="144" Count="2" />
+      <LineId Id="154" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

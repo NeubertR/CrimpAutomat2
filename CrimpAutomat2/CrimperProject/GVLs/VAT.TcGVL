@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="VAT" Id="{df1ed0c1-7b1d-4b83-9969-396cade028ab}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+	//MB5 : BYTE; // +F Blinktakt-Generator
+	//MB6 : BYTE; // kein Gebrauch, nur 0-Initialisierung
+	b00Test : BOOL := FALSE;
+	//M0 : BYTE;
+	(*
+	0.0 -- frei
+	0.1 -- frei
+	0.2 -- 2te Ablauf-Freigabe
+	0.3 -- Tipp, Einzel-Schritt
+	0.4 -- frei 
+	0.5 -- Bedingung für Ablauf-Freigabe
+	0.6 -- SR Start
+	0.7 -- Sammel-Störung
+	*)
+	bZweitAblaufFreig : BOOL; //ehem. M0.2 -- 2te Ablauf-Freigabe
+ 	bEinzelSchritt : BOOL;	//ehem. M0.3 -- Tipp, Einzel-Schritt
+	bAblaufFreigabe : BOOL; //ehem. M0.5 -- Bedingung für Ablauf-Freigabe
+	bSrStart : BOOL; 		//ehem. M0.6 -- SR Start
+	bSammelStoerung : BOOL;	//ehem. M0.7 -- Sammel-Störung
+
+	//M1 : BYTE;
+	//1.0 -- frei 
+	//1.1 -- frei
+	//1.2 -- frei
+	//1.3 -- RS Stop
+	bRsStop : BOOL; //ehem. M1.3 -- RS Stop
+	
+	//M3 : BYTE;
+	//3.0 -- Alles in Sollposition
+	//3.1 -- PNOZ old
+	//3.2 -- frei 
+	//3.3 -- frei
+	//3.4 -- frei
+	//3.5 -- frei
+	//3.6 -- frei
+	//3.7 -- frei
+	bAllesInSollPos : BOOL; //(ehem. M3.0 -- Alles in Sollposition)
+	bResetNotHalt_Old : BOOL; //(ehem. M3.1 -- PNOZ old)
+	
+	//M4 : BYTE; //Blinktakt-Generator
+	//4.0 -- 8-Hz Blinktakt
+	//4.1 -- 4-Hz Blinktakt
+	//4.2 -- 2-Hz Blinktakt
+	//4.3 -- 1-Hz Blinktakt
+	//4.4 -- 0.5-Hz Blinktakt (alle 2 sec)
+	//4.5 -- 0.25-Hz Blinktakt (alle 4 sec)
+	//4.6 -- 0.125-Hz Blinktakt (alle 8 sec)
+	//4.7 -- frei
+	
+	byBlinkTakt : BYTE := 0; //Blinktakt-Generator (ehem. M4)
+	//4.0 -- 8-Hz Blinktakt
+	//4.1 -- 4-Hz Blinktakt
+	//4.2 -- 2-Hz Blinktakt
+	//4.3 -- 1-Hz Blinktakt
+	//4.4 -- 0.5-Hz Blinktakt (alle 2 sec)
+	//4.5 -- 0.25-Hz Blinktakt (alle 4 sec)
+	//4.6 -- 0.125-Hz Blinktakt (alle 8 sec)
+	//4.7 -- frei
+		
+	//M5 : BYTE;
+	//5.0 
+	//5.1
+	//5.2
+	//5.3 -- +F 1-Hz Blinktakt
+	//5.4
+	//5.5
+	//5.6
+	//5.7
+	
+	b1HzFlanke : BOOL; //(ehem. M5.3 -- +F 1-Hz Blinktakt)
+	
+	//M6 : BYTE;
+	//6.0 -- +F Reset-Button
+	bFlkResetButton : BOOL := FALSE; //(ehem. M6.0 -- +F Reset-Button)
+	
+	
+	//M8 : BYTE; //MB8
+	//8.0	M8.0 NormalCrimp
+	//8.1	Magazin Leerfahren
+	//8.2	Sortierer Leerfahren
+	//8.3	"M8.3 CrimpEinr
+	//8.4	"M8.4 NurAbisolieren
+	//8.5	Probelauf ohne Kontakt
+	//8.6	"M8.6 ohneCrmpen
+	//8.7	"M8.7 Probelauf ohne Litze
+	
+	bNormalCrimp : BOOL; 			//(ehem. M8.0 NormalCrimp)
+	bMagazinLeerfahren : BOOL; 		//(ehem. M8.1 Magazin Leerfahren)
+	bSortiererLeerfahren : BOOL;	//(ehem. M8.2 Sortierer Leerfahren)
+	bCrimpEinrichten : BOOL; 		//(ehem. M8.3 Crimp Einrichten)
+	bNurAbisolieren : BOOL; 		//(ehem. M8.4 Nur Abisolieren)
+	bProbelOhneKontakt : BOOL;		//(ehem. M8.5 Probelauf ohne Kontakt)
+	bProbelOhneCrimpen : BOOL; 		//(ehem. M8.6 ohne Crimpen)
+	bProbelOhneLitze : BOOL; 		//(ehem. M8.7 Probelauf ohne Litze)
+	
+	//M9 : BYTE;
+	//9.0 -- mit Sortier-Blasen
+	//9.1
+	//9.2
+	//9.3 
+	//9.4
+	//9.5
+	//9.6
+	//9.7
+	bSortiererBlasen : BOOL; //(ehem. M9.0 -- mit Sortier-Blasen)
+	bSortiererBlasenAlt : BOOL;
+	sortierTextID : INT := 1000;
+	
+	//M11 : BYTE; --- RVL.sBrDrahthalterIstOffen...
+	//11.0 -- Brücke E1.0 Drahthalter offen
+	//11.1 -- Brücke E1.1 Auslöseschalter
+	//11.2 -- Brücke E1.2 Abisolierer zu
+	//11.3 -- Brücke E1.3 Abisolierer vorn
+	//11.4 -- Brücke E1.4 Abisolierer rück (abisoliert)
+	//11.5 -- Brücke E1.5 Abisolierer links (aus Arbeitsraum)
+	//11.6 -- Brücke E1.6 Crimpzange zu
+	//11.7 -- Brücke E1.7 Crimpzange offen
+	
+	// M12 : BYTE; --- RVL.sBrKontaktIstGefallen...
+	//12.0 -- Brücke E2.0 Kontakt gefallen
+	//12.1 -- Brücke E2.1 Crimpeinheit vorn
+	//12.2 -- Brücke E2.2 Kontakt-Schieben vorn
+	//12.3 -- Brücke E2.3 Ausstoßen vorn
+	//12.4 -- Brücke E2.4 Crimpeinheit rück
+	//12.5 -- Brücke E2.5 Magazin gefüllt
+	//12.6
+	//12.7
+	
+	//M14 : BYTE;
+	//14.0 -- A55 Kontakt nicht gefallen
+	//14.1
+	//14.2
+	//14.3
+	//14.4
+	//14.5
+	//14.6
+	//14.7
+	bA55KontaktNichtGefallen:BOOL; //(ehem. M14.0 A55 Kontakt nicht gefallen)
+	
+	//M20 : BYTE; //Schrittkette
+	//20.0 -- Drahthalter + Drahtführung zu
+	//20.1 -- Abisolierer zu
+	//20.2 -- Abisolierer rück
+	//20.3 -- Abisolierer nach links + Abisolierer auf
+	//20.4 -- Crimpeinheit vor
+	//20.5 -- Crimpeinheit zu
+	//20.6 -- Drahthalter + Drahtführung auf
+	//20.7 -- Crimpzange auf + Abisoliereinheit vor
+	
+	bDrahtHalterUndFuehrungZU : BOOL; //(ehem. M20.0 -- Drahthalter + Drahtführung zu)
+	bAbisoliererZU : BOOL; //(ehem. M20.1 -- Abisolierer zu )
+	bAbisoliererRUECK : BOOL; //(ehem. M20.2 -- Abisolierer rück )
+	bAbisoliererLINKSundAUF : BOOL; //(ehem. M20.3 -- Abisolierer nach links + Abisolierer auf )
+	bCrimpeinheitVOR : BOOL; //(ehem. M20.4 --Crimpeinheit vor)
+	bCrimpenZU : BOOL; //(ehem. M20.5 --Crimpeinheit zu)
+	bDrahtHalterUndFuehrungAUF : BOOL; //(ehem. M20.6 --Drahthalter + Drahtführung auf)
+	bCrZangeAUF_AisolierVOR : BOOL; //(ehem. M20.7 -- Crimpzange auf + Abisoliereinheit vor)
+	
+	
+	//M21 : BYTE;
+	//21.0  -- Ausstoßen vor
+	//21.1 -- Crimpeinheit rück
+	//21.2 -- Abisolierer nach rechts + Kontakt-Schieben rück
+	//21.3
+	//21.4
+	//21.5
+	//21.6 -- Aktueller Ablauf ohne Crimpen
+	//21.7 -- Kontakt-Anforderung
+	bAusstossenVOR : BOOL; //(ehem. M21.0 Ausstoßen vor)
+	bCrimpeinheitRUECK : BOOL; //(ehem. M21.1 Ausstoßen vor)
+	bAbisoNachRE_KontSchiebRUECK : BOOL; //(ehem. M21.2 Abisolierer nach rechts + Kontakt-Schieben rück)
+	
+	
+	bAktAblaufOhneCr : BOOL;	//(ehem. M21.6  -- Aktueller Ablauf ohne Crimpen)
+	bKontaktAnforderung : BOOL; //(ehem. M21.7  -- Kontakt-Anforderung)
+	
+	//M22 : BYTE;
+	//22.0 -- Abisolierer nach Links Leerf-o-Crimpen
+	//22.1 -- Crimpeinheit vor Leerf-o-Crimpen
+	//22.2 -- Vereinzelung takten od.Crimpen
+	//22.3 -- Crimpeinheit rück Leerf-o-Crimpen
+	//22.4 -- frei
+	//22.5 -- frei
+	//22.6 -- Crimpen beim Einstellen
+	//22.7 -- Endstellung
+	bAbisoliererNachLinksLoC : BOOL; //(ehem. M22.0 Abisolierer nach Links Leerfahren-ohne-Crimpen)
+	bCrimpEinheitVorLoC : BOOL; //(ehem. M22.1 Crimpeinheit vor Leerfahren-ohne-Crimpen)
+	bVereinzelungTakten  : BOOL; //(ehem. M22.2 takten od.Crimpen)
+	bCrimpEinheitRueckLoC : BOOL; //(ehem. M22.3 rück Leerfahren-ohne-Crimpen)
+	//frei
+	bCrimpenZuBeiEinstellen : BOOL; //(ehem. M22.6 Crimpen zu bei Einstellen Leerfahren-ohne-Crimpen)
+	bEndstellung : BOOL; //(ehem. M22.7 Endstellung)
+	
+	//M23 : BYTE;
+	//23.0 -- Takt für Vereinzelung bei Leerfahren
+	//23.1 -- Zylinder sollen IN Leerfahrstellung
+	//23.2 -- Zylinder sollen AUS Leerfahrstellung
+	//23.3 -- S&R 2ter Vereinzelungs-Versuch
+	//23.4
+	//23.5
+	//23.6
+	//23.7
+	bTaktVereinzLeerF : BOOL; //(ehem. M23.0 Takt für Vereinzelung bei Leerfahren)
+	bZylINLeerFahrt : BOOL; //(ehem. M23.1 Zylinder sollen IN Leerfahrstellung)
+	bZylAUSLeerFahrt : BOOL; //(ehem. M23.2 Zylinder sollen AUS Leerfahrstellung)
+	bSr2terVereinzVersuch : BOOL; //(ehem. M23.3 S&R 2ter Vereinzelungs-Versuch)
+	
+	//M24 : BYTE;
+	//24.0 
+	//24.1 -- Zuw.v.T21 2ter Vereinzelungs-Versuch
+	//24.2 -- +F 2ter Vereinzelungs-Versuch
+	//24.3
+	//24.4
+	//24.5
+	//24.6
+	//24.7
+	bFlk2terVersuch : BOOL; //(ehem. M24.2) +F 2ter Vereinzelungs-Versuch
+	
+	//M60 : BYTE; //MB60
+	
+	//M80 : BYTE;
+	//80.0 //+F E0.0 Taste Start
+	bFlkTasteStart : BOOL; //(ehem. M80.0) +F E0.0 Taste Start
+	bFlkTasteStop : BOOL; //NEU
+	
+	//M81 : BYTE;
+	//81.0 
+	//81.1 -- +F E1.1 Auslöseschalter
+	//81.2
+	//81.3
+	//81.4
+	//81.5
+	//81.6
+	//81.7
+	bFlankeAusloeseschalter : BOOL;  //(ehem. M81.1) +F E1.1 Auslöseschalter
+	
+	//M82 : BYTE;
+	//82.0 
+	//82.1 
+	//82.2
+	//82.3
+	//82.4
+	//82.5 -- +F E2.5 Magazin gefüllt
+	//82.6
+	//82.7
+	bFlankeMagazGefuellt : BOOL; //(ehem. M82.5) +F E2.5 Magazin gefüllt
+	
+	(*
+	
+	//M104 : BYTE;
+	//104.0 -- Drahthalter nicht offen
+	//104.1 -- Drahthalter nicht zu
+	//104.2 -- Auslöseschalter Dauermelung
+	//104.3 -- Abisolierer nicht offen
+	//104.4 -- Abisolierer nicht zu
+	//104.5 -- Doppelmeldung Abisolierer vorn+rück
+	//104.6 -- Abisolierer nicht vorn
+	//104.7 -- Abisolierer nicht rück (abisoliert)
+	errDrahthltNichtOffen : BOOL; //(ehem. M104.0) Drahthalter nicht offen
+	errDrahthltNichtZu : BOOL; //(ehem. M104.1) Drahthalter nicht zu
+	errAusloesSchaltDauerMldg: BOOL;//(ehem. M104.2) -- Auslöseschalter Dauermelung
+	errAbisolierNichtOffen : BOOL; //(ehem. M104.3) Abisolierer nicht offen
+	errAbisolierNichtZu : BOOL; //(ehem. M104.4) Abisolierer nicht zu
+	errDoppelMlgAbisoVornRueck : BOOL; //(ehem. M104.5) Doppelmeldung Abisolierer vorn+rück
+	errAbisolierNichtVorn : BOOL; //(ehem. M104.6) Abisolierer nicht vorn
+	errAbisolierNichtRueck : BOOL; //(ehem. M104.7) Abisolierer nicht rück (abisoliert)
+		
+	
+	//M105 : BYTE;
+	//105.0 -- Abisolierer nicht links (aus Arbeitsraum)
+	//105.1 -- Abisolierer nicht rechts
+	//105.2 -- Doppelmeldung Crimpzange zu+offen
+	//105.3 -- Crimpzange nicht zu
+	//105.4 -- Crimpzange nicht offen
+	//105.5 -- Kontakt nicht gefallen 
+	//105.6
+	//105.7 -- Doppelmeldung Crimpeinheit vorn+rück
+	errAbisolierNichtLinks : BOOL; //(ehem. M105.0) Abisolierer nicht links (aus Arbeitsraum)
+	errAbisolierNichtRechts : BOOL; //(ehem. M105.1) Abisolierer nicht rechts
+	errDoppelMlgCrimpzZuOffen : BOOL; //(ehem. M105.2) Doppelmeldung Crimpzange zu+offen
+	errCrimpZangeNichtZu : BOOL; //(ehem. M105.3) Crimpzange nicht zu
+	errCrimpZangeNichtOffen : BOOL; //(ehem. M105.4) Crimpzange nicht offen
+	errKontaktNichtGefallen : BOOL; //(ehem. M105.5) !! nur xls File !! --
+	errDauermeldungKontaktGefallen : BOOL; //(ehem. 105.6) !! nur xls File !! --
+	errDoppelMlgCrimpEinhVornZurueck : BOOL; //(ehem. M105.7) Doppelmeldung Crimpeinheit vorn+rück
+	
+	
+	//M106 : BYTE;
+	//106.0 -- Crimpeinheit nicht vorn
+	//106.1 -- Crimpeinheit nicht rück
+	//106.2 -- Kontakt-Schieben nicht vorn
+	//106.3 -- Kontakt-Schieben nicht rück
+	//106.4 -- Ausstoßen nicht vorn
+	//106.5 -- Ausstoßen nicht rück
+	//106.6
+	//106.7 -- Wartungs-Zähler, hat Vorwahl erreicht, weiter mit Reset
+	errCrimpeinheitNichtVorn : BOOL; //(ehem. M106.0)Crimpeinheit nicht vorn
+	errCrimpeinheitNichtRueck : BOOL; //(ehem. M106.1) Crimpeinheit nicht rück
+	errKontaktSchiebenNichtVorn : BOOL; //(ehem. M106.2) Kontakt-Schieben nicht vorn
+	errKontaktSchiebenNichtRueck : BOOL; //(ehem. M106.3) Kontakt-Schieben nicht rück
+	errAusstossenNichtVorn : BOOL; //(ehem. M106.4) Ausstoßen nicht vorn
+	errAusstossenNichtRueck : BOOL; //(ehem. M106.5) Ausstoßen nicht rück
+	//106.6
+	bWartungsZaehlErreicht : BOOL := FALSE; //(ehem. M106.7) Wartungs-Zähler, hat Vorwahl erreicht
+	
+	//M107 : BYTE;
+	//107.0 -- Stückzahl-Vorwahl erreicht
+	//107.1 -- 
+	//107.2 -- 
+	//107.3 -- 
+	//107.4 -- 
+	//107.5
+	//107.6
+	//107.7
+	bStueckZaehlErreicht : BOOL := FALSE; //(ehem. M107.0 Stückzahl-Vorwahl erreicht)
+	*)
+	aw4Sortierer : WORD;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="IO" Id="{139a58c7-9b63-4959-a049-e5d96b8fe4b5}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+	//EL1809 16xDE (-10K1)
+	inResetNotHalt				AT%I* : BOOL; //EL1809-E1.0 - roteTaste, LowAktiv
+	inStart 					AT%I* : BOOL; //EL1809-E1.1 (ehem. E0.0)
+	inDrahthalterIstOffen 		AT%I* : BOOL; //EL1809-E1.2 (ehem. E1.0)
+	inAusloeseSchalter			AT%I* : BOOL; //EL1809-E1.3 (ehem. E1.1), wenn Draht in Aufnahme
+	inAbisoliererIstZU			AT%I* : BOOL; //EL1809-E1.4 (ehem. E1.2)
+	inAbisoliererIstVORN		AT%I* : BOOL; //EL1809-E1.5 (ehem. E1.3)
+	inAbisoliererIstRUECK		AT%I* : BOOL; //EL1809-E1.6 (ehem. E1.4)
+	inAbisoliererIstLINKS		AT%I* : BOOL; //EL1809-E1.7 (ehem. E1.5)
+	
+	inCrimpZangeIstZU			AT%I* : BOOL; //EL1809-E1.8 (ehem. E1.6)
+	inCrimpZangeIstOFFEN		AT%I* : BOOL; //EL1809-E1.9 (ehem. E1.7)
+	inKontaktIstGefallen		AT%I* : BOOL; //EL1809-E1.10 (ehem. E2.0)
+	inCrimpEinheitIstVORN		AT%I* : BOOL; //EL1809-E1.11 (ehem. E2.1)
+	inCrimpEinheitIstRUECK		AT%I* : BOOL; //EL1809-E1.12 (ehem. E2.4)
+	inAusstossenVORN			AT%I* : BOOL; //EL1809-E1.13 (ehem. E2.3)
+	inKontaktSchiebenVORN		AT%I* : BOOL; //EL1809-E1.14 (ehem. E2.2)
+	inMagazinGEFUELLT			AT%I* : BOOL; //EL1809-E1.15 (ehem. E2.5)
+	
+	inWord0 					AT%I* : WORD; //Eingangswort komplett für EL1809-E1.
+	
+	
+	
+	//EL1809 16xDA (-10K4)
+	outNotHaltReset 			AT%Q* : BOOL; //EL2809-A1.0
+	//ToDo umben. 'TastleuchteStart'	
+	outMldTasteStart			AT%Q* : BOOL; //EL2809-A1.1 (ehem. A0.0),Meldeleuchte Taste Start
+	outResA1_2					AT%Q* : BOOL; //EL2809-A1.2
+	//resA1.3
+	//resA1.4
+	outY11SortierLuft 			AT%Q* : BOOL; //EL2809-A1.5  (ehem. A0.1), toDo umben. BlasLuftSortierer...
+	outY1Ausstossen 			AT%Q* : BOOL; //EL2809-A1.6  (ehem. A0.6)
+	outY2KontaktVereinzelung	AT%Q* : BOOL; //EL2809-A1.7  (ehem. A0.7)
+	outY3KontaktSchieben	 	AT%Q* : BOOL; //EL2809-A1.8  (ehem. A1.0)
+	outY4CrimpEinheitVOR	 	AT%Q* : BOOL; //EL2809-A1.9  (ehem. A1.1)
+	outY5AbisolierNachLINKS	 	AT%Q* : BOOL; //EL2809-A1.10 (ehem. A1.2)
+	outY6AbisoliererZU		 	AT%Q* : BOOL; //EL2809-A1.11 (ehem. A1.3)
+	outY7AbfallRUNTER		 	AT%Q* : BOOL; //EL2809-A1.12 (ehem. A1.4)
+	outY8AbisoliererRUECK	 	AT%Q* : BOOL; //EL2809-A1.13 (ehem. A1.5)
+	outY9CrimperZU			 	AT%Q* : BOOL; //EL2809-A1.14 (ehem. A1.6)
+	outY10DrahthaltFuehrungZU	AT%Q* : BOOL; //EL2809-A1.15 (ehem. A1.7)
+	
+	
+	//EL4122 (-10K6)
+	outSollwertRuettelTopf		AT%Q* : UINT; //EL4122-AAW1
+	//ToDo umbenennen bis in Klemme 4 outDrahthaltSchliessdrSoll
+	outSollwertDruckVentil		AT%Q* : UINT; //EL4122-AAW2 Drahthalter Schliessdruck Sollwert
+	
+	//EL2911 (-10K6.1)
+	safeInModuleFault			AT%I* : BOOL; //EL2911 In-Module-Fault
+	safeOutNotHalt				AT%I* : BOOL; //EL2911 geklonter Ausgang des Not-Halt-AND Objekts
+	safeOutSchutzTueren			AT%I* : BOOL; //EL2911 geklonter Ausgang des SchutzTueren-AND Objekts
+
+	
+	safeOutModuleFault			AT%I* : BOOL; //EL2911 Out-Module-Fault
+	safeOutHauptLuft			AT%I* : BOOL; //EL2911-OUT1
+	
+	safetyErrAcknowledge 		AT%Q* : BOOL; //
+	safetyRUN 					AT%Q* : BOOL; //EL2911 verlinkt mit dem Safety-Projekt 
+	
+	
+	outWord0 : WORD; //Ausgangswort komplett für EL2809-E1. (selbst gefüllt)
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

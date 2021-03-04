@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_Endstellung" Id="{1d30da5a-e7b8-41df-ae8c-7db2a3954361}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Endstellung : BOOL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 5 Endstellung *)
+
+(*
+UN "M 20.0" M20.0 -- 0---Drahthalter + Drahtführung zu
+UN "M 20.1" M20.1 -- 1---Abisolierer zu
+UN "M 20.2" M20.2 -- 2---Abisolierer rück (abisolieren)
+UN "M 20.3" M20.3 -- 3---Abisolierer nach links + Abisolierer auf
+UN "M 20.4" M20.4 -- 4---Crimpeinheit vor
+UN "M 20.5" M20.5 -- 5---Crimpen zu
+UN "M 20.6" M20.6 -- 6---Drahthalter + Drahtführung auf
+UN "M 20.7" M20.7 -- 7---Crimpzange auf + Abisoliereinheit vor
+
+UN "M 21.0" M21.0 -- 8---Ausstoßen vor
+UN "M 21.1" M21.1 -- 9---Crimpeinheit rück
+UN "M 21.2" M21.2 -- 10--Abisolierer nach rechts + Kontakt-Schieben rück
+
+UN "M 22.0" M22.0 -- 0---Abisolierer nach Links Leerf-o-Ce
+UN "M 22.1" M22.1 -- 1---Crimpeinheit vor Leerf-o-Ce
+UN "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+UN "M 22.3" M22.3 -- 3---Crimpeinheit rück Leerf-o-Ce
+
+= "M 22.7" M22.7 -- Endstellung
+
+*)
+
+VAT.bEndstellung := 
+	//M20.X
+	NOT VAT.bDrahtHalterUndFuehrungZU AND
+	NOT VAT.bAbisoliererZU AND
+	NOT VAT.bAbisoliererRUECK AND
+	NOT VAT.bAbisoliererLINKSundAUF AND
+	NOT VAT.bCrimpeinheitVOR AND
+	NOT VAT.bCrimpenZU AND
+	NOT VAT.bDrahtHalterUndFuehrungAUF AND
+	NOT VAT.bCrZangeAUF_AisolierVOR AND
+	//M21.X
+	NOT VAT.bAusstossenVOR AND
+	NOT VAT.bCrimpeinheitRUECK AND
+	NOT VAT.bAbisoNachRE_KontSchiebRUECK AND
+	//M22.X
+	NOT VAT.bAbisoliererNachLinksLoC AND
+	NOT VAT.bCrimpEinheitVorLoC AND
+	NOT VAT.bVereinzelungTakten AND
+	NOT VAT.bCrimpEinheitRueckLoC;
+	
+F_Endstellung := VAT.bEndstellung;]]></ST>
+    </Implementation>
+    <LineIds Name="F_Endstellung">
+      <LineId Id="8" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="12" Count="7" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="23" Count="3" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="69" Count="5" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="88" Count="3" />
+      <LineId Id="94" Count="2" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="29" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

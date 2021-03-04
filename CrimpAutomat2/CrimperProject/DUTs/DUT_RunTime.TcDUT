@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <DUT Name="DUT_RunTime" Id="{18a6887a-88b8-4ef0-ac1a-d2568c2dc006}">
+    <Declaration><![CDATA[TYPE DUT_RunTime :
+STRUCT
+	seconds:INT;
+	mins:INT;
+	hours:DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

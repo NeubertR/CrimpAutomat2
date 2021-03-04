@@ -1,0 +1,1499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <TextList Name="BetrAnzeigeListe" Id="{ae46d11a-a98c-426e-8b75-ebbdf9c4c560}">
+    <XmlArchive>
+      <Data>
+        <o xml:space="preserve" t="TextListObject">
+          <v n="UniqueIdGenerator">"0"</v>
+          <l n="TextList" t="ArrayList" cet="TextListRow">
+            <o>
+              <v n="TextID">"6"</v>
+              <v n="TextDefault">"Einzel-Schritt, Litze einführen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode: Single step,  Steps with Start button, Exit with Single step</v>
+                <v>Betriebsart: Einzelschritt, Schritte mit Taste START, Beenden mit Einzelschritt</v>
+                <v>Mode de fonctionnement : Etape individuelle, Etape avec touche Start, Terminer avec étape individuelle</v>
+                <v>Üzemmód: Egyes lépés,  lépések a Start gombbal,  Befejezés egyes lépéssel</v>
+                <v>Modalità operativa: Passo-passo,  Avanzare con START, Uscire con Passo-passo</v>
+                <v>Режим работы: Отдельный шаг,  Шаги с кнопкой Start, </v>
+                <v>Mod de operare: pas cu pas \pasi cu tasta START\ Iesire din "pas cu pas"</v>
+                <v>Modo de funcionamiento: Paso individual,  Pasos pulsando Start,  Salir con Paso individual</v>
+                <v>Tryb pracy: Pojedynczy krok,  Kroki poprzez przyscisk Start, Wyjście poprzez pojedynczy krok</v>
+                <v>作業モード:　シングルステップ, スタートボタンでステップ毎に動作, シングルステップの終了</v>
+                <v>运行模式: 步进模式, 按启动按钮步进, 通过步进退出</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"7"</v>
+              <v n="TextDefault">"Einzel-Schritt weiter mit Start"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode: Single step  Steps with Start button Exit with Single step</v>
+                <v>Betriebsart: Einzelschritt, Schritte mit Taste START, Beenden mit Einzelschritt</v>
+                <v>Mode de fonctionnement : Etape individuelle Etape avec touche Start Terminer avec étape individuelle</v>
+                <v>Üzemmód: Egyes lépés  lépések a Start gombbal  Befejezés egyes lépéssel</v>
+                <v>Modalità operativa: Passo-passo  Avanzare con START Uscire con Passo-passo</v>
+                <v>Режим работы: Отдельный шаг  Шаги с кнопкой Start </v>
+                <v>Mod de operare: pas cu pas \pasi cu tasta START\ Iesire din "pas cu pas"</v>
+                <v>Modo de funcionamiento: Paso individual  Pasos pulsando Start  Salir con Paso individual</v>
+                <v>Tryb pracy: Pojedynczy krok  Kroki poprzez przyscisk Start Wyjście poprzez pojedynczy krok</v>
+                <v>作業モード:　シングルステップ スタートボタンでステップ毎に動作 シングルステップの終了</v>
+                <v>运行模式: 步进模式 按启动按钮步进 通过步进退出</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"10"</v>
+              <v n="TextDefault">"Maschine bereit, Weiter mit Taste START"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Machine ready  Continue with START button</v>
+                <v>Maschine bereit, Weiter mit Taste START</v>
+                <v> Machine opérationnelle  Continuer avec touche START</v>
+                <v> Gép készen áll  Tovább a START gombbal</v>
+                <v>Macchina pronta Premere il tasto START per continuare</v>
+                <v>Аппарат готов  Продолжить кнопкой START</v>
+                <v>Masina pregatita\ Continua cu tasta START</v>
+                <v>Máquina preparada  Continue pulsando START</v>
+                <v>Maszyna gotowa  kontynuacja poprzez przycisk START</v>
+                <v>準備完了\スタートボタンを押してください</v>
+                <v> 设备待机  按启动按钮继续</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"11"</v>
+              <v n="TextDefault">"Maschine bereit zum Crimpen - Litze einführen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Machine ready for crimping   Insert wire</v>
+                <v>Maschine bereit zum Crimpen, Litze einführen</v>
+                <v>Machine opérationnelle pour sertissage  Introduire fil</v>
+                <v>Gép krimpelésre kész  Huzal behelyezése\</v>
+                <v>Macchina pronta per crimpare  Inserire il cavo</v>
+                <v>Машина готова к обжиму  Завести провод</v>
+                <v>Masina pregatita pentru sertizare\ Introduceti lita</v>
+                <v>Máquina preparada para engaste   Insertar cable</v>
+                <v>Maszyna gotowa do zaciskania   Wprowadzić przewód</v>
+                <v>圧着準備完了 ケーブル挿入</v>
+                <v>设备待机准备压接   送线</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"12"</v>
+              <v n="TextDefault">"Maschine im Ablauf gestoppt - Weiter mit START"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Machine stopped during process  Continue with START</v>
+                <v>Maschine im Ablauf gestoppt, Weiter mit START</v>
+                <v> Machine arrêtée en cours  Continuer avec touche START</v>
+                <v> Gép a folyamat közben megállítva  Tovább a START-tal</v>
+                <v>La macchina si è bloccata durante il processo Premere START per continuare</v>
+                <v>Остановка машины во время работы  Продолжить кнопкой START</v>
+                <v>Masina s-a oprit in timpul procesului\ Continua cu tasta START</v>
+                <v>Máquina parada durante el proceso  Continue con START</v>
+                <v>Maszyna zatrzymana w czasie procesu  kontynuacja poprzez przycisk START</v>
+                <v>機械が動作中停止しました スタートボタンを押してください</v>
+                <v> 运行中设备停止  按启动按钮继续</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"13"</v>
+              <v n="TextDefault">"nicht Crimpen zu (?)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Open crimping tool for setup Close with Start button Exit with Reset</v>
+                <v>Crimpzange zum Einrichten offen, Schließen mit Taste Start, Beenden mit Reset</v>
+                <v>Ouvrir pince à sertir pour réglage Fermer avec touche Start Terminer avec Reset</v>
+                <v>Krimpelo fogó beállításhoz nyitva  Zárás a Start gombbal  Befejezés a Reset gombbal</v>
+                <v>Apertura ganasce di crimpatura per regolazione Chiusura con pulsante START Uscire con RESET</v>
+                <v>Открыть обжимной элемент для настройки   Закрыть кнопкой Start  Выход через Reset</v>
+                <v>Cleste crimpare deschis pentru reglare\ Inchidere cu tasta START\ Incheiere cu tasta RESET</v>
+                <v>Herramienta de crimpado abierta para ajuste Cerrar pulsando Start Salir pulsando Reset</v>
+                <v>Otwarcie jednostki zaciskającej do ustawienia Zamknięcie poprzez przycisk Start Wyjście poprzez przycisk Reset</v>
+                <v>セットアップ時の圧着ツールオープン スタートボタンでクローズ/nリセッットで終了</v>
+                <v>打开压接工具来设定 按启动按钮关闭 按复位按钮退出</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"14"</v>
+              <v n="TextDefault">"Crimpen zu (?)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Crimping tool closed for testing Open with Start button Exit with Reset</v>
+                <v>Crimpzange zum Prüfen zu Öffnen mit Taste Start, Beenden mit Reset</v>
+                <v>Fermer pince à sertir pour contrôle Ouvrir avec touche Start Terminer avec Reset</v>
+                <v>Krimpelo fogó ellenorzéshez zárva  Nyitás a Start gombbal  Befejezés a Reset gombbal</v>
+                <v>Ganasce di crimpatura chiuse per test Aprire con pulsante START Uscire con RESET</v>
+                <v>Обжимной элемент закрыт для теста  Открыть кнопкой Старт Завершить с помощью Reset</v>
+                <v>Cleste crimpare inchis pentru verificare\ deschidere cu tasta START\ Incheiere  cu tasta RESET</v>
+                <v>Herramienta de crimpado cerrada para ajuste Abrir pulsando Start Salir pulsando Reset</v>
+                <v>Jednostka zaciskająca zamknięta do testowania Otwarcie maszyny poprzez przycisk Wyjście poprzez przycisk Reset</v>
+                <v>テスト時の圧着ツールクローズ スタートボタンでオープン リセットで終了</v>
+                <v>关闭压接工具来测试 按启动按钮开机 按复位按钮退出</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"15"</v>
+              <v n="TextDefault">"Bereit zum Crimpen - Litze einführen-dann Start drücken"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Machine ready for crimping  Insert wire and press Start button</v>
+                <v>Maschine bereit zum Crimpen, Litze einführen und Taste Start drücken</v>
+                <v>Machine opérationnelle pour sertissage  Introduire fil et appuyer touche Start</v>
+                <v>Gép krimpelésre kész  Huzal behelyezése\ és  nyomja meg a Start gombot</v>
+                <v>Macchina pronta per crimpare Inserire il cavo e premere il pulsante START</v>
+                <v>Машина готова к обжиму  Завести провод и  нажать кнопку Старт</v>
+                <v>Masina pregatita pentru sertizare\ Introduceti lita si \ apasa tasta START</v>
+                <v>Máquina preparada para engaste  Insertar cable y pulsar Start</v>
+                <v>Maszyna gotowa do zaciskania  Wprowadzić przewód i  nacisnąć przycisk Start</v>
+                <v>圧着準備完了 ケーブル挿入 スタートボタンを押してください</v>
+                <v>设备待机准备压接  送线  按下启动按钮</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"20"</v>
+              <v n="TextDefault">"Abisolieren einrichten - weiter mit Start"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Set up stripping unit Continue with Start Exit with Reset</v>
+                <v>Betriebsart: Abisolieren einrichten, weiter mit Start, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Régler dénudage Continuer avec Start Terminer avec Reset</v>
+                <v>Üzemmód:  Csupaszítás beállítása  tovább a Start gombbal Befejezés a Reset gombbal</v>
+                <v>Modalità operativa: Impostazione unità di spellatura Continuare con START Uscire con RESET</v>
+                <v>Режим работы: Настройка снятия изоляции  Продолжить с Start Выход с Reset</v>
+                <v>Mod de operare: reglare dezizolare\continua cu tasta START\ Incheiere cu RESET</v>
+                <v>Modo de funcionamiento: Ajustar unidad de pelado Continuar con Start Salir con Reset</v>
+                <v>Tryb pracy: Ustawianie jednostki zaciskającej Kontynuacja poprzez przycisk Start Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　ストリッピング・ユニットのセットアップ スタートして継続/リセットして終了</v>
+                <v>运行模式: 设定剥线单元  按启动按钮继续 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"21"</v>
+              <v n="TextDefault">"Magazin Leerfahren (?)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Run magazine empty Exit with Reset</v>
+                <v>Betriebsart: Magazin leerfahren, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Vider magasin Terminer avec Reset</v>
+                <v>Üzemmód:  Tároló üresre járatása Befejezés a Reset gombbal</v>
+                <v>Modalità operativa:  Svuotamento caricatore Uscire con RESET</v>
+                <v>Вид операции:  Очистить магазин Завершить с помощью Reset</v>
+                <v>Mod de operare: \ golire magazie \ Incheiere  cu tasta RESET</v>
+                <v>Modo de funcionamiento:  Ejecutar vaciado de depósito Salir con Reset</v>
+                <v>Tryb pracy:   Uruchomienie pustego magazynka Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　 マガジンが空の状態での操作 リセットで終了</v>
+                <v>运行模式:   启动料箱清空 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"22"</v>
+              <v n="TextDefault">"Sortierer Leerfahren (?)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Run sorter empty Exit with Reset</v>
+                <v>Betriebsart: Sortierer leerfahren, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Vider trieuse Terminer avec Reset</v>
+                <v>Üzemmód:  Szortírozó üresre járatása Befejezés a Reset gombbal</v>
+                <v>Modalità operativa: Scarico canale contatti Uscire con RESET</v>
+                <v>Вид операции:  Очистка сортировщика Завершить с помощью Reset</v>
+                <v>Mod de operare: \ golire sortator \ Incheiere  cu tasta RESET</v>
+                <v>Modo de funcionamiento:  Ejecutar vaciado clasificador Salir con Reset</v>
+                <v>Tryb pracy:   Uruchomienie pustego sortera Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　 ソーター空状態での操作 リセットで終了</v>
+                <v>运行模式:   运行分拣清空 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"23"</v>
+              <v n="TextDefault">"Crimpen Einrichten (?)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Set up crimping Exit with Reset</v>
+                <v>Betriebsart: Crimpzange einrichten, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Régler pince à sertir Terminer avec Reset</v>
+                <v>Üzemmód:  Krimpelo fogó beállítása Befejezés a Reset gombbal</v>
+                <v>Modalità operativa:  Regolazione crimpatura Uscire con RESET</v>
+                <v>Вид операции:  Настройка обжимного элемента Завершить с помощью Reset</v>
+                <v>Mod de operare: \ reglare cleste sertizare\ Incheiere cu tasta RESET</v>
+                <v>Modo de funcionamiento:  Ajustar engaste Salir con Reset</v>
+                <v>Tryb pracy:   Ustawienie zaciskania Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　 圧着の設定 リセットで終了</v>
+                <v>运行模式:   设定压接 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"24"</v>
+              <v n="TextDefault">"Abisolieren einrichten - Litze einführen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Set up stripping unit Insert wire Exit with Reset</v>
+                <v>Betriebsart: Abisolieren einrichten, Litze einführen, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Régler dénudage Introduire fil Terminer avec Reset</v>
+                <v>Üzemmód:  Csupaszítás beállítása Huzal behelyezése Befejezés a Reset gombbal</v>
+                <v>Modalità operativa: Impostazione unità di spellatura Inserire il cavo Uscire con RESET</v>
+                <v>Режим работы: Настройка снятия изоляции  завести провод Выход с Reset</v>
+                <v>Mod de operare: reglare dezizolare\ introducere lita\ Incheiere cu RESET</v>
+                <v>Modo de funcionamiento: Ajustar unidad de pelado Insertar cable Salir con Reset</v>
+                <v>Tryb pracy: Ustawianie jednostki zaciskającej Wprowadzić przewód Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　ストリッピング・ユニットのセットアップ ケーブルの挿入/リセットして終了</v>
+                <v>运行模式: 设定剥线单元   送线   通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"25"</v>
+              <v n="TextDefault">"Probelauf ohne Kontakt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Trial run without contact Exit with Reset</v>
+                <v>Betriebsart: Probelauf ohne Kontakt, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Marche d'essai sans contact Terminer avec Reset</v>
+                <v>Üzemmód:  Próbaüzem érintkezo nélkül Befejezés a Reset gombbal</v>
+                <v>Modalità operativa: Ciclo di prova senza contatto Uscire con RESET</v>
+                <v>Вид операции:  Пробный запуск без контактов Завершить с помощью Reset</v>
+                <v>Mod de operare: \ test fara contacte \ Incheiere  cu tasta RESET</v>
+                <v>Modo de funcionamiento:  Prueba sin contacto  Salir con Reset</v>
+                <v>Tryb pracy:   Przebieg testowy bez kontaktu Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　 コンタクトなしでのテスト操作 リセットで終了</v>
+                <v>运行模式:   试运行但不进针 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"26"</v>
+              <v n="TextDefault">"Probelauf ohne Crimpen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Trial run without crimping Exit with Reset</v>
+                <v>Betriebsart: Probelauf ohne Crimpen, Beenden mit Reset</v>
+                <v>Mode de fonctionnement :  Marche d'essai sans sertissage Terminer avec Reset</v>
+                <v>Üzemmód:  Próbaüzem krimplelés nélkül Befejezés a Reset gombbal</v>
+                <v>Modalità operativa: Ciclo di prova senza crimpatura Uscire con RESET</v>
+                <v>Вид операции:  Пробный запуск без обжима Завершить с помощью Reset</v>
+                <v>Mod de operare: \ test fara sertizare \ Incheiere  cu tasta RESET</v>
+                <v>Modo de funcionamiento:  Prueba sin engaste  Salir con Reset</v>
+                <v>Tryb pracy:   Przebieg testowy bez zaciskania Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　 圧着なしでのテスト操作 リセットで終了</v>
+                <v>运行模式:   试运行但不压接 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"27"</v>
+              <v n="TextDefault">"Probelauf ohne Litze"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Operating mode:  Trial run without wire Exit with Reset</v>
+                <v>Betriebsart: Probelauf ohne Litze Beenden, mit Reset</v>
+                <v>Mode de fonctionnement :  Marche d'essai sans fil Terminer avec Reset</v>
+                <v>Üzemmód:  Próbaüzem huzal nélkül Befejezés a Reset gombbal</v>
+                <v>Modalità operativa: Ciclo di prova senza cavo Uscire con RESET</v>
+                <v>Вид операции:  Пробный запуск без кабеля Завершить с помощью Reset</v>
+                <v>Mod de operare: \ test fara lite \ Incheiere cu tasta RESET</v>
+                <v>Modo de funcionamiento:  Prueba sin cable  Salir con Reset</v>
+                <v>Tryb pracy:   Przebieg testowy bez przewodu Wyjście poprzez przycisk Reset</v>
+                <v>作業モード:　 ケーブルなしでのテスト操作 リセットで終了</v>
+                <v>运行模式:   试运行但不进线 通过复位退出 </v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"55"</v>
+              <v n="TextDefault">"A55 Kontakt nicht gefallen"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Contact not fed E1.10 missing</v>
+                <v>Störung: Kontakt nicht gefallen E1.10 fehlt</v>
+                <v>Défaut : contact pas tombé E1.10 absent</v>
+                <v>Zavar: Érintkezo nem esett le E1.10 hiányzik</v>
+                <v>Anomalia: Contatto non in posizione E1.10 mancante</v>
+                <v>Нарушение: Контакт не загружен, E1.10 отсутствует</v>
+                <v>Defectiune: Contactul nu a cazut\ E1.10 lipseste</v>
+                <v>Error de funcionamiento: Contactos no alimentados E1.10 sin señal</v>
+                <v>Nieprawidłowość:  Kontakt niepodany E1.10 Brakuje</v>
+                <v>エラー: コンタクトが供給されていません E1.10　不明</v>
+                <v>故障: 针没有落下 E1.10 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"1000"</v>
+              <v n="TextDefault">"ohne Sortierluft"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>without sorting air</v>
+                <v>ohne Sortierluft</v>
+                <v>sans tri d'air</v>
+                <v>buborékok nélkül</v>
+                <v>senza aria</v>
+                <v>без пузырьков</v>
+                <v>fără bule</v>
+                <v>sin burbujas</v>
+                <v>bez bąbelków</v>
+                <v>空気をソートせずに</v>
+                <v>没有分拣气</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"1001"</v>
+              <v n="TextDefault">"mit Sortierluft"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>with sorting air</v>
+                <v>mit Sortierluft</v>
+                <v>avec tri de l'air</v>
+                <v>buborékokkal</v>
+                <v>con aria</v>
+                <v>с пузырьками</v>
+                <v>cu bule</v>
+                <v>con burbujas</v>
+                <v>z bąbelkami</v>
+                <v>ソートエアー付き</v>
+                <v>带分拣气</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"127"</v>
+              <v n="TextDefault">"warte auf SAFETY-Signal..."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"101"</v>
+              <v n="TextDefault">"Druckluft nicht ein"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"102"</v>
+              <v n="TextDefault">"Schutztür nicht zu"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"105"</v>
+              <v n="TextDefault">"Kein Signal von Taste Maschine-Aus"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"108"</v>
+              <v n="TextDefault">"Not-Aus Steuerpult nicht OK"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"109"</v>
+              <v n="TextDefault">"Kein SAFETY Signal"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"501"</v>
+              <v n="TextDefault">"Fehler: A1.8 "Kontakt schieben" ist aus, aber Schieber ist vorn."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"502"</v>
+              <v n="TextDefault">"Fehler: A1.8 "Kontakt schieben" ist ein, aber Schieber ist nicht vorn."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"503"</v>
+              <v n="TextDefault">"Fehler: A1.9 "Crimpeinheit vor" ist aus, Einheit ist aber nicht hinten."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"504"</v>
+              <v n="TextDefault">"Fehler: A1.9 "Crimpeinheit vor" ist ein, Einheit ist aber nicht vorn."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"505"</v>
+              <v n="TextDefault">"Fehler: A1.10 "Abisolierer nach links" ist aus, aber Einheit ist links."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"506"</v>
+              <v n="TextDefault">"Fehler: A1.10 "Abisolierer nach links" ist ein, aber Einheit ist nicht links."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"507"</v>
+              <v n="TextDefault">"Fehler: A1.11 "Abisolierer zu" ist aus, aber Abisolierer ist zu."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"508"</v>
+              <v n="TextDefault">"Fehler: A1.11 "Abisolierer zu" ist ein, aber Abisolierer ist nicht zu."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"509"</v>
+              <v n="TextDefault">"Fehler A1.13 "Abisolierer zurück" ist aus, aber Abisolierer ist nicht vorn."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"510"</v>
+              <v n="TextDefault">"Fehler A1.13 "Abisolierer zurück" ist ein, aber Abisolierer ist nicht hinten."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"511"</v>
+              <v n="TextDefault">"Fehler A1.14 "Crimpzange zu" ist aus, aber Zange ist nicht offen."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"512"</v>
+              <v n="TextDefault">"Fehler A1.14 "Crimpzange zu" ist ein, aber Zange ist offen."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"513"</v>
+              <v n="TextDefault">"Fehler A1.15 "Drahthalter zu" ist aus, aber Drahthalter ist nicht offen."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"514"</v>
+              <v n="TextDefault">"Fehler A1.15 "Drahthalter zu" ist ein, aber Drahthalter ist offen."</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"500"</v>
+              <v n="TextDefault">"   "</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"420"</v>
+              <v n="TextDefault">"Einzelschritt - Start durch Drahteinfuhr"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"422"</v>
+              <v n="TextDefault">"Abisolierer zu"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"423"</v>
+              <v n="TextDefault">"Abisolierer zurück (abisolieren)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"424"</v>
+              <v n="TextDefault">"Abisolierer nach links + Abisolierer auf"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"425"</v>
+              <v n="TextDefault">"Crimpeinheit vor"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"426"</v>
+              <v n="TextDefault">"Crimpen zu"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"427"</v>
+              <v n="TextDefault">"Drahthalter + Drahtführung auf"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"428"</v>
+              <v n="TextDefault">"Crimpzange auf + Abisoliereinheit vor"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"429"</v>
+              <v n="TextDefault">"Ausstoßen vor"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"430"</v>
+              <v n="TextDefault">"Crimpeinheit zurück"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"431"</v>
+              <v n="TextDefault">"Abisolierer nach rechts + Kontakt-Schieben zurück"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"432"</v>
+              <v n="TextDefault">"Einzelschritt - Ende"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"421"</v>
+              <v n="TextDefault">"Drahthalter + Drahtführung zu"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"600"</v>
+              <v n="TextDefault">"Störung: Drahthalter nicht offen, E1.2 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Wire holder not open, E1.2 missing</v>
+                <v>Störung: Drahthalter nicht offen, E1.2 fehlt</v>
+                <v>Défaut : Porte-fil pas ouvert, E1.2 absent</v>
+                <v>Zavar: Huzaltartó nincs nyitva, E1.2 hiányzik</v>
+                <v>Anomalia: Dispositivo blocca-cavo chiuso, E1.2 mancante</v>
+                <v>Нарушение: Кабельный захват не открыт, E1.2 отсутствует</v>
+                <v>Defectiune: Suportul de fir nu e deschis, E1.2 lipseste</v>
+                <v>Error de funcion.: Soporte de cable no está abierto, E1.2 sin señal</v>
+                <v>Nieprawidłowość: Uchwyt przewodu nie jest otwarty, E1.2 Brakuje</v>
+                <v>エラー: ケーブルフォルダーが閉じていません, E1.2 不明</v>
+                <v>故障: 集线器未打开, E1.2 缺失</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"601"</v>
+              <v n="TextDefault">"Störung: Drahthalter nicht zu E1.2 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Wire holder not closed, E1.2 not gone</v>
+                <v>Störung: Drahthalter nicht zu, E1.2 nicht weg</v>
+                <v>Défaut : Porte-fil pas fermé, E1.2 pas parti</v>
+                <v>Zavar: Huzaltartó nincs zárva, E1.2 nem tunt el</v>
+                <v>Anomalia: Dispositivo blocca-cavo aperto, E1.2 non attivo</v>
+                <v>Нарушение: Кабельный захват не закрыт, E1.2 не удален</v>
+                <v>Defectiune: Suportul de fir nu e inchis, E1.2 nu dispare</v>
+                <v>Error de funcion.: Soporte de cable no está cerrado, E1.2 no desaparece la señal</v>
+                <v>Nieprawidłowość: Uchwyt przewodu nie jest zamknięty, E1.2 Pozostaje</v>
+                <v>エラー: ワイヤーホルダーが閉じていません, E1.2 不明</v>
+                <v>故障: 集线器未关闭, E1.2 没有离开</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"602"</v>
+              <v n="TextDefault">"Störung: Auslöseschalter Dauermeldung E1.3 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Cable trigger switch continuous signal, E1.3 not gone</v>
+                <v>Störung: Auslöseschalter Dauermeldung, E1.3 nicht weg</v>
+                <v>Défaut : Déclencheur message permanent, E1.3 pas parti</v>
+                <v>Zavar: Kioldó kapcsoló folyamatos jelzés, E1.3 nem tunt el</v>
+                <v>Anomalia: Segnale continuo del sensore di presenza cavo, E1.3 non attivo</v>
+                <v>Нарушение: Непрерывный сигнал блокировки, E1.3 не удален</v>
+                <v>Defectiune: Declanșator mesaj permanent, E1.3 nu dispare</v>
+                <v>Error de funcion.: Señal permanente en interruptor de disparo de cable, E1.3 no desaparece</v>
+                <v>Nieprawidłowość: Przełącznik kablowy z ciągłym sygnałem, E.1.3 Pozostało</v>
+                <v>エラー: ケーブルトリガースイッチが連続メッセージ, E1.3　未完了</v>
+                <v>故障:线缆触发开关持续信号, E1.3 故障没有解除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"603"</v>
+              <v n="TextDefault">"Störung: Abisoliermesser nicht offen E1.4 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Stripping blades not open, E1.4 not gone</v>
+                <v>Störung: Abisoliermesser nicht offen, E1.4 nicht weg</v>
+                <v>Défaut : Lames à dénuder pas ouvertes, E1.4 pas parti</v>
+                <v>Zavar: Csupaszító kés nincs nyitva, E1.4 nem  tunt el</v>
+                <v>Anomalia: Lame di spellatura non aperte, E1.4 non attivo</v>
+                <v>Нарушение: Нож зачистки не открыт, E1.4 не удален</v>
+                <v>Defectiune: Cutitul de dezizolare nu e deschis, E1.4 nu dispare</v>
+                <v>Error de funcion.: Cuchillas de pelado no abiertas, E1.4 no desaparece la señal</v>
+                <v>Nieprawidłowość:  Noże odizolowujące nie są otwarte, E1.4 Pozostało</v>
+                <v>エラー: ストリッピングブレードが開いていません,  E1.4　未完了</v>
+                <v>故障: 剥线刀片没有打开, E1.4 故障没有解除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"604"</v>
+              <v n="TextDefault">"Störung: Abisoliermesser nicht  zu E1.4 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Stripping blades not closed, E1.4 missing</v>
+                <v>Störung: Abisoliermesser nicht  zu, E1.4 fehlt</v>
+                <v>Défaut : Lames à dénuder pas fermées, E1.4 absent</v>
+                <v>Zavar: Csupaszító kés nincs zárva, E1.4 hiányzik</v>
+                <v>Anomalia: Lame di spellatura non chiuse, E1.2 mancante</v>
+                <v>Нарушение: Нож зачистки не закрыт, E1.4 отсутствует</v>
+                <v>Defectiune: Cutitul de dezizolare nu e inchis, E1.4 lipseste</v>
+                <v>Error de funcion.: Cuchillas de pelado no cerradas, E1.4 sin señal</v>
+                <v>Nieprawidłowość: Nnoże odizolowujące nie są zamknięte, E1.4 Brakuje</v>
+                <v>エラー: ストリッピングブレードが閉じていません, 1.4不明</v>
+                <v>故障: 剥线刀片没有闭合 E1.4 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"605"</v>
+              <v n="TextDefault">"Störung: Doppelmeldung Abisolierer vorn+rück E1.5+E1.6 gleichzeitig"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Double signal stripping unit at front+rear E1.5+E1.6 simultaneous</v>
+                <v>Störung: Doppelmeldung Abisolierer vorn+rück, E1.5+E1.6 gleichzeitig</v>
+                <v>Défaut : Message double Dénudeur avance+retour, E1.5+E1.5 simultanément</v>
+                <v>Zavar: Dupla jelzés Csupaszító elol+vissza, E1.5+E1.6 egyszerre</v>
+                <v>Anomalia: Segnale doppio Unità di spellatura avanzata+arretrata E1.5+E1.6 contemporaneamente</v>
+                <v>Нарушение: Двухкратное сообщение блок зачистки фронтальный + задней панелиnE1.3+E1.4 одновременно</v>
+                <v>Defectiune: Mesaj dublu dezizolator inainte+inapoi, E1.5+E1.6 simultan</v>
+                <v>Error de funcion.: Doble señal la unidad de pelado está delante y detrás E1.3+E1.4 simultaneamente</v>
+                <v>Nieprawidłowość: Podwójny sygnał jednostka odizolowująca z przodu+tyłu E1.3+E1.4 Równocześnie</v>
+                <v>エラー:ダブルメッセージ ストリッピングユニットが前面+後方にあります E2.1+E2.4　同時発生</v>
+                <v>故障:    双路信号 剥线单元在前+在后 E1.3+E1.4 同时</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"606"</v>
+              <v n="TextDefault">"Störung: Abisolierer nicht vorn E1.5 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Stripping unit not at front, E1.5 missing</v>
+                <v>Störung: Abisolierer nicht vorn, E1.5 fehlt</v>
+                <v>Défaut : Dénudeur pas avance, E1.5 absent</v>
+                <v>Zavar: Csupaszító kés nincs elöl, E1.5 hiányzik</v>
+                <v>Anomalia: Unità di spellatura non avanzata, E1.5 mancante</v>
+                <v>Нарушение: Зачистка не фронтально, E1.5 отсутствует</v>
+                <v>Defectiune: Dezizolatorul nu e in fata, E1.5 lipseste</v>
+                <v>Error de funcion.: La unidad de pelado no está en la parte frontal, E1.3 sin señal</v>
+                <v>Nieprawidłowość: Jednostka odizolowująca nie jest z przodu, E1.5 Brakuje</v>
+                <v>エラー: ストリッピングユニットが前面に有りません, E1.5　不明</v>
+                <v>故障: 剥线单元不在前边, E1.5 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"607"</v>
+              <v n="TextDefault">"Störung: Abisolierer nicht rück (abisoliert) E1.6 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Stripping unit not at rear (stripped),  E1.6 missing</v>
+                <v>Störung: Abisolierer nicht rück (abisoliert),  E1.6 fehlt</v>
+                <v>Défaut : Dénudeur pas retour (dénudé),  E1.6 absent</v>
+                <v>Zavar: Csupaszító nincs hátul (csupaszított), E1.6 hiányzik</v>
+                <v>Anomalia: Unità si spellatura non arretrata (spellato), E1.6 mancante</v>
+                <v>Нарушение: Зачистка не с тыльной стороны (зачистка), E1.6 отсутствует</v>
+                <v>Defectiune: Dezizolatorul nu revine in spate, E1.6 lipseste</v>
+                <v>Error de funcion.: La unidad de pelado no está en la parte posterior (despojado), E1.6 sin señal</v>
+                <v>Nieprawidłowość: Jednostka odizolowująca nie jest z tyłu (odizolowane), E1.6 Brakuje</v>
+                <v>エラー: ストリッピングユニットが後方に有りません （除去済み), E1.6 不明</v>
+                <v>故障: 剥线单元不在后边 (剥离), E1.6 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"608"</v>
+              <v n="TextDefault">"Störung: Abisolierer nicht links (aus Arbeitsraum) E1.7 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Stripping unit not on LH side (out of machining compartment), E1.7 missing</v>
+                <v>Störung: Abisolierer nicht links (aus Arbeitsraum), E1.7 fehlt</v>
+                <v>Défaut : Dénudeur pas gauche (de l'espace de travail), E1.7 absent</v>
+                <v>Zavar: Csupaszító nincs bal oldalon (a munkatérbol), E1.7 hiányzik</v>
+                <v>Anomalia: Unità di spellatura non sul lato LH (fuori dal comparto di lavoro), E1.7 mancante</v>
+                <v>Нарушение: Блокзачистки не с лева (вне машинного блока), E1.7 отсутствует</v>
+                <v>Defectiune: Dezizolatorul nu e in stanga (din domeniul de lucru), E1.7 lipseste</v>
+                <v>Error de funcion.: La unidad de pelado no está en el lado LH (fuera del espacio de trabajo), E1.7 sin señal</v>
+                <v>Nieprawidłowość: Jednostka odizolowująca nie jest z lewej strony (poza przedziałem maszyny), E1.7 Brakuje</v>
+                <v>エラー: ストリッピングユニットがLH側に有りません (正しくセットされていません）E1.7 不明</v>
+                <v>故障: 剥线单元不在左边 ( 不在工作区间 )  E1.7 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"609"</v>
+              <v n="TextDefault">"Störung: Abisolierer nicht rechts E1.7 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Stripping unit not on RH side, E1.7 not gone</v>
+                <v>Störung: Abisolierer nicht rechts, E1.7 nicht weg</v>
+                <v>Défaut : Dénudeur pas droite, E1.7 pas parti</v>
+                <v>Zavar: Huzaltartó nincs jobb oldalon, E1.7 nem tunt el</v>
+                <v>Anomalia: Unità di spellatura non sul lato RH, E1.7 non attivo</v>
+                <v>Нарушение: Блокзачистки не с права, E1.7 не удален</v>
+                <v>Defectiune: Dezizolatorul nu e in dreapta, E1.7 nu dispare</v>
+                <v>Error de funcionamiento: La unidad de pelado no está en el lado RH, E1.7 no desaparece la señal</v>
+                <v>Nieprawidłowość: Jednostka odizolowująca nie jest po prawej stronie, E1.7 Pozostało</v>
+                <v>エラー: ストリッピングユニットがRH側に有りません E1.5　未完了</v>
+                <v>故障: 剥线单元不在右边, E1.7 故障没有解除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"610"</v>
+              <v n="TextDefault">"Störung: Doppelmeldung Crimpzange zu+offen E1.8+E1.9 gleichzeitig"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Double signal Crimping tool closed+open, E1.8+E1.9 simultaneous</v>
+                <v>Störung: Doppelmeldung Crimpzange zu+offen E1.8+E1.9 gleichzeitig</v>
+                <v>Défaut : Message double Pince à sertir fermée+ouverte E1.8+E1.9 simultanément</v>
+                <v>Zavar: Dupla jelzés Krimpelo fogó zárva+nyitva, E1.8+E1.9 egyszerre</v>
+                <v>Anomalia: Segnale doppio Ganasce di crimpatura chiuse+aperte, E1.8+E1.9 contemporaneamente</v>
+                <v>Нарушение: Двухкратное сообщение обжимной элемент закрать + открыть, E1.8+E1.9 одновременно</v>
+                <v>Defectiune: Mesaj dublu cleste sertizare inchis+deschis, E1.8+E1.9 simultan</v>
+                <v>Error de funcionamiento: Doble señal la unidad de crimpado está abierta y cerrada, E1.8+E1.9 simultaneamente</v>
+                <v>Nieprawidłowość: Podwójny sygnał Jednostka zaciskająca zamknięta+otwarta, E1.8+E1.9 Równocześnie</v>
+                <v>エラー:ダブルメッセージ ストリッピングユニット　クローズ+オープン E1.8+E1.9 同時発生</v>
+                <v>故障:   双路信号 压接工具闭合+打开 E1.8+E1.9 同时</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"611"</v>
+              <v n="TextDefault">"Störung: Crimpzange nicht zu E1.8 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Crimping tool not closed, E1.8 missing</v>
+                <v>Störung: Crimpzange nicht zu, E1.8 fehlt</v>
+                <v>Défaut : Pince à sertir pas fermée, E1.8 absent</v>
+                <v>Zavar: Csupaszító kés nincs zárva E1.8 hiányzik</v>
+                <v>Anomalia: Ganasce di crimpatura aperte, E1.8 mancante</v>
+                <v>Нарушение: Обжимной элемент не закрыт, E1.8 отсутствует</v>
+                <v>Defectiune: Clestele de sertizare nu e inchis, E1.8 lipseste</v>
+                <v>Error de funcionamiento: Herramienta de engaste no está cerrada, E1.8 sin señal</v>
+                <v>Nieprawidłowość: Jednostka zaciskająca nie jest zamknięta, E1.8 Brakuje</v>
+                <v>エラー: 圧着ツールが閉じていませんE1.8　不明</v>
+                <v>故障: 压接工具没有关闭, E1.8 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"612"</v>
+              <v n="TextDefault">"Störung: Crimpzange nicht offen E1.7 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Crimping tool not open, E1.9 missing</v>
+                <v>Störung: Crimpzange nicht offen, E1.9 fehlt</v>
+                <v>Défaut : Pince à sertir pas ouverte, E1.9 absent</v>
+                <v>Zavar: Csupaszító kés nincs nyitva E1.9 hiányzik</v>
+                <v>Anomalia: Ganasce di crimpatura chiuse E1.9 mancante</v>
+                <v>Нарушение: Обжимной элемент не открыт, E1.9 отсутствует</v>
+                <v>Defectiune: Clestele de sertizare nu e deschis, E1.9 lipseste</v>
+                <v>Error de funcionamiento: Herramienta de engaste no está abierta, E1.9 sin señal</v>
+                <v>Nieprawidłowość: Jednostka zaciskająca nie jest otwarta, E1.9 Brakuje</v>
+                <v>エラー: 圧着ユニットが開いていません, E1.9 不明</v>
+                <v>故障: 压接工具没有打开, E1.9 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"613"</v>
+              <v n="TextDefault">"Störung: Kontakt nicht gefallen E1.10 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Contact not fed, E1.10 missing</v>
+                <v>Störung: Kontakt nicht gefallen, E1.10 fehlt</v>
+                <v>Défaut : Contact pas tombé, E1.10 absent</v>
+                <v>Zavar: Érintkezo nem esett le, E1.10 hiányzik</v>
+                <v>Anomalia: Contatto non in posizione E1.10 mancante</v>
+                <v>Нарушение: Контакт не загружен, E1.10 отсутствует</v>
+                <v>Defectiune: Contactul nu a cazut E1.10 lipseste</v>
+                <v>Error de funcion.: Contactos no alimentados, E1.10 sin señal</v>
+                <v>Nieprawidłowość: Kontakt niepodany, E1.10 Brakuje</v>
+                <v>エラー: コンタクトが供給されていません 1.10　不明</v>
+                <v>故障: 针没有落下 E1.10 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"614"</v>
+              <v n="TextDefault">"Störung: Dauermeldung Kontakt gefallen E1.10 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Continuous signal, contact fed, E1.10 not gone</v>
+                <v>Störung: Dauermeldung Kontakt gefallen, E1.10 nicht weg</v>
+                <v>Défaut : Message permanent contact tombé, E1.10 pas parti</v>
+                <v>Zavar: Folyamatos jelzés érintkezo leesett, E1.10 nem tunt el</v>
+                <v>Anomalia: Segnale continuo alimentatore dei contatti, E1.10 non attivo</v>
+                <v>Нарушение: Непрерывный сигнал контакт не загружен, E1.10 не удален</v>
+                <v>Defectiune: Mesaj permanent contact cazut, E1.10 nu dispare</v>
+                <v>Error de funcionamiento: Señal permanente alimentador contactos, E1.10 no desaparece la señal</v>
+                <v>Nieprawidłowość: Ciągły sygnał, podajnik kontaktów E1.10 Pozostaje</v>
+                <v>エラー: 連続メッセージ,コンタクト供給, E1.10 未完了</v>
+                <v>故障: 持续信号，送针, E1.10 故障没有解除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"615"</v>
+              <v n="TextDefault">"Störung: Doppelmeldung Crimpeinheit vorn+rück E1.11+E1.12 gleichzeitig"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction:  Double signal Crimping unit at front+rear, E1.11+E1.12 simultaneous</v>
+                <v>Störung: Doppelmeldung Crimpeinheit vorn+rück, E1.11+E1.12 gleichzeitig</v>
+                <v>Défaut : Message double Unité à dénuder avance+retour, E1.11+E1.12 simultanément</v>
+                <v>Zavar:  Dupla jelzés Krimpelo egység elöl+hátul, E1.11+E1.12 egyszerre</v>
+                <v>Anomalia: Segnale doppio Unità di crimpatura avanzata+arretrata, E1.11+E1.12 contemporaneamente</v>
+                <v>Нарушение: Двухкратное сообщение Обжимной элемент фронтальный+задний, E1.11+E1.12  одновременно</v>
+                <v>Defectiune: mesaj dublu unitate sertizare inainte+inapoi E1.11+E1.12 simultan</v>
+                <v>Error de funcionamiento: Doble señal la unidad de crimpado está delante y detrás E1.11+E1.12 simultaneamente</v>
+                <v>Nieprawidłowość: Podwójny sygnał Jednostka zaciskająca z przodu+tyłu, E1.11+E1.12 Równocześnie</v>
+                <v>エラー:ダブルメッセージ 圧着ユニットが前面+後方にありません E1.11+E1.12 同時発生</v>
+                <v>故障:  双路信号 压接单元 在前+在后 E1.11+E1.12 同时</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"616"</v>
+              <v n="TextDefault">"Störung: Crimpeinheit nicht vorn E1.11 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Crimping unit not at front, E1.11 missing</v>
+                <v>Störung: Crimpeinheit nicht vorn, E1.11 fehlt</v>
+                <v>Défaut : Unité à dénuder pas avance, E1.11 absent</v>
+                <v>Zavar: Krimpelo egység nincs elöl, E1.11 hiányzik</v>
+                <v>Anomalia: Unità di crimpatura non avanzata, E1.11 mancante</v>
+                <v>Нарушение: Обжимной элемент не фронтально, E1.11 отсутствует</v>
+                <v>Defectiune: Unitatea de sertizare nu e in fata, E1.11 lipseste</v>
+                <v>Error de funcionamiento: Unidad de engaste no está en la parte frontal, E1.11 sin señal</v>
+                <v>Nieprawidłowość: Jednostka zaciskająca nie jest z przodu, E1.11 Brakuje</v>
+                <v>エラー: 圧着ユニットが前面に有りません,E1.11 不明</v>
+                <v>故障: 压接单元不在前面 E1.11 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"617"</v>
+              <v n="TextDefault">"Störung: Crimpeinheit nicht rück E1.12 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Crimping unit not at rear, E1.12 missing</v>
+                <v>Störung: Crimpeinheit nicht rück, E1.12 fehlt</v>
+                <v>Défaut : Unité à dénuder pas retour, E1.12 absent</v>
+                <v>Zavar: Krimpelo egység nincs hátul, E1.12 hiányzik</v>
+                <v>Anomalia: Unità di crimpatura non arretrata E1.12 mancante</v>
+                <v>Нарушение: Обжимной элемент не с тыльной стороны, E1.12 отсутствует</v>
+                <v>Defectiune: Unitatea de sertizare nu e in spate E1.12 lipseste</v>
+                <v>Error de funcionamiento: Unidad de engaste no está en la parte posterior, E1.12 sin señal</v>
+                <v>Nieprawidłowość: Jednostka zaciskająca nie jest z tyłu E2.4 Brakuje</v>
+                <v>エラー: 圧着ユニットが後方に有りません E1.12　不明</v>
+                <v>故障: 压接单元不在后面 E1.12 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"618"</v>
+              <v n="TextDefault">"Störung: Kontakt-Schieben nicht vorn E1.14 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Contact slides not at front, E1.14 missing</v>
+                <v>Störung: Kontakt-Schieben nicht vorn, E1.14 fehlt</v>
+                <v>Défaut : Pousser contact pas avance, E1.14 absent</v>
+                <v>Zavar: Érintkezo-toló nincs elöl, E1.14 hiányzik</v>
+                <v>Anomalia. Slitta contatti non avanzata,  E1.14 mancante</v>
+                <v>Нарушение:  Контакт заведен не фронтально, E1.14 отсутствует</v>
+                <v>Defectiune: Impingatorul de contacte nu e in fata, E1.14 lipseste</v>
+                <v>Error de funcionamiento: Pasador de contactos no está en la parte frontal, E1.14 sin señal</v>
+                <v>Nieprawidłowość:  Zjeżdżalnia kontaktów nie jest z przodu,  E1.14 Brakuje</v>
+                <v>エラー: コンタクトスライドが前方に有りません E1.14 未装着 </v>
+                <v>故障: 推针器在前面  E1.14 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"619"</v>
+              <v n="TextDefault">"Störung: Kontakt-Schieben nicht rück E1.14 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Contact slides not at rear E1.14 not gone</v>
+                <v>Störung: Kontakt-Schieben nicht rück, E1.14 nicht weg</v>
+                <v>Défaut : Pousser contact pas retour, E1.14 pas parti</v>
+                <v>Zavar: Érintlezo-toló nincs hátul, E1.14 nem tunt el</v>
+                <v>Anomalia. Slitta contatti non arretrata,  E1.14 non attivo</v>
+                <v>Нарушение:  Контакт заведен не с тыльной стороны, E1.14 не удален</v>
+                <v>Defectiune: Impingatorul de contacte nu e in spate, E1.14 nu dispare</v>
+                <v>Error de funcionamiento: Pasador de contactos no está en la parte posterior, E1.14 no desaparece la señal</v>
+                <v>Nieprawidłowość:  Zjeżdżalnia kontaktów nie jest z tyłu,  E1.14 Pozostaje</v>
+                <v>エラー: コンタクトスライドが後方に有りません E1.14　未完了</v>
+                <v>故障: 推针器不在后面  E1.14 故障没有解除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"620"</v>
+              <v n="TextDefault">"Störung: Ausstoßen nicht vorn E1.13 fehlt"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Ejector not at front , E1.13 missing</v>
+                <v>Störung: Ausstoßen nicht vorn , E1.13 fehlt</v>
+                <v>Défaut : éjecter pas avance , E1.13 absent</v>
+                <v>Zavar: Kilökés nincs elöl , E1.13 hiányzik</v>
+                <v>Anomalia: Espulsore non avanzato , E1.13 mancante</v>
+                <v>Нарушение: Выталкивание не фронтальное , E1.13 отсутствует</v>
+                <v>Defectiune: Ejectorul nu e in fata\ E2.3 lipseste</v>
+                <v>Error de funcionamiento: Eyector no está en la parte frontal , E1.13 sin señal</v>
+                <v>Nieprawidłowość:  Wyrzutnik nie jest z przodu .E2.3 Brakuje</v>
+                <v>エラー： エジェクタが前面に有りません 2.3　未完了</v>
+                <v>故障: 弹射器不在前面 , E1.13 故障</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"621"</v>
+              <v n="TextDefault">"Störung: Ausstoßen nicht rück E1.13 nicht weg"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Malfunction: Ejector not at rear , E1.13 not gone</v>
+                <v>Störung: Ausstoßen nicht rück , E1.13 nicht weg</v>
+                <v>Défaut : éjecter pas retour , E1.13 pas parti</v>
+                <v>Zavar: Kilökés nincs hátul , E1.13 nem tunt el</v>
+                <v>Anomalia: Espulsore non arretrato , E1.13 non attivo</v>
+                <v>Нарушение: Выталкивание не с тыльной стороны , E1.13 не удален</v>
+                <v>Defectiune: Ejectorul nu e in spate\ E2.3 nu dispare</v>
+                <v>Error de funcionamiento: Eyector no está en la parte posterior , E1.13 no desaparece la señal</v>
+                <v>Nieprawidłowość:  Wyrzutnik nie jest z tyłu  , E1.13 Pozostało</v>
+                <v>エラー: エジェクタが後方に有りません 2.3　未完了</v>
+                <v>故障: 弹射器不在后面 , E1.13 故障没有解除</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"622"</v>
+              <v n="TextDefault">"Reserve (r106_6)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+                <v>Reserve (r106_6)</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"623"</v>
+              <v n="TextDefault">"Wartungs-Zähler hat Vorwahl erreicht, weiter mit Reset"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Maintenance counter preselection reached  (Continue with Reset)</v>
+                <v>Wartungs-Zähler hat Vorwahl erreicht, weiter mit Reset</v>
+                <v>Compteur maintenance a atteint présélection continuer avec Reset</v>
+                <v>Karbantartás-számláló elérte a beállított értéket tovább Reset-tel</v>
+                <v>Raggiunto valore cicli per manutenzione  (Continuare con RESET)</v>
+                <v>Счетчик обслуживания  код достигнут  продолжить с Reset</v>
+                <v>Numaratorul de intretinere\ a realizat cantitatea preselectata\ continua cu RESET</v>
+                <v>Preselección del contador de mantenimiento alcanzado  (Continuar con Reset)</v>
+                <v>Wstępnie wybrana ilość licznika obsługi została osiągnięta  (Kontynuacja poprzez przycisk Reset)</v>
+                <v>メンテナンスまでのカウンター (リセットで継続）</v>
+                <v>预设保养次数达到  (复位按钮继续)</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"624"</v>
+              <v n="TextDefault">"Stückzahl-Vorwahl erreicht (weiter mit Reset)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v>Quantity preselection reached (Continue with Reset)</v>
+                <v>Stückzahl-Vorwahl erreicht (weiter mit Reset)</v>
+                <v>Préselection nbre de pces atteint (continuer avec Reset)</v>
+                <v>Darabszám elérte a beállított értéket (tovább Reset-tel)</v>
+                <v>Raggiunta quantità pre-selezionata (Continuare con RESET)</v>
+                <v>Заданное кол-во достигнуто (продолжить c Reset)</v>
+                <v>Cantitatea preselectata realizata (continua cu RESET)</v>
+                <v>Cantidad preseleccionada alcanzada (Continuar con Reset)</v>
+                <v>Ilość wstępnie wybrana została osiągnięta (Kontynuacja poprzez przycisk Reset)</v>
+                <v>設定数量達成 リセットで継続</v>
+                <v>预设总数到达 (复位按钮继续)</v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"625"</v>
+              <v n="TextDefault">"Reserve (r107_1)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"626"</v>
+              <v n="TextDefault">"Reserve (r107_2)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"627"</v>
+              <v n="TextDefault">"Reserve (r107_3)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"628"</v>
+              <v n="TextDefault">"Reserve (r107_4)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"629"</v>
+              <v n="TextDefault">"Reserve (r107_5)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"630"</v>
+              <v n="TextDefault">"Reserve (r107_6)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">"631"</v>
+              <v n="TextDefault">"Reserve (r107_7)"</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+            <o>
+              <v n="TextID">""</v>
+              <v n="TextDefault">""</v>
+              <l n="LanguageTexts" t="ArrayList" cet="String">
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+                <v></v>
+              </l>
+            </o>
+          </l>
+          <l n="Languages" t="ArrayList" cet="String">
+            <v>EN</v>
+            <v>DE</v>
+            <v>FR</v>
+            <v>HU</v>
+            <v>IT</v>
+            <v>RU</v>
+            <v>RO</v>
+            <v>ES</v>
+            <v>PL</v>
+            <v>JA</v>
+            <v>ZH</v>
+          </l>
+          <v n="GuidInit">{f1837a69-77bf-4312-8843-460c655d4615}</v>
+          <v n="GuidReInit">{c999f592-972b-4a2c-8332-510bb90b93dc}</v>
+          <v n="GuidExitX">{90a0a610-da0a-4b1c-bc77-b5bd57229987}</v>
+        </o>
+      </Data>
+      <TypeList>
+        <Type n="ArrayList">System.Collections.ArrayList</Type>
+        <Type n="Guid">System.Guid</Type>
+        <Type n="String">System.String</Type>
+        <Type n="TextListObject">{2bef0454-1bd3-412a-ac2c-af0f31dbc40f}</Type>
+        <Type n="TextListRow">{53da1be7-ad25-47c3-b0e8-e26286dad2e0}</Type>
+      </TypeList>
+    </XmlArchive>
+  </TextList>
+</TcPlcObject>

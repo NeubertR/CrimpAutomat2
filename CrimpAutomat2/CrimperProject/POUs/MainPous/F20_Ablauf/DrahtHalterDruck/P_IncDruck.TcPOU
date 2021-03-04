@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_IncDruck" Id="{6eb67aaa-a90b-4d77-9125-dde8fd5a48c5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_IncDruck
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF DB6.rDrahthalterSchliessdruck < 5.9 THEN
+	DB6.rDrahthalterSchliessdruck := DB6.rDrahthalterSchliessdruck + 0.5;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="P_IncDruck">
+      <LineId Id="5" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

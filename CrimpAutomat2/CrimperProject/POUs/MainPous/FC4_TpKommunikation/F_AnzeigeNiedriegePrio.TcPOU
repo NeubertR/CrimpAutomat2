@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_AnzeigeNiedriegePrio" Id="{4557e400-4c1b-4295-9d23-01a3dd6d10f5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_AnzeigeNiedriegePrio : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	
+	vke : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//im Original, Netzwerk 2:
+
+//U "M0.7" M0.7 -- Störung aufgetreten (gesammelt)
+//SPB knp -- Springe wenn VKE = 1
+IF VAT.bSammelStoerung THEN
+	RETURN; //knp -- Ende der Funktion
+END_IF
+(*
+U "T 14" T14 -- Verzög. Betriebs-Anzeigen-Reset
+ON "T 3" T3 -- Fehler-Kontr.Maschine (keine Bewegung), ON: ODER NICHT
+SPBN res -- Springe wenn VKE = 0
+
+L 0
+T "MW 14" MW14 -- enthäLT Betriebs-Anzeige-Bits
+*)
+//SPBN - Springe wenn VKE = 0 - 'jump' on FALSE equals 'do it' on TRUE
+IF GVL.tonBetrAnzeigReset.Q OR NOT GVL.tonFehlerKontrMaschine.Q THEN
+	GVL.BetrAnzeigeTmp := 0; //war MW14
+END_IF
+
+//res:
+//L "MW 14" MW14 -- enthält Betriebs-Anzeige-Bits
+//L 0 -- Aktuellen Wert als Ganzzahl in AKKU1 laden
+//<>I -- 	AKKU2 ungleich AKKU1
+//UN "T 14" T14 -- Verz. Betriebs-Anzeigen-Reset
+
+vke := GVL.BetrAnzeigeTmp <> 0; //war MW14
+vke := vke AND NOT GVL.tonBetrAnzeigReset.Q;
+
+//L S5T#2S
+//SE "T 14" T14 -- Verz. Betriebs-Anzeigen-Reset (SE Laden einer Zeit mit der Funktion Einschaltverzögerung),
+//Zeit mit Einschaltverzögerung starten
+GVL.tonBetrAnzeigReset(IN := vke, PT := T#2S);
+
+(*
+TTI@schulz-heise.com 2020-10-22:...das Ganze ist wie eine Schrittkette aufgebaut. Vor jedem der Sprünge wird der AKKU 1 geladen aber – so sieht es aus – 
+nur ein Wert wird bis zum ende des Bausteins behalten, der mit dem Befehl T  DB6.DBW 226 – transferiere in das Datenwort226 des Datenbausteins 6. 
+Das Programm funktioniert nur in einer STEP 7 Umgebung, da Siemens sogenannte VKE begrenzende Befehle definiert hat.
+In einer anderen Umgebung müsste nach den UND Befehlen  eine Zuweisung bestehen.
+*)
+
+
+
+// Es wird eine Zahl 'mitgeschleppt', die anzeigt, wo er das letzte Mal gewesen ist...
+
+//L 10 
+GVL.BetrAnzeigeTmp := 10; // Maschine bereit, Weiter mit Taste START
+
+//U "M0.2" M0.2 -- 2te Ablauf-Freigabe -- Aktuellen Wert als Ganzzahl in AKKU1 laden
+//SPBN a16 -- Springe wenn VKE = 0
+
+//SPBN: -> Springe wenn VKE = 0 - 'jump' on FALSE equals 'do it' on TRUE
+IF VAT.bZweitAblaufFreig THEN
+	//L 16
+	GVL.BetrAnzeigeTmp := 16;
+END_IF  
+
+//a16: BLD 130 -- BLD sind Nulloperationen, beeinflußt die Statusbits nicht.
+
+//U "M0.2" M0.2 -- 2te Ablauf-Freigabe
+//U "M 22.7" M22.7 -- Endstellung
+//SPBN a11
+//L 11 //Maschine bereit zum Crimpen - Litze einführen
+
+//SPBN: -> Springe wenn VKE = 0 - 'jump' on FALSE equals 'do it' on TRUE
+IF VAT.bZweitAblaufFreig AND VAT.bEndstellung THEN
+	GVL.BetrAnzeigeTmp := 11; //Maschine bereit zum Crimpen - Litze einführen
+END_IF
+
+//a11: BLD 130
+//U "M0.2" M0.2 -- 2te Ablauf-Freigabe
+//U "M 22.7" M22.7 -- Endstellung
+//U "M11.1_Bridge_E1.1" M11.1 -- Brücke E1.1 Auslöseschalter
+//SPBN a15
+//L 15 //bereit zum Crimpen - Litze einführen-dann Start drücken
+
+IF VAT.bZweitAblaufFreig AND VAT.bEndstellung AND GVL.insecAusloeseSchalter THEN
+	GVL.BetrAnzeigeTmp := 15; //bereit zum Crimpen - Litze einführen-dann Start drücken
+END_IF
+
+
+//a15: BLD 130
+//U "M0_3_Tipp" M0.3 -- Einzel-Schritt
+//SPBN a6
+//L 6 //Einzel-Schritt, Litze einführen
+
+IF VAT.bEinzelSchritt THEN
+	GVL.BetrAnzeigeTmp := 6; //Einzel-Schritt, Litze einführen
+END_IF
+
+
+//a6: BLD 130
+//U "M0_3_Tipp" M0.3 -- Einzel-Schritt
+//UN "M 22.7" M22.7 -- Endstellung
+//SPBN a7
+//L 7 //Einzel-Schritt weiter mit Start
+
+IF VAT.bEinzelSchritt AND NOT VAT.bEndstellung THEN
+	GVL.BetrAnzeigeTmp := 7; //Einzel-Schritt weiter mit Start
+END_IF
+
+//a7: BLD 130
+//U "M8.3CrimpEinr" M8.3 -- Crimpen Einrichten
+//SPBN a23
+//L 23
+
+IF VAT.bCrimpEinrichten THEN
+	GVL.BetrAnzeigeTmp := 23; //Crimpen Einrichten
+END_IF
+
+//a23: BLD 130
+//U "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+//UN "M 22.6" M22.6 -- Crimpen zu, bei Einstellen Leerf-o-Ce
+//SPBN a13
+//L 13
+
+IF VAT.bVereinzelungTakten AND NOT VAT.bCrimpenZuBeiEinstellen THEN
+	GVL.BetrAnzeigeTmp := 13;
+END_IF
+
+
+//a13: BLD 130
+//U "M 22.2" M22.2 -- 2---Vereinzelung takten od.Crimpen zu/auf Leerf-o-Ce
+//U "M 22.6" M22.6 -- Crimpen zu bei Einstellen
+//Leerf-o-Ce
+//SPBN a14
+//L 14
+
+IF VAT.bVereinzelungTakten AND VAT.bCrimpenZuBeiEinstellen THEN
+	GVL.BetrAnzeigeTmp := 14;
+END_IF
+
+//a14: BLD 130
+//U "M8.1MagLeerf" M8.1 -- Magazin Leerfahren
+//SPBN a21
+//L 21
+
+IF VAT.bMagazinLeerfahren THEN
+	GVL.BetrAnzeigeTmp := 21;
+END_IF
+
+//a21: BLD 130
+//U "M8.2SortLeerf" M8.2 -- Sortierer Leerfahren
+//SPBN a22
+//L 22
+
+IF VAT.bSortiererLeerfahren THEN
+	GVL.BetrAnzeigeTmp := 22;
+END_IF
+
+//a22: BLD 130
+//U "M8.4NurAbisolieren" M8.4 -- Nur Abisolieren
+//SPBN a24
+//L 24 //Abisolieren einrichten - Litze einführen
+
+IF VAT.bNurAbisolieren THEN
+	GVL.BetrAnzeigeTmp := 24; //Abisolieren einrichten - Litze einführen
+
+	//U "M0.6" M0.6 -- SR Start
+	//SPB a24
+	//L 20 //Abisolieren einrichten - weiter mit Start
+	
+	IF NOT VAT.bSrStart THEN
+		GVL.BetrAnzeigeTmp := 20; //Abisolieren einrichten - weiter mit Start
+	END_IF
+
+END_IF
+
+//a24: BLD 130
+//U "M8.5ohneKontakt" M8.5 -- Probelauf ohne Kontakt
+//SPBN a25
+//L 25
+
+IF VAT.bProbelOhneKontakt THEN
+	GVL.BetrAnzeigeTmp := 25; //Probelauf ohne Kontakt
+END_IF
+
+//a25: BLD 130
+//U "M8.6ohneCrmpen" M8.6 -- Probelauf ohne Crimpen
+//SPBN a26
+//L 26
+
+IF VAT.bProbelOhneCrimpen THEN
+	GVL.BetrAnzeigeTmp := 26;
+END_IF
+
+//a26: BLD 130
+//U "M8.7ohneLitze" M8.7 -- Probelauf ohne Litze
+//SPBN a27
+//L 27
+
+IF VAT.bProbelOhneLitze THEN
+	GVL.BetrAnzeigeTmp := 27;
+END_IF
+
+//a27: BLD 130
+//U "M 14.0" M14.0 -- A55 Kontakt nicht gefallen
+//SPBN a55
+//L 55
+
+IF VAT.bA55KontaktNichtGefallen THEN
+	GVL.BetrAnzeigeTmp := 55;
+END_IF
+
+//a55: BLD 130
+//T "DB6".w226_Betr_Anz_Wert DB6.DBW226 -- Betriebs-Anzeige-Wert
+DB6.w226_Betr_Anz_Wert := GVL.BetrAnzeigeTmp;
+
+
+
+
+//knp: BLD 130
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_AnzeigeNiedriegePrio">
+      <LineId Id="291" Count="0" />
+      <LineId Id="297" Count="2" />
+      <LineId Id="398" Count="1" />
+      <LineId Id="396" Count="0" />
+      <LineId Id="401" Count="0" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="302" Count="1" />
+      <LineId Id="586" Count="0" />
+      <LineId Id="304" Count="1" />
+      <LineId Id="439" Count="0" />
+      <LineId Id="436" Count="0" />
+      <LineId Id="433" Count="0" />
+      <LineId Id="437" Count="1" />
+      <LineId Id="306" Count="1" />
+      <LineId Id="570" Count="0" />
+      <LineId Id="309" Count="2" />
+      <LineId Id="583" Count="2" />
+      <LineId Id="312" Count="2" />
+      <LineId Id="440" Count="0" />
+      <LineId Id="416" Count="0" />
+      <LineId Id="456" Count="1" />
+      <LineId Id="461" Count="1" />
+      <LineId Id="464" Count="1" />
+      <LineId Id="460" Count="0" />
+      <LineId Id="458" Count="1" />
+      <LineId Id="449" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="571" Count="0" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="467" Count="0" />
+      <LineId Id="572" Count="0" />
+      <LineId Id="317" Count="1" />
+      <LineId Id="442" Count="0" />
+      <LineId Id="441" Count="0" />
+      <LineId Id="425" Count="0" />
+      <LineId Id="445" Count="0" />
+      <LineId Id="471" Count="0" />
+      <LineId Id="443" Count="0" />
+      <LineId Id="419" Count="0" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="472" Count="0" />
+      <LineId Id="321" Count="2" />
+      <LineId Id="477" Count="0" />
+      <LineId Id="479" Count="0" />
+      <LineId Id="478" Count="0" />
+      <LineId Id="474" Count="0" />
+      <LineId Id="476" Count="0" />
+      <LineId Id="447" Count="1" />
+      <LineId Id="325" Count="5" />
+      <LineId Id="480" Count="0" />
+      <LineId Id="483" Count="1" />
+      <LineId Id="481" Count="1" />
+      <LineId Id="450" Count="0" />
+      <LineId Id="331" Count="2" />
+      <LineId Id="492" Count="0" />
+      <LineId Id="497" Count="0" />
+      <LineId Id="495" Count="1" />
+      <LineId Id="493" Count="0" />
+      <LineId Id="491" Count="0" />
+      <LineId Id="334" Count="5" />
+      <LineId Id="500" Count="2" />
+      <LineId Id="498" Count="1" />
+      <LineId Id="340" Count="1" />
+      <LineId Id="343" Count="1" />
+      <LineId Id="504" Count="0" />
+      <LineId Id="507" Count="1" />
+      <LineId Id="505" Count="1" />
+      <LineId Id="345" Count="1" />
+      <LineId Id="348" Count="0" />
+      <LineId Id="350" Count="1" />
+      <LineId Id="510" Count="0" />
+      <LineId Id="513" Count="1" />
+      <LineId Id="511" Count="1" />
+      <LineId Id="509" Count="0" />
+      <LineId Id="352" Count="1" />
+      <LineId Id="355" Count="2" />
+      <LineId Id="359" Count="0" />
+      <LineId Id="515" Count="0" />
+      <LineId Id="518" Count="1" />
+      <LineId Id="516" Count="1" />
+      <LineId Id="360" Count="3" />
+      <LineId Id="521" Count="0" />
+      <LineId Id="524" Count="1" />
+      <LineId Id="522" Count="0" />
+      <LineId Id="520" Count="0" />
+      <LineId Id="364" Count="3" />
+      <LineId Id="538" Count="2" />
+      <LineId Id="527" Count="0" />
+      <LineId Id="526" Count="0" />
+      <LineId Id="368" Count="3" />
+      <LineId Id="543" Count="0" />
+      <LineId Id="546" Count="1" />
+      <LineId Id="594" Count="0" />
+      <LineId Id="598" Count="5" />
+      <LineId Id="595" Count="0" />
+      <LineId Id="597" Count="0" />
+      <LineId Id="544" Count="0" />
+      <LineId Id="529" Count="0" />
+      <LineId Id="375" Count="3" />
+      <LineId Id="552" Count="0" />
+      <LineId Id="550" Count="1" />
+      <LineId Id="530" Count="1" />
+      <LineId Id="379" Count="3" />
+      <LineId Id="553" Count="2" />
+      <LineId Id="532" Count="1" />
+      <LineId Id="383" Count="3" />
+      <LineId Id="534" Count="0" />
+      <LineId Id="557" Count="1" />
+      <LineId Id="556" Count="0" />
+      <LineId Id="535" Count="0" />
+      <LineId Id="387" Count="3" />
+      <LineId Id="536" Count="0" />
+      <LineId Id="560" Count="1" />
+      <LineId Id="559" Count="0" />
+      <LineId Id="537" Count="0" />
+      <LineId Id="391" Count="1" />
+      <LineId Id="563" Count="0" />
+      <LineId Id="573" Count="2" />
+      <LineId Id="562" Count="0" />
+      <LineId Id="393" Count="1" />
+      <LineId Id="294" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

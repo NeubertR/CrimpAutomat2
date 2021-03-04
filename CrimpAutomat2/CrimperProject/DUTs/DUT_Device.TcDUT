@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <DUT Name="DUT_Device" Id="{6da4fb20-0c52-4efe-aa67-2dbdbd465e94}">
+    <Declaration><![CDATA[TYPE DUT_Device :
+STRUCT
+	wID:WORD; (* Geräte ID *)
+		
+	rIN_LO:REAL; (* REAL in Wert unten *)
+	rIN_HI:REAL; (* REAL in Wert oben *)
+	nOUT_LO:UINT; (* RAW out Wert unten *)
+	nOUT_HI:UINT; (* RAW out Wert oben *)
+	
+	dFakt_A:REAL; (* Faktor 'a' in Y=aX + b *)
+	dSmd_B:REAL; (* Summand 'b' in Y=aX + b *)
+	
+	sDevName:STRING(50); (* Gerätename *)
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

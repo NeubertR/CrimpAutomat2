@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_OnResetClick" Id="{ffc97bad-9301-49cf-89e6-7d539a19fd85}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_OnResetClick
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_AuswertungBefehlstastenVonTP(tastenWert := CVL.RESET_BUTTON);
+F_ResetEndSchalterFehler();]]></ST>
+    </Implementation>
+    <LineIds Name="P_OnResetClick">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

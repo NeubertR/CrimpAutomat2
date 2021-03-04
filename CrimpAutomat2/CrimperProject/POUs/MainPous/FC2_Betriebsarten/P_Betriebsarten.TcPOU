@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_Betriebsarten" Id="{e5518de6-ec41-4738-9477-6ecda80f2f0d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Betriebsarten
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Baustein: FC2 - Start,Stop,Betriebsarten *)
+(* FC2 - AWL2ST: Fertig *)
+
+F_EndschalterBruecken(); // OK 
+
+P_FlankenErzeugen(); // OK 
+
+P_BlinktaktTastleuchten(); // OK
+
+F_StartStopTipp(); // OK]]></ST>
+    </Implementation>
+    <LineIds Name="P_Betriebsarten">
+      <LineId Id="18" Count="1" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

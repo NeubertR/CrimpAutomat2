@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="FB_INPUT_HANDLER" Id="{077f78e5-6245-4296-932c-8b4771fba0c7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_INPUT_HANDLER
+VAR_INPUT
+	orgIN : BOOL;
+	onlineSwitch : BOOL;
+	offLineState : BOOL;
+END_VAR
+VAR_OUTPUT
+	resultIN : BOOL;
+	onlineImageID : STRING(20);
+ 	modeImageID : STRING(20);
+END_VAR
+VAR
+	orgIN_old : BOOL;
+	onlineSwitch_old : BOOL;
+	offLineState_old : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF GVL.firstCycle THEN
+	
+	IF onlineSwitch THEN
+		onlineImageID := 'switch_on';
+		modeImageID := 'switch_undef';
+	ELSE
+		onlineImageID := 'switch_off';
+		
+		IF offLineState THEN
+			modeImageID := 'switch_on';
+		ELSE
+			modeImageID := 'switch_off';
+		END_IF
+		
+	END_IF
+	
+	
+	
+END_IF
+
+IF onlineSwitch THEN
+	resultIN := orgIN;
+	IF onlineSwitch <> onlineSwitch_old THEN
+		onlineImageID := 'switch_on';
+		modeImageID := 'switch_undef';
+	END_IF
+	
+	offLineState := FALSE;
+	(* IF offLineState <> offLineState_old THEN
+		modeImageID := 'switch_undef';
+	END_IF *)
+	
+ELSE	
+	IF onlineSwitch <> onlineSwitch_old THEN
+		onlineImageID := 'switch_off';
+	END_IF
+
+	IF offLineState THEN
+		resultIN := TRUE;
+		IF offLineState <> offLineState_old THEN
+			modeImageID := 'switch_on';
+		END_IF
+	ELSE
+		resultIN := FALSE;
+		IF offLineState <> offLineState_old THEN
+			modeImageID := 'switch_off';
+		END_IF
+	END_IF
+
+END_IF
+orgIN_old := orgIN;
+onlineSwitch_old := onlineSwitch;
+offLineState_old := offLineState;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_INPUT_HANDLER">
+      <LineId Id="166" Count="1" />
+      <LineId Id="210" Count="1" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="212" Count="1" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="234" Count="3" />
+      <LineId Id="232" Count="1" />
+      <LineId Id="209" Count="0" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="169" Count="5" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="175" Count="28" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

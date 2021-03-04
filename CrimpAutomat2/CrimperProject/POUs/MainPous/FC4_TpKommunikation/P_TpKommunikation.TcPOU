@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_TpKommunikation" Id="{b93ec95b-18ca-44f3-8e6d-35b2b63f1e5b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_TpKommunikation
+VAR
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Netzwerk 1:
+//F_AuswertungBefehlstastenVonTP(); nur noch in den Tasten-Events
+
+//Netzwerk 2:
+F_AnzeigeNiedriegePrio();
+
+//Netzwerk 3:
+//F_SignaldauerVonTastleuchte_MaschEinAuswerten();
+
+//Netzwerk 4:
+F_SAFETY_AnzeigenHohePrio_Neu();]]></ST>
+    </Implementation>
+    <LineIds Name="P_TpKommunikation">
+      <LineId Id="308" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="312" Count="0" />
+      <LineId Id="311" Count="0" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="314" Count="0" />
+      <LineId Id="316" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

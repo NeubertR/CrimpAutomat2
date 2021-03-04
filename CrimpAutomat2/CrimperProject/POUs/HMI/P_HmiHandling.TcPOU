@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="P_HmiHandling" Id="{4165462b-3bf4-4761-9d2d-90c8ce86ceb3}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_HmiHandling
+VAR
+	ntClosePlcHmi : NT_StartProcess;
+	bClose : BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+ntClosePlcHmi(
+	NETID:='' , 
+	PATHSTR:='C:\Windows\System32\cmd.exe' , 
+	DIRNAME:='C:\Windows\System32' , 
+	COMNDLINE:='/c "C:\HMI\ClosePlcHmi.cmd"' , 
+	START:=bClose , 
+	TMOUT:=T#5S ,
+ 
+	BUSY=> , 
+	ERR=> , 
+	ERRID=> );]]></ST>
+    </Implementation>
+    <LineIds Name="P_HmiHandling">
+      <LineId Id="8" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

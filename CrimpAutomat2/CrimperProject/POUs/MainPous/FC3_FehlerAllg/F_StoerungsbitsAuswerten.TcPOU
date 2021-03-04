@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="F_StoerungsbitsAuswerten" Id="{c1d0d3c0-fd2b-4c68-878c-5c2666abbb54}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_StoerungsbitsAuswerten : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	x:BOOL;
+	akku1 : WORD;
+	wLocal2 : WORD;
+	wLocal4 : WORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Netzwerk: 7 Störungsbits auswerten und Reset (für Ziffern-Display) *)
+
+(* 
+	L 110 //** höchste auszuwertende Wort-Adresse
+*)
+akku1 := 110;
+(*	
+Sar1: T LW 2 //Abwärts-Zähler Wort-Adresse
+	SLW 3  -- Schiebe Wort nach links
+	LAR1
+	L MW [AR1,P#0.0]
+	T LW 4 //enthält Bits vom aktuellen Störungs-Wort
+	L 0
+	<>I
+	SPB Sar2+
+	L 100 //** niedrigste auszuwertende Wort-Adresse
+	L LW 2 //Abwärts-Zähler Wort-Adresse
+	>=I
+	SPB Sar6
+	DEC 2
+	SPA Sar1 -- Springe absolut
+*)
+
+(*
+x := TRUE;	
+WHILE x = TRUE DO
+	wLocal2 := akku1;	
+	akku1 := akku1 * 8;
+
+
+
+END_WHILE
+*)
+
+
+	
+(*	
+Sar2: L 2#11111110111111111111111011111111
+	T LD 6 //Schiebe-Maske
+	L 18
+	T LW 0 //Abwärts-Zähler Bit-Adresse
+Sar3: L LW 0 //Abwärts-Zähler Bit-Adresse
+	DEC 1
+	T LW 0 //Abwärts-Zähler Bit-Adresse
+	L 9
+	<>I
+	SPB Sar4
+	L 7
+	T LW 0 //Abwärts-Zähler Bit-Adresse
+Sar4: L LD 6 //Schiebe-Maske
+	SRD 1
+	T LD 6 //Schiebe-Maske
+	L LW 4 //enthält Bits vom aktuellen Störungs-Wort
+	L LW 8 //16 Bit rechts der Schiebe-Maske
+	UW
+	==I
+SPB Sar3
+	UN "M 6.0" M6.0 -- +F Reset-Button
+	SPB Sar5
+	L LW 2 //Abwärts-Zähler Wort-Adresse
+	SLW 3
+	LAR1
+	TAK
+	T MW [AR1,P#0.0]
+Sar5: L LW 2 //Abwärts-Zähler Wort-Adresse
+	DEC 100
+	L 10
+	*I
+	L LW 0 //Abwärts-Zähler Bit-Adresse
+	+I
+	T "DB6".w226_Betr_Anz_Wert DB6.DBW226 -- Betriebs-Anzeige-Wert
+Sar6: BLD 130
+*)
+;]]></ST>
+    </Implementation>
+    <LineIds Name="F_StoerungsbitsAuswerten">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="12" Count="13" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="77" Count="2" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="71" Count="2" />
+      <LineId Id="68" Count="1" />
+      <LineId Id="26" Count="33" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="60" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
