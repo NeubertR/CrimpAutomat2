@@ -47,6 +47,11 @@
   ],
   "content": [
     {
+      "url": "Inhalte/Ausgangstest.content",
+      "preload": false,
+      "keepAlive": false
+    },
+    {
       "url": "Inhalte/BetriebsAnzeige.content",
       "preload": false,
       "keepAlive": false
@@ -72,7 +77,17 @@
       "keepAlive": false
     },
     {
+      "url": "Inhalte/Spracheinstellungen.content",
+      "preload": false,
+      "keepAlive": false
+    },
+    {
       "url": "Inhalte/StartView.content",
+      "preload": false,
+      "keepAlive": false
+    },
+    {
+      "url": "Inhalte/TotalZaehler.content",
       "preload": false,
       "keepAlive": false
     }

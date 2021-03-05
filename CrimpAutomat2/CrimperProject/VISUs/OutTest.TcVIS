@@ -4323,8 +4323,8 @@
                 <v>1c740e72-1ab8-41f8-ab3f-e58d44ba2b81</v>
                 <v>ContainsPoint</v>
                 <v>575c2adb-7c0b-423a-82f7-8792a5e61734</v>
-                <v>HasInputAccess</v>
-                <v>5e83d146-3718-4932-a3b5-938983007d15</v>
+                <v>SetStaticState</v>
+                <v>004b3e06-13bb-4474-a3a6-b762c0e0c92e</v>
                 <v>HasInputAccessIntern</v>
                 <v>ed4dd6c2-cb0f-4974-9968-e8509cd649c9</v>
                 <v>GetTooltip</v>
@@ -4343,12 +4343,12 @@
                 <v>21b48332-b449-441d-8ea0-fbb5b56ba9b3</v>
                 <v>SetClientData</v>
                 <v>c8db776e-e94b-48a7-9c85-bc16f0327696</v>
-                <v>HasVisibilityAccessIntern</v>
-                <v>3848b02c-47e8-48cb-b710-edac32b18dbf</v>
                 <v>GetInstance</v>
                 <v>799e293f-9f75-474a-b4dd-8ae782347f4e</v>
                 <v>GetClientData</v>
                 <v>bde3eebf-b741-4e2b-b655-0fad59062a55</v>
+                <v>Destruct</v>
+                <v>56d636ff-a0ba-45b5-b326-238fc2393e53</v>
                 <v>Paint</v>
                 <v>25f33fd2-7286-40a5-b417-bc560ff43555</v>
                 <v>GetElementArray</v>
@@ -4363,10 +4363,10 @@
                 <v>12858b06-147f-4b6c-a4a3-c9e01a905db8</v>
                 <v>Initialize</v>
                 <v>7f61d98f-ed48-41e3-a7ec-e5e784358c18</v>
-                <v>Destruct</v>
-                <v>56d636ff-a0ba-45b5-b326-238fc2393e53</v>
-                <v>SetStaticState</v>
-                <v>004b3e06-13bb-4474-a3a6-b762c0e0c92e</v>
+                <v>HasInputAccess</v>
+                <v>5e83d146-3718-4932-a3b5-938983007d15</v>
+                <v>HasVisibilityAccessIntern</v>
+                <v>3848b02c-47e8-48cb-b710-edac32b18dbf</v>
                 <v>GetSurroundingRect</v>
                 <v>3abce1f3-d999-4d4f-abfc-e9715c036cc1</v>
                 <v>GetResult</v>

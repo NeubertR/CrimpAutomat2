@@ -202,7 +202,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
-          "value": "Inhalte/BetriebsAnzeige.content"
+          "value": "Inhalte/MaschineEinrichten.content"
         },
         "asyncWait": true
       }
@@ -404,7 +404,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
-          "value": "Inhalte/BetriebsAnzeige.content"
+          "value": "Inhalte/Einstellungen.content"
         },
         "asyncWait": true
       }

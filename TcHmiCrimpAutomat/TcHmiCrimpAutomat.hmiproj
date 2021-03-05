@@ -23,7 +23,7 @@
     <EnableTypeScript>true</EnableTypeScript>
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
     <Name>TcHmiCrimpAutomat</Name>
-    <HmiCommunicationRouterPort>10104</HmiCommunicationRouterPort>
+    <HmiCommunicationRouterPort>10105</HmiCommunicationRouterPort>
     <HmiCommunicationServerAuthPort>13000</HmiCommunicationServerAuthPort>
     <HmiInitial>1.12.742.5</HmiInitial>
     <HmiRecent>1.12.744.2</HmiRecent>
@@ -165,6 +165,15 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Inhalte\Einstellungen.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Inhalte\Ausgangstest.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Inhalte\Spracheinstellungen.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Inhalte\TotalZaehler.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="KeyboardLayouts\Numpad - indirect.keyboard.json">

@@ -862,6 +862,454 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.DB6.frceY10DrahthaltFuehrungZU": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY10DrahthaltFuehrungZU",
+            "OPTIONS": {
+                "comment": "EL1809-A1.15"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY11SortierLuft": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY11SortierLuft",
+            "OPTIONS": {
+                "comment": "EL1809-A1.5"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY1Ausstossen": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY1Ausstossen",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY2KontaktVereinzelung": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY2KontaktVereinzelung",
+            "OPTIONS": {
+                "comment": "EL1809-A1.7"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY3KontaktSchieben": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY3KontaktSchieben",
+            "OPTIONS": {
+                "comment": "EL1809-A1.8"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY4CrimpEinheitVOR": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY4CrimpEinheitVOR",
+            "OPTIONS": {
+                "comment": "EL1809-A1.9"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY5AbisolierNachLINKS": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY5AbisolierNachLINKS",
+            "OPTIONS": {
+                "comment": "EL1809-A1.10"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY6AbisoliererZU": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY6AbisoliererZU",
+            "OPTIONS": {
+                "comment": "EL1809-A1.11"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY7AbfallRUNTER": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY7AbfallRUNTER",
+            "OPTIONS": {
+                "comment": "EL1809-A1.12"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY8AbisoliererRUECK": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY8AbisoliererRUECK",
+            "OPTIONS": {
+                "comment": "EL1809-A1.13"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.DB6.frceY9CrimperZU": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::DB6::frceY9CrimperZU",
+            "OPTIONS": {
+                "comment": "EL1809-A1.14"
+            },
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inAbisoliererIstLINKS": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inAbisoliererIstLINKS",
+            "OPTIONS": {
+                "comment": "EL1809-E1.7 (ehem. E1.5)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inAbisoliererIstRUECK": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inAbisoliererIstRUECK",
+            "OPTIONS": {
+                "comment": "EL1809-E1.6 (ehem. E1.4)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inAbisoliererIstVORN": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inAbisoliererIstVORN",
+            "OPTIONS": {
+                "comment": "EL1809-E1.5 (ehem. E1.3)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inAbisoliererIstZU": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inAbisoliererIstZU",
+            "OPTIONS": {
+                "comment": "EL1809-E1.4 (ehem. E1.2)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inAusloeseSchalter": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inAusloeseSchalter",
+            "OPTIONS": {
+                "comment": "EL1809-E1.3 (ehem. E1.1), wenn Draht in Aufnahme"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inAusstossenVORN": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inAusstossenVORN",
+            "OPTIONS": {
+                "comment": "EL1809-E1.13 (ehem. E2.3)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inCrimpEinheitIstRUECK": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inCrimpEinheitIstRUECK",
+            "OPTIONS": {
+                "comment": "EL1809-E1.12 (ehem. E2.4)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inCrimpEinheitIstVORN": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inCrimpEinheitIstVORN",
+            "OPTIONS": {
+                "comment": "EL1809-E1.11 (ehem. E2.1)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inCrimpZangeIstOFFEN": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inCrimpZangeIstOFFEN",
+            "OPTIONS": {
+                "comment": "EL1809-E1.9 (ehem. E1.7)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inCrimpZangeIstZU": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inCrimpZangeIstZU",
+            "OPTIONS": {
+                "comment": "EL1809-E1.8 (ehem. E1.6)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inDrahthalterIstOffen": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inDrahthalterIstOffen",
+            "OPTIONS": {
+                "comment": "EL1809-E1.2 (ehem. E1.0)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inKontaktIstGefallen": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inKontaktIstGefallen",
+            "OPTIONS": {
+                "comment": "EL1809-E1.10 (ehem. E2.0)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inKontaktSchiebenVORN": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inKontaktSchiebenVORN",
+            "OPTIONS": {
+                "comment": "EL1809-E1.14 (ehem. E2.2)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.IO.inMagazinGEFUELLT": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::IO::inMagazinGEFUELLT",
+            "OPTIONS": {
+                "comment": "EL1809-E1.15 (ehem. E2.5)"
+            },
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.RuntimePorts": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3543,6 +3991,31 @@
                 "ADS.ListCommonTypes": 3,
                 "ADS.ListRoutes": 3,
                 "ADS.ListSymbols": 3,
+                "ADS.PLC1.DB6.frceY10DrahthaltFuehrungZU": 3,
+                "ADS.PLC1.DB6.frceY11SortierLuft": 3,
+                "ADS.PLC1.DB6.frceY1Ausstossen": 3,
+                "ADS.PLC1.DB6.frceY2KontaktVereinzelung": 3,
+                "ADS.PLC1.DB6.frceY3KontaktSchieben": 3,
+                "ADS.PLC1.DB6.frceY4CrimpEinheitVOR": 3,
+                "ADS.PLC1.DB6.frceY5AbisolierNachLINKS": 3,
+                "ADS.PLC1.DB6.frceY6AbisoliererZU": 3,
+                "ADS.PLC1.DB6.frceY7AbfallRUNTER": 3,
+                "ADS.PLC1.DB6.frceY8AbisoliererRUECK": 3,
+                "ADS.PLC1.DB6.frceY9CrimperZU": 3,
+                "ADS.PLC1.IO.inAbisoliererIstLINKS": 3,
+                "ADS.PLC1.IO.inAbisoliererIstRUECK": 3,
+                "ADS.PLC1.IO.inAbisoliererIstVORN": 3,
+                "ADS.PLC1.IO.inAbisoliererIstZU": 3,
+                "ADS.PLC1.IO.inAusloeseSchalter": 3,
+                "ADS.PLC1.IO.inAusstossenVORN": 3,
+                "ADS.PLC1.IO.inCrimpEinheitIstRUECK": 3,
+                "ADS.PLC1.IO.inCrimpEinheitIstVORN": 3,
+                "ADS.PLC1.IO.inCrimpZangeIstOFFEN": 3,
+                "ADS.PLC1.IO.inCrimpZangeIstZU": 3,
+                "ADS.PLC1.IO.inDrahthalterIstOffen": 3,
+                "ADS.PLC1.IO.inKontaktIstGefallen": 3,
+                "ADS.PLC1.IO.inKontaktSchiebenVORN": 3,
+                "ADS.PLC1.IO.inMagazinGEFUELLT": 3,
                 "ADS.RuntimePorts": 3,
                 "AddOrChangeUser": 3,
                 "AddSymbol": 3,
@@ -3671,6 +4144,31 @@
                 "ADS.ListCommonTypes": 3,
                 "ADS.ListRoutes": 3,
                 "ADS.ListSymbols": 3,
+                "ADS.PLC1.DB6.frceY10DrahthaltFuehrungZU": 0,
+                "ADS.PLC1.DB6.frceY11SortierLuft": 0,
+                "ADS.PLC1.DB6.frceY1Ausstossen": 0,
+                "ADS.PLC1.DB6.frceY2KontaktVereinzelung": 0,
+                "ADS.PLC1.DB6.frceY3KontaktSchieben": 0,
+                "ADS.PLC1.DB6.frceY4CrimpEinheitVOR": 0,
+                "ADS.PLC1.DB6.frceY5AbisolierNachLINKS": 0,
+                "ADS.PLC1.DB6.frceY6AbisoliererZU": 0,
+                "ADS.PLC1.DB6.frceY7AbfallRUNTER": 0,
+                "ADS.PLC1.DB6.frceY8AbisoliererRUECK": 0,
+                "ADS.PLC1.DB6.frceY9CrimperZU": 0,
+                "ADS.PLC1.IO.inAbisoliererIstLINKS": 0,
+                "ADS.PLC1.IO.inAbisoliererIstRUECK": 0,
+                "ADS.PLC1.IO.inAbisoliererIstVORN": 0,
+                "ADS.PLC1.IO.inAbisoliererIstZU": 0,
+                "ADS.PLC1.IO.inAusloeseSchalter": 0,
+                "ADS.PLC1.IO.inAusstossenVORN": 0,
+                "ADS.PLC1.IO.inCrimpEinheitIstRUECK": 0,
+                "ADS.PLC1.IO.inCrimpEinheitIstVORN": 0,
+                "ADS.PLC1.IO.inCrimpZangeIstOFFEN": 0,
+                "ADS.PLC1.IO.inCrimpZangeIstZU": 0,
+                "ADS.PLC1.IO.inDrahthalterIstOffen": 0,
+                "ADS.PLC1.IO.inKontaktIstGefallen": 0,
+                "ADS.PLC1.IO.inKontaktSchiebenVORN": 0,
+                "ADS.PLC1.IO.inMagazinGEFUELLT": 0,
                 "ADS.RuntimePorts": 3,
                 "AddOrChangeUser": 3,
                 "AddSymbol": 3,
@@ -3704,36 +4202,36 @@
                 "LocalizeText": 3,
                 "Login": 3,
                 "Logout": 3,
-                "PLC1.GVL.MW0": 3,
-                "PLC1.GVL.devSortierer.sDevName": 3,
-                "PLC1.GVL.insecAbisoliererIstLINKS": 3,
-                "PLC1.GVL.insecAbisoliererIstRUECK": 3,
-                "PLC1.GVL.insecAbisoliererIstVORN": 3,
-                "PLC1.GVL.insecAbisoliererIstZU": 3,
-                "PLC1.GVL.insecAusloeseSchalter": 3,
-                "PLC1.GVL.insecAusstossenVORN": 3,
-                "PLC1.GVL.insecCrimpEinheitIstRUECK": 3,
-                "PLC1.GVL.insecCrimpEinheitIstVORN": 3,
-                "PLC1.GVL.insecCrimpZangeIstOFFEN": 3,
-                "PLC1.GVL.insecCrimpZangeIstZU": 3,
-                "PLC1.GVL.insecDrahthalterIstOffen": 3,
-                "PLC1.GVL.insecKontaktIstGefallen": 3,
-                "PLC1.GVL.insecKontaktSchiebenVORN": 3,
-                "PLC1.GVL.insecMagazinGEFUELLT": 3,
-                "PLC1.RVL.sBrAbisoliererIstLINKS": 3,
-                "PLC1.RVL.sBrAbisoliererIstRUECK": 3,
-                "PLC1.RVL.sBrAbisoliererIstVORN": 3,
-                "PLC1.RVL.sBrAbisoliererIstZU": 3,
-                "PLC1.RVL.sBrAusloeseSchalter": 3,
-                "PLC1.RVL.sBrAusstossenVORN": 3,
-                "PLC1.RVL.sBrCrimpEinheitIstRUECK": 3,
-                "PLC1.RVL.sBrCrimpEinheitIstVORN": 3,
-                "PLC1.RVL.sBrCrimpZangeIstOFFEN": 3,
-                "PLC1.RVL.sBrCrimpZangeIstZU": 3,
-                "PLC1.RVL.sBrDrahthalterIstOffen": 3,
-                "PLC1.RVL.sBrKontaktIstGefallen": 3,
-                "PLC1.RVL.sBrKontaktSchiebenVORN": 3,
-                "PLC1.RVL.sBrMagazinGEFUELLT": 3,
+                "PLC1.GVL.MW0": 0,
+                "PLC1.GVL.devSortierer.sDevName": 0,
+                "PLC1.GVL.insecAbisoliererIstLINKS": 0,
+                "PLC1.GVL.insecAbisoliererIstRUECK": 0,
+                "PLC1.GVL.insecAbisoliererIstVORN": 0,
+                "PLC1.GVL.insecAbisoliererIstZU": 0,
+                "PLC1.GVL.insecAusloeseSchalter": 0,
+                "PLC1.GVL.insecAusstossenVORN": 0,
+                "PLC1.GVL.insecCrimpEinheitIstRUECK": 0,
+                "PLC1.GVL.insecCrimpEinheitIstVORN": 0,
+                "PLC1.GVL.insecCrimpZangeIstOFFEN": 0,
+                "PLC1.GVL.insecCrimpZangeIstZU": 0,
+                "PLC1.GVL.insecDrahthalterIstOffen": 0,
+                "PLC1.GVL.insecKontaktIstGefallen": 0,
+                "PLC1.GVL.insecKontaktSchiebenVORN": 0,
+                "PLC1.GVL.insecMagazinGEFUELLT": 0,
+                "PLC1.RVL.sBrAbisoliererIstLINKS": 0,
+                "PLC1.RVL.sBrAbisoliererIstRUECK": 0,
+                "PLC1.RVL.sBrAbisoliererIstVORN": 0,
+                "PLC1.RVL.sBrAbisoliererIstZU": 0,
+                "PLC1.RVL.sBrAusloeseSchalter": 0,
+                "PLC1.RVL.sBrAusstossenVORN": 0,
+                "PLC1.RVL.sBrCrimpEinheitIstRUECK": 0,
+                "PLC1.RVL.sBrCrimpEinheitIstVORN": 0,
+                "PLC1.RVL.sBrCrimpZangeIstOFFEN": 0,
+                "PLC1.RVL.sBrCrimpZangeIstZU": 0,
+                "PLC1.RVL.sBrDrahthalterIstOffen": 0,
+                "PLC1.RVL.sBrKontaktIstGefallen": 0,
+                "PLC1.RVL.sBrKontaktSchiebenVORN": 0,
+                "PLC1.RVL.sBrMagazinGEFUELLT": 0,
                 "RefreshDefinitions": 3,
                 "Remove": 3,
                 "RemoveFromConfiguration": 3,
@@ -3799,6 +4297,31 @@
                 "ADS.ListCommonTypes": 3,
                 "ADS.ListRoutes": 3,
                 "ADS.ListSymbols": 3,
+                "ADS.PLC1.DB6.frceY10DrahthaltFuehrungZU": 3,
+                "ADS.PLC1.DB6.frceY11SortierLuft": 3,
+                "ADS.PLC1.DB6.frceY1Ausstossen": 3,
+                "ADS.PLC1.DB6.frceY2KontaktVereinzelung": 3,
+                "ADS.PLC1.DB6.frceY3KontaktSchieben": 3,
+                "ADS.PLC1.DB6.frceY4CrimpEinheitVOR": 3,
+                "ADS.PLC1.DB6.frceY5AbisolierNachLINKS": 3,
+                "ADS.PLC1.DB6.frceY6AbisoliererZU": 3,
+                "ADS.PLC1.DB6.frceY7AbfallRUNTER": 3,
+                "ADS.PLC1.DB6.frceY8AbisoliererRUECK": 3,
+                "ADS.PLC1.DB6.frceY9CrimperZU": 3,
+                "ADS.PLC1.IO.inAbisoliererIstLINKS": 3,
+                "ADS.PLC1.IO.inAbisoliererIstRUECK": 3,
+                "ADS.PLC1.IO.inAbisoliererIstVORN": 3,
+                "ADS.PLC1.IO.inAbisoliererIstZU": 3,
+                "ADS.PLC1.IO.inAusloeseSchalter": 3,
+                "ADS.PLC1.IO.inAusstossenVORN": 3,
+                "ADS.PLC1.IO.inCrimpEinheitIstRUECK": 3,
+                "ADS.PLC1.IO.inCrimpEinheitIstVORN": 3,
+                "ADS.PLC1.IO.inCrimpZangeIstOFFEN": 3,
+                "ADS.PLC1.IO.inCrimpZangeIstZU": 3,
+                "ADS.PLC1.IO.inDrahthalterIstOffen": 3,
+                "ADS.PLC1.IO.inKontaktIstGefallen": 3,
+                "ADS.PLC1.IO.inKontaktSchiebenVORN": 3,
+                "ADS.PLC1.IO.inMagazinGEFUELLT": 3,
                 "ADS.RuntimePorts": 3,
                 "AddOrChangeUser": 3,
                 "AddSymbol": 3,
